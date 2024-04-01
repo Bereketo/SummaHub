@@ -8,7 +8,7 @@ SummaHubAI is a project aimed at providing an intelligent text summarization and
 This project is currently in development. We're actively working on implementing features and improving functionality.
 
 ## Features (Planned)
-
+-**User Authentication and authorization**: User will have account and they gonna access it in more secure way.
 - **Text Summarization**: Summarize lengthy text documents into concise and informative summaries.
 - **Question Generation**: Automatically generate relevant questions based on the summarized content.
 - **Note Taking**: Integrated note-taking functionality to capture key points and annotations.
