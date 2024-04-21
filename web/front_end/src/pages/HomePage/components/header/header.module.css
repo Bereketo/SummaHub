@@ -1,0 +1,60 @@
+.head_container{
+    display: flex;
+    justify-content:space-between;
+    margin: 10px 20px 5px 20px;
+    padding:0.3rem;
+    background-color:rgb(230, 234, 248);
+    align-items:center;
+    height:50px;
+    gap: 2rem;
+    row-gap: 2rem
+
+}
+.head_menu{
+    gap:rem
+}
+.head_menu > a {
+    font-weight: 500;
+    display: inline-block; 
+    padding: 0.5rem; 
+    border-radius: 0.8rem;
+    /* transition: background-color 0.3s ease;  */
+    transition: all 300ms ease-in;
+}
+
+.head_menu > a:hover {
+    background-color: rgb(8, 67, 113);
+    color: white;
+    transform: scale(0.9);
+}
+
+.daynight_btn > img{
+    height:35px;
+    width:35px
+}
+/* .login_btn{
+    margin-bottom: 0px;
+} */
+.buttons{
+    margin-top: auto;
+
+    display: flex;
+    align-items: center;
+    gap:1rem;
+}
+.account{
+    display: flex;
+    gap:0.5rem;
+}
+.account_img  > img{
+    height:30px;
+    width:30px
+}
+.account_detail >*{
+    color: rgb(59, 62, 59);
+    font-size: 10pt;
+}
+.account_detail{
+    height:30px;
+    /* width:30px */
+}
