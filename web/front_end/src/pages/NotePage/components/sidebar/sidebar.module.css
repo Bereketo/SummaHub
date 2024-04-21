@@ -1,0 +1,43 @@
+.sidebar_wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:2rem;
+    width: 20%;
+   
+}
+.addnote_btn{
+    margin-top: 1.3rem;
+    background-color: rgb(86, 86, 249);
+    width:150px;
+    font-size: 12pt;
+    text-align: center;
+    padding-bottom:30px;
+}
+.sidebar_menu{
+    padding:0px 20px;
+    
+}
+.emoji{
+    margin-right: 20px;
+}
+.sidebar_menu > button{
+    background-color: white;
+    color:black;
+    font-size: 14pt;
+    text-align: left;
+    font-weight:400;
+    margin-bottom: 10px;
+    transition: all 300ms ease-in;
+    padding-bottom:2rem;
+}
+
+.sidebar_menu > button:hover {
+    cursor:pointer;
+    transform: scale(1.1);
+    background-color: rgb(224, 238, 250);
+}
+.addnote_btn:hover{
+    cursor:pointer;
+    transform: scale(1.02);
+}
