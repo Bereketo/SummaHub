@@ -1,0 +1,87 @@
+.head_wrapper{
+    position:sticky;
+    top:0px;
+    left:0;
+    width: 100vw;
+}
+.head_container{
+    display: flex;
+    justify-content:space-between;
+    margin: 10px 20px 5px 20px;
+    padding:0.7rem;
+    background-color:rgba(171, 211, 249, 0.7);
+    align-items:center;
+    height:45px;
+    gap: 2rem;
+    border-radius: 5px;
+    row-gap: 2rem
+
+}
+.head_menu{
+    gap:rem
+}
+.head_menu > .link {
+    font-weight: 500;
+    display: inline-block; 
+    padding: 0.5rem; 
+    border-radius: 0.8rem;
+    
+    transition: all 300ms ease-in;
+}
+
+.link:hover {
+    background:linear-gradient(rgb(47, 102, 255) ,rgb(8, 143, 184));
+    color: white;
+    transform: scale(0.9);
+    border-radius: 7px;
+    width:max-content;
+    padding:0.5rem;
+    font-size: 14pt;
+}
+.active{
+    background:linear-gradient(rgb(47, 102, 255) ,rgb(8, 143, 184));
+    color: white;
+    transform: scale(0.9);
+    border-radius: 7px;
+    width:max-content;
+    padding:0.5rem;
+    font-size: 14pt;
+
+}
+ 
+
+.daynight_btn > img{
+    height:35px;
+    width:35px
+}
+.buttons{
+    
+    /* margin-top: auto; */
+    margin-top: 26px;
+    display: flex;
+    align-items: center;
+    gap:1rem;
+}
+.login_link{
+    color:white;
+}
+.buttons > button{
+    border-radius: 5px;
+    width:80px;
+}
+.account{
+    display: flex;
+    gap:0.5rem;
+}
+.account_img  > img{
+    height:30px;
+    width:30px
+}
+.account_detail >*{
+    color: rgb(59, 62, 59);
+    font-size: 10pt;
+}
+.account_detail{
+    height:30px;
+    /* width:30px */
+}

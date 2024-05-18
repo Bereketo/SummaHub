@@ -1,0 +1,30 @@
+.info_wrapper{
+    width: 100vw;
+    height:fit-content;
+    /* background-color: wheat; */
+}
+.accor_title{
+    text-align: center;
+    font-size: 18pt;
+    margin-bottom: 2rem;
+}
+.accor_title > em{
+    font-size:18pt;
+    color:blue
+}
+.item{
+    margin:1rem 5rem;
+    padding:0.5rem;
+    width:80vw;
+    background-color: rgb(244, 238, 238);
+
+}
+.title{
+    display: flex;
+    justify-content: space-between;
+}
+.title > h3{
+    font-size: 14pt;
+    font-weight:500;
+    margin-bottom:10px;
+}
