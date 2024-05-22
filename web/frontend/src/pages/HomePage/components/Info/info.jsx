@@ -16,10 +16,14 @@ function Info() {
     {
       data && data.length > 0 ? (
         data.map((dataItem) => (
-          <div className={styles.item}>
-          <div onClick={handleselection(dataItem.id)} >
-          <div className={styles.title}> 
-          <h3> ❓{dataItem.question}</h3>
+        
+          <div onClick={handleselection(dataItem.id)}   key={dataItem.id} className={`${styles.item} ${selected === dataItem.id ? styles.selected : ''}`}>
+         
+          <div className={styles.title}>
+          <div className={styles.left_title}>
+          <img src='./images/question.png' width={25} className={styles.faq_img}/> 
+          <h3> {dataItem.question}</h3>
+          </div>
           <h1> + </h1>
           </div>
 
@@ -30,7 +34,7 @@ function Info() {
             {dataItem.answer}</div> :null
             
           }
-          </div>
+          
           </div>
         ))
       ):( <div>"No data Found"</div>)

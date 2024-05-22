@@ -19,7 +19,7 @@ const Header = ({useButtons}) => {
           <NavLink className = {`${styles.link} ${isActive("/Summary") ? styles.active : ""} `} to = "/Summary"> Summarize Text</NavLink>
           <NavLink className = {`${styles.link} ${isActive("/Question") ? styles.active : ""} `} to = "/Question"> Generate Question</NavLink>
           <NavLink className = {`${styles.link} ${isActive("/Note") ? styles.active : ""} `} to = "/Note"> Note </NavLink>
-          <NavLink className = {`${styles.link} ${isActive("/About") ? styles.active : ""} `} to ='/About'> About </NavLink> 
+
         </div>
         <div className={styles.daynight_btn}>
         <img src="./images/night-mode.png"/>
