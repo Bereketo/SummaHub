@@ -1,0 +1,65 @@
+.summary_wrapper{
+    margin:0 50px;
+    display: flex;
+    flex-direction: column;
+}
+.summary_wrapper > h1{
+    text-align: center;
+    font-size: 18pt;
+    margin:0.8rem 0px;
+}
+.top_bar{
+    display: flex;
+    border:1px black solid;
+    width: 48%;
+    height:35px;
+    margin-left:10px;
+    padding-left:1rem;
+    gap : 1rem;
+}
+.top_bar em {
+    margin-top: 10px;
+}
+.top_bar input[type='range'] {
+    margin-top : 10px;
+  }
+.para_range{
+    display: flex;
+    gap:1rem;
+    margin:0 30px;
+}
+.summary_area{
+    width: 93vw;
+    height: 60vh;
+    display: flex;
+    gap:1rem;
+    margin:10px;
+
+}
+.summary_input{
+    background-color: rgb(194, 194, 53);
+    width:50%;
+    height: 100%;
+}
+.summary_output{
+    background-color: rgb(194, 194, 53);
+    width:50%;
+    height: 50
+}
+.summinput_textarea {
+    height: 100%;
+    width: 100%;
+    background-color:white;
+    padding: 1rem;
+  }
+.summoutput_textarea{
+    height: 100%;
+    width: 100%;
+    background-color:rgb(224, 248, 249);
+    padding: 1rem;
+}
+.summary_btn{
+    font-size: 13pt;
+    text-align: center;
+    padding:0;
+}

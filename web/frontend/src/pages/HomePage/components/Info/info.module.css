@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap');
+.info_wrapper{
+    width: 100vw;
+    height:fit-content;
+    margin:0px 20px;
+    margin-bottom: 10px;
+    padding-top: 2rem;
+    /* background: linear-gradient(180deg, #FFFFFF 48%, #5789b8 48%, #a4c8ed 52%, #FFFFFF 52%); */
+    /* background: linear-gradient(50deg, #b6daff, #f2faff, #ffffff, #8db1ff);
+    background-size: 200% 200%;
+
+    animation: gradient 5s linear infinite; */
+}
+
+/* @keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  } */
+.accor_title{
+    text-align: center;
+    font-size: 18pt;
+    margin-bottom: 2rem;
+}
+.accor_title > em{
+    font-size:18pt;
+    color:blue
+}
+.item{
+    margin:1rem 5rem;
+    padding:0.5rem;
+    width:80vw;
+    border-radius: 10px;
+}
+
+.title{
+    display: flex;
+    justify-content: space-between;
+}
+.left_title  > h3{
+    font-size: 11.8pt;
+    font-weight:600;
+    margin-bottom:10px;
+    font-family:Noto Serif ;
+}
+.left_title{
+    display: flex;
+    gap:3rem;
+}
+
+.selected{
+    background-color:rgb(222, 245, 252);
+}
+.selected  .left_title{
+
+    padding-left: 30px;
+    gap:1rem;
+}
+.selected .left_title h3{
+    font-weight: 600;
+    font-size:13pt;
+    color:rgb(3, 3, 106);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    
+}
+.selected 
+.content{
+    text-indent: 1.5rem;
+    font-size:14pt;
+    padding:10px;
+    font-weight: 400;
+    line-height :1.5em;;
+   
+}
