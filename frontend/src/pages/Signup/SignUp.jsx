@@ -40,7 +40,6 @@ function SignUp() {
             if (!isSubmitting) {
                 return;
             }
-
             try {
                 const response = await axios.post(SIGN_UP_URL, {
                     firstname: values.firstName,

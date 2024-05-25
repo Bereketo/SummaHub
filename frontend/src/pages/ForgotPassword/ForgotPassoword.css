@@ -1,0 +1,57 @@
+.ForgotWrapper{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color:#f5f5f5;
+}
+form{
+    padding: 0px 20px;
+    border-radius: 10px;
+    border: 1px solid white;
+    background-color: #ffffff;
+    
+}
+button{
+    width: 100%;
+    height:30px;
+    padding:10px;
+    border :none;
+    color:white;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 12px;
+    cursor: pointer;
+    /* margin-top: 50px;
+    margin-bottom: 150px ; */
+    background-color: blue;
+
+    /* margin-bottom: 200px; */
+
+}
+.logo{
+    height: 100px;
+    margin-bottom: 25px;
+}
+form > a{
+    float:right;
+    text-decoration: none;
+    font-size: 9pt;
+    color:grey;
+    margin-bottom: 50px;
+}
+form > p > a{
+    text-decoration: none;
+} 
+form > p{
+    margin-bottom: 50px;
+}
+
+
+.errmsg{
+    color: red;
+    font-size: 20pt;
+}
+.offscreen{
+    display: none;
+}

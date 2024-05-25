@@ -1,14 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Login.css";
-import FormInput from "./components/formInputLogin";
-import LoginInputs from "./LoginInputs";
+import "./ForgotPassoword.css";
+import FormInput from "./components/formInputForgot";
+import ForgotInputs from "./forgotInput";
 import axios from "../../api/axios";
 
-const LOGIN_URL = "http://localhost:4040/api/v1/users/login";
+const FORGOT_PASSWORD_URL = "http://localhost:4040/api/v1/users/forgotPassword";
 
-function Login() {
-  const [values, setValues] = useState({ email: "", password: "" });
+function ForgotPassword() {
+  const [values, setValues] = useState({ email: "" });
   const [errMsg, setErrMsg] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const errRef = useRef();
@@ -27,12 +27,12 @@ function Login() {
 
       try {
         const response = await axios.post(
-          LOGIN_URL,
-          { email: values.email, password: values.password }
+            FORGOT_PASSWORD_URL,
+          { email: values.email }
         );
         console.log(JSON.stringify(response?.data.status));
         if (response?.data.status === "Success") {
-          navigate("/");
+            console.log('success email check your email');
         }
       } catch (err) {
         handleErrorResponse(err);
@@ -63,7 +63,7 @@ function Login() {
   };
 
   return (
-    <div className="loginWrapper">
+    <div className="ForgotWrapper">
       <form onSubmit={handleSubmit}>
         <p
           ref={errRef}
@@ -73,7 +73,7 @@ function Login() {
           {errMsg}
         </p>
         <img className="logo" src="./images/logo.png" alt="logo" />
-        {LoginInputs.map((input) => (
+        {ForgotInputs.map((input) => (
           <FormInput
             key={input.id}
             {...input}
@@ -81,16 +81,14 @@ function Login() {
             onChange={handleChange}
           />
         ))}
-        <a href="/ForgotPassword">Forgot your password?</a>
+        <a href="/forget">Forgot your password?</a>
         <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Logging in..." : "Login"}
+          {isSubmitting ? "Lodding..." : "reset"}
         </button>
-        <p>
-          Don't have an account? <a href="/signup">Sign Up Here</a>
-        </p>
+   
       </form>
     </div>
   );
 }
 
-export default Login;
+export default ForgotPassword;
