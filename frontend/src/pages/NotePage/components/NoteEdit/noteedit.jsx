@@ -5,10 +5,10 @@ import React from "react";
 import "react-quill/dist/quill.snow.css";
 import 'react-quill/dist/quill.core.css';
 import 'react-quill/dist/quill.bubble.css';
-import styles from "./notearea.module.css";
+import styles from "../NoteArea/notearea.module.css";
 import QuillEditor from "react-quill";
 import {useState , useRef , useMemo} from 'react'
-const NoteArea = () => {
+const NoteEdit = () => {
   const [value, setValue] = useState("");
   function handleSave() {
     console.log(value);
@@ -47,7 +47,7 @@ const NoteArea = () => {
       <QuillEditor
       theme = {'snow'}
       ref = {(el)=>(quill.current = el)}
-       className={styles.quilleditor}
+     className={styles.quilleditor}
        
        value ={value}
        formats={formats}
@@ -56,10 +56,10 @@ const NoteArea = () => {
        onChange = {(value) => setValue(value)}
         />
     </div>
-    <button onClick={handleSave} classname = {styles.savebtn}> Save</button>
+    <button onClick={handleSave} classname = {styles.savebtn}>Edit</button>
 
     </div>
   );
 };
 
-export default NoteArea;
+export default NoteEdit;

@@ -1,20 +1,29 @@
-import React, { useRef, useState, useContext, useEffect } from "react";
-import AuthContext from "../../context/AuthProvider";
+import React, { useRef, useState, useEffect } from "react";
 import "./Login.css";
 import FormInputLogin from "./components/formInputLogin";
 import LoginInputs from "./LoginInputs";
 import axios from "../../api/axios";
-const Login_url = "/auth";
+const Login_url = "http://localhost:4040/api/v1/users/login";
 function Login() {
   const [values, setValues] = useState({email: "",password: "", });
   const errRef = useRef();
   const [errMsg, setErrMsg] = useState("");
-  const { setAuth } = useContext(AuthContext);
   // useEffect (()=>{useRef.current.focus();} , [])
   useEffect(() => { setErrMsg("");}, [values.email, values.password]);
-  
+
+  // const [email, setEmail] = useState('')
+  // const [password, setPassword] = useState('')
+  // useEffect(()=>{
+  //   const loginFetch = async () =>{
+  //       const responce = await axios.post('http://localhost:4040/api/v1/users/login',{email,password})
+  //       console.log(responce.data)
+  //   }
+  //   loginFetch()
+  // },[email,password]);
+   
   // const [success, setSuccess] = useState(false);
   const handleSubmit = async (e) => {
+    console.log(values.email,values.password)
     try {
       e.preventDefault();
       const response = await axios.post(
@@ -28,10 +37,7 @@ function Login() {
         }
       );
       console.log(JSON.stringify(response?.data));
-      const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
-      setValues({ email: "", password: "", });
-      setAuth({email: values.email,password: values.password,roles,accessToken,});
+      console.log(response)
     }
      catch (err) {
       if (!err?.response) {
@@ -62,7 +68,7 @@ function Login() {
             >
               {errMsg}{" "}
             </p>
-            <img className="logo" src="./images/logo.png" />
+            <img className="logo" src="./images/logo.png" alt="logo"/>
             {LoginInputs.map((input) => (
               <FormInputLogin
                 key={input.id}
@@ -71,12 +77,14 @@ function Login() {
                 onChange={handleChange}
               />
             ))}
-            <a href=""> forgot your password? </a>
+            {/* <input type="email" name="" id="" value={(e)=>setPassword(e.target.value)}/>
+            <input type="password" value={(e)=>setEmail(e.target.value)}/> */}
+            <a href="/forget"> forgot your password? </a>
             <button> Login</button>
 
             <p>
               {" "}
-              Don't have an account? <a href=""> SignUp Here</a>
+              Don't have an account? <a href="/signup"> SignUp Here</a>
             </p>
           </form>
         </div>

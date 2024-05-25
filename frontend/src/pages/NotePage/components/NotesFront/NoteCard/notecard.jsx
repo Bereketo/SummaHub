@@ -1,5 +1,7 @@
 import React from 'react'
 import styles from "./notecard.module.css"
+import { Link } from 'react-router-dom';
+
 function Notecard() {
     const currentdate = new Date()
     const formattedDate = currentdate.toLocaleString();
@@ -17,7 +19,7 @@ function Notecard() {
     <footer>
     <div className = {styles.deleteSave}>
     <button className={styles.deletebtn}> Delete</button>
-    <button className={styles.editbtn}> Edit </button>
+    <Link className={styles.editbtn} to='/NoteEdit'> Edit </Link>
     </div>
         <p className={styles.noteDate}>{formattedDate}</p>
         
