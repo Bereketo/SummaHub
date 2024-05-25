@@ -10,7 +10,7 @@ import QuillEditor from "react-quill";
 import {useState , useRef , useMemo} from 'react'
 const NoteEdit = () => {
   const [value, setValue] = useState("");
-  function handleSave() {
+  function handleEdit() {
     console.log(value);
   }
   const formats = ["header","bold","italic","underline","strike","blockquote",
@@ -33,7 +33,7 @@ const NoteEdit = () => {
           ["link", "image"],
           ["clean"],
         ],
- 
+
       },
       clipboard: {
         matchVisual: true,
@@ -56,7 +56,7 @@ const NoteEdit = () => {
        onChange = {(value) => setValue(value)}
         />
     </div>
-    <button onClick={handleSave} classname = {styles.savebtn}>Edit</button>
+    <button onClick={handleEdit} classname = {styles.savebtn}>Edit</button>
 
     </div>
   );
