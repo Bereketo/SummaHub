@@ -1,14 +1,18 @@
 import React, { useRef, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import "./ForgotPassoword.css";
-import FormInput from "./components/formInputForgot";
-import ForgotInputs from "./forgotInput";
+import { useNavigate, useParams } from "react-router-dom";
+import "./ResetPassword.css";
+import FormInput from "./components/formInputReset";
+import inputs from "./resetInput";
 import axios from "../../api/axios";
 
-const FORGOT_PASSWORD_URL = "http://localhost:4040/api/v1/users/forgotPassword";
-
-function ForgotPassword() {
-  const [values, setValues] = useState({ email: "" });
+function ResetPassword() {
+  const { resetToken} = useParams();
+  const RESET_PASSWORD_URL = `http://localhost:4040/api/v1/users/resetPassword/${resetToken}`;
+  
+  const [values, setValues] = useState({
+    password: "",
+    passwordConfirm: "",
+  });
   const [errMsg, setErrMsg] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const errRef = useRef();
@@ -21,18 +25,17 @@ function ForgotPassword() {
 
   useEffect(() => {
     const submitForm = async () => {
-      if (!isSubmitting) {
-        return
-      };
+      if (!isSubmitting) {return};
 
       try {
-        const response = await axios.post(
-            FORGOT_PASSWORD_URL,
-          { email: values.email }
-        );
-        console.log(JSON.stringify(response?.data.status));
+        const response = await axios.post(RESET_PASSWORD_URL, {
+          password: values.password,
+          passwordConfirm: values.passwordConfirm,
+        });
+
         if (response?.data.status === "Success") {
-            console.log('success email check your email');
+          console.log('Success: Check your email');
+          navigate('/login'); // Redirect to login page after successful password reset
         }
       } catch (err) {
         handleErrorResponse(err);
@@ -43,17 +46,17 @@ function ForgotPassword() {
     };
 
     submitForm();
-  }, [isSubmitting, values, navigate]);
+  }, [isSubmitting, values, navigate, RESET_PASSWORD_URL]);
 
   const handleErrorResponse = (err) => {
     if (!err?.response) {
       setErrMsg("No Server Response");
     } else if (err.response?.status === 400) {
-      setErrMsg("Missing Username or Password");
+      setErrMsg("Missing Password or Password Confirmation");
     } else if (err.response?.status === 401) {
       setErrMsg("Unauthorized");
     } else {
-      setErrMsg("Unable to login");
+      setErrMsg("Failed to reset password");
     }
   };
 
@@ -63,7 +66,7 @@ function ForgotPassword() {
   };
 
   return (
-    <div className="ForgotWrapper">
+    <div className="ResetWrapper">
       <form onSubmit={handleSubmit}>
         <p
           ref={errRef}
@@ -73,7 +76,7 @@ function ForgotPassword() {
           {errMsg}
         </p>
         <img className="logo" src="./images/logo.png" alt="logo" />
-        {ForgotInputs.map((input) => (
+        {inputs.map((input) => (
           <FormInput
             key={input.id}
             {...input}
@@ -81,14 +84,12 @@ function ForgotPassword() {
             onChange={handleChange}
           />
         ))}
-        <a href="/forget">Forgot your password?</a>
         <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Lodding..." : "reset"}
+          {isSubmitting ? "Loading..." : "Change Password"}
         </button>
-   
       </form>
     </div>
   );
 }
 
-export default ForgotPassword;
+export default ResetPassword;

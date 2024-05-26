@@ -4,12 +4,11 @@ import Home from "./pages/HomePage/home";
 import SignUp from "./pages/Signup/SignUp";
 import Login from "./pages/Login/Login";
 import NoteEdit from "./pages/NotePage/components/NoteEdit/noteedit";
-// import Question from "./pages/Question/question";
 import Summary from "./pages/Summary/summary";
 import About from "./pages/HomePage/components/AboutUs/aboutus";
-import ForgotPassword from "./pages/ForgotPassword/ForgotPassoword";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 
 function App() {
   return (
@@ -20,14 +19,13 @@ function App() {
           <Route path="/Signup" element={<SignUp />} />
           <Route path="/Note" element={<Note />} />
           <Route path="/Login" element={<Login />} />
-          {/* <Route path = '/Question' element = {<Question/>} /> */}
-          <Route path='/Summary' element={<Summary />} />
-          <Route path='/About' element={<About />} />
-          <Route path='/NoteEdit' element={<NoteEdit />} />
-          <Route path='/ForgotPassword' element={<ForgotPassword />} />
+          <Route path="/Summary" element={<Summary />} />
+          <Route path="/About" element={<About />} />
+          <Route path="/NoteEdit" element={<NoteEdit />} />
+          <Route path="/ForgotPassword" element={<ForgotPassword />} />
+          <Route path="/resetPassword/:resetToken" element={<ResetPassword />} /> {/* Ensure this route is correct */}
         </Routes>
       </BrowserRouter>
-
     </div>
   );
 }
