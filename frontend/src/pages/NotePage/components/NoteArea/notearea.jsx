@@ -10,6 +10,7 @@ import QuillEditor from "react-quill";
 import {useState , useRef , useMemo} from 'react'
 const NoteArea = () => {
   const [value, setValue] = useState("");
+// sourcery skip: avoid-function-declarations-in-blocks
   function handleSave() {
     console.log(value);
   }
