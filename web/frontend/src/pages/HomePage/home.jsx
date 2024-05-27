@@ -1,17 +1,30 @@
-import React from "react";
+import { React , useRef} from "react";
+
 import Header from "./components/header/header";
 import Hero from "./components/hero/hero";
 import Slider from "./components/slider/slider";
 import Info from "./components/Info/info";
+import About from "./components/AboutUs/aboutus";
 import './home.module.css'
 function Home() {
+
+  const bottomRef = useRef(null);
+
+  const scrollToBottom = () => {
+    if (bottomRef.current) {
+      bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+
   return (
     <div>
-      <Header useButtons={true} />
+      <Header useButtons={true} onScrollToBottom={scrollToBottom} />
       <Hero /> 
       <Slider />
       <Info />
-      
+      <div ref={bottomRef} >
+      <About /> </div>
     </div>
   );
 }

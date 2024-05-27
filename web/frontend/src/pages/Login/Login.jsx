@@ -15,6 +15,7 @@ function Login() {
   
   // const [success, setSuccess] = useState(false);
   const handleSubmit = async (e) => {
+    console.log(values.email , values.password)
     try {
       e.preventDefault();
       const response = await axios.post(
@@ -72,7 +73,7 @@ function Login() {
               />
             ))}
             <a href=""> forgot your password? </a>
-            <button> Login</button>
+            <button  type="submit"> Login</button>
 
             <p>
               {" "}
