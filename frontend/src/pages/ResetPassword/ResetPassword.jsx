@@ -6,7 +6,9 @@ import inputs from "./resetInput";
 import axios from "../../api/axios";
 
 function ResetPassword() {
-  const { resetToken} = useParams();
+  const { resetToken } = useParams();
+  console.log("Reset Token:", resetToken);
+
   const RESET_PASSWORD_URL = `http://localhost:4040/api/v1/users/resetPassword/${resetToken}`;
   
   const [values, setValues] = useState({
@@ -28,16 +30,21 @@ function ResetPassword() {
       if (!isSubmitting) {return};
 
       try {
-        const response = await axios.post(RESET_PASSWORD_URL, {
+        console.log("Submitting form with values:", values);
+        
+        const response = await axios.patch(RESET_PASSWORD_URL, {
           password: values.password,
           passwordConfirm: values.passwordConfirm,
         });
+
+        console.log("Response:", response);
 
         if (response?.data.status === "Success") {
           console.log('Success: Check your email');
           navigate('/login'); // Redirect to login page after successful password reset
         }
       } catch (err) {
+        console.error("Error during password reset:", err); // Log the error for debugging
         handleErrorResponse(err);
         errRef.current.focus();
       } finally {
