@@ -13,6 +13,7 @@ const AppError = require('./utils/appError')
 const globalErrorHandler = require('./controllers/errorController')
 
 const userRouter = require('./routes/userRoutes')
+const noteRouter = require('./routes/noteRoutes')
 
 //1) Global Middlewares
 //set secure http headers
@@ -44,6 +45,7 @@ app.use((req, res, next) => {
 //2) Routes
 app.get('/', (req, res, next) => {res.send('Welcome from backend ? Yeah am working!😁😀🚀🚀🚀')})
 app.use('/api/v1/users', userRouter)
+app.use('/api/v1/notes', noteRouter)
 
 app.all('*', (req, res, next) => {
     const err = new Error()
