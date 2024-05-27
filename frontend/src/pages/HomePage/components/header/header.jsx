@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./header.module.css";
-import { NavLink , Link, useLocation } from "react-router-dom";
+import { NavLink , useLocation } from "react-router-dom";
 
 const Header = ({useButtons}) => {
   const location = useLocation();
@@ -22,7 +22,7 @@ const Header = ({useButtons}) => {
 
         </div>
         <div className={styles.daynight_btn}>
-        <img src="./images/night-mode.png"/>
+        <img src="./images/night-mode.png" alt="logo"/>
         </div>
         
         {useButtons  ? ( 
@@ -30,12 +30,12 @@ const Header = ({useButtons}) => {
           <>
           <div className={`buttons ${styles.buttons} `}>
           <button className={` btn_1 ${styles.login_btn}`}> <NavLink className={styles.login_link}  to = "/Login"> Login </NavLink> </button>
-          <button className={`btn_2 ${styles.signUp_btn}`}> <NavLink className={styles.signup_link} to = "/Signup"> SignUp </NavLink> </button>
+          {/* <button className={`btn_2 ${styles.signUp_btn}`}> <NavLink className={styles.signup_link} to = "/Signup"> SignUp </NavLink> </button> */}
           </div>
           </>):
           (<div className={styles.account}>
             <div className={styles.account_img}> 
-             <img src="./images/user.png" />
+             <img src="./images/user.png" alt="logo"/>
             </div>
             <div className={styles.account_detail}>
             <h1>Yonas Alemu</h1>
