@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useRef } from "react";
 import styles from "./header.module.css";
-import { NavLink , Link, useLocation } from "react-router-dom";
+import { NavLink , useLocation } from "react-router-dom";
+// import About from "../AboutUs/aboutus";
 
-const Header = ({useButtons}) => {
+const Header = ({useButtons, onScrollToBottom }) => {
   const location = useLocation();
   function isActive(to){
     return to === location.pathname
   }
+
 
   return (
     
@@ -19,6 +21,7 @@ const Header = ({useButtons}) => {
           <NavLink className = {`${styles.link} ${isActive("/Summary") ? styles.active : ""} `} to = "/Summary"> Summarize Text</NavLink>
           <NavLink className = {`${styles.link} ${isActive("/Question") ? styles.active : ""} `} to = "/Question"> Generate Question</NavLink>
           <NavLink className = {`${styles.link} ${isActive("/Note") ? styles.active : ""} `} to = "/Note"> Note </NavLink>
+          <NavLink onClick = {onScrollToBottom} className = {`${styles.link} ${isActive("/About") ? styles.active : ""} `} > About </NavLink>
 
         </div>
         <div className={styles.daynight_btn}>
@@ -46,8 +49,12 @@ const Header = ({useButtons}) => {
           }
         
       </div>
+      {/* <div ref={bottomRef}>  /><About</div> */}
     </div>
+
   );
 };
+
+
 
 export default Header;

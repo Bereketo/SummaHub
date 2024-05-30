@@ -1,7 +1,4 @@
 import React from "react";
-
-import ReactQuill from "react-quill";
-import Theme from "quill/core/theme";
 import "react-quill/dist/quill.snow.css";
 import 'react-quill/dist/quill.core.css';
 import 'react-quill/dist/quill.bubble.css';
@@ -10,6 +7,7 @@ import QuillEditor from "react-quill";
 import {useState , useRef , useMemo} from 'react'
 const NoteArea = () => {
   const [value, setValue] = useState("");
+
   function handleSave() {
     console.log(value);
   }
@@ -56,7 +54,7 @@ const NoteArea = () => {
        onChange = {(value) => setValue(value)}
         />
     </div>
-    <button onChange = {handleSave} classname = {styles.savebtn}> Save</button>
+    <button onClick = {handleSave} classname = {styles.savebtn}> Save</button>
 
     </div>
   );
