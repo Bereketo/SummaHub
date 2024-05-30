@@ -36,7 +36,25 @@ function Chat() {
           <img src="./images/ai.png" />
         </div>
       </div>
-      <div className={styles.chat_space}></div>
+      <div className={styles.chat_space}>
+        <div className={styles.response_space}>
+        <div className={styles.response_placeholder}>
+        <div className={styles.chat_pic}>
+         <img  src="./images/ai-assistant.png"/>
+        </div>
+        <h1> Curious about something? Let's explore!</h1>
+
+        </div>
+        
+        </div>
+        <div className={styles.chat_input}>
+        <textarea placeholder="Ask me anything .... "></textarea>
+        <div className={styles.send_arrow}>
+          <img src="./images/send.png" />
+        </div>
+        </div>
+
+      </div>
     </div>
   );
 }
