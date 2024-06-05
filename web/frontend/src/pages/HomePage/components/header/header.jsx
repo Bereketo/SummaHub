@@ -1,14 +1,17 @@
 import React, { useRef } from "react";
 import styles from "./header.module.css";
 import { NavLink , useLocation } from "react-router-dom";
+
 // import About from "../AboutUs/aboutus";
 
-const Header = ({useButtons, onScrollToBottom }) => {
+const Header = ({useButtons, onScrollToBottom ,theme ,setTheme}) => {
   const location = useLocation();
   function isActive(to){
     return to === location.pathname
   }
-
+  function toggle_mode (){
+    theme === 'light' ? setTheme('dark') : setTheme('light')
+  }
 
   return (
     
@@ -21,11 +24,12 @@ const Header = ({useButtons, onScrollToBottom }) => {
           <NavLink className = {`${styles.link} ${isActive("/Summary") ? styles.active : ""} `} to = "/Summary"> Summarize Text</NavLink>
           <NavLink className = {`${styles.link} ${isActive("/Question") ? styles.active : ""} `} to = "/Question"> Generate Question</NavLink>
           <NavLink className = {`${styles.link} ${isActive("/Note") ? styles.active : ""} `} to = "/Note"> Note </NavLink>
+          {/* <NavLink className = {`${styles.link} ${isActive("/About") ? styles.active : ""} `} to = "/About"> ab </NavLink> */}
           <NavLink onClick = {onScrollToBottom} className = {`${styles.link} ${isActive("/About") ? styles.active : ""} `} > About </NavLink>
 
         </div>
         <div className={styles.daynight_btn}>
-        <img src="./images/night-mode.png"/>
+        <img onClick = {() => {toggle_mode()}} src=  {theme === 'light' ? "./images/moon.png" : "./images/sun.png"} />
         </div>
         
         {useButtons  ? ( 

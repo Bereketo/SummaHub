@@ -2,6 +2,7 @@
 .notepage_wrapper{
     overflow: hidden;
     position: relative;
+    /* color: var(--primary-text-color); */
     
 }
 .note_wrapper{

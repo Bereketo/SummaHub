@@ -3,7 +3,7 @@
     width: 75vw;
     background-color:white;
     margin:10px;
-  
+  background-color: var(--background-color);
    
     /* border:2px rgb(62, 57, 57) solid; */
 
@@ -12,12 +12,22 @@
     height: 90%;
     width: 100%;
     margin-bottom: 10px;
+    /* padding:1rem 1rem; */
     
     
 }
+.note_title{
+    width: 100%;
+}
+.note_title::placeholder{
+    font-size: 12pt;
+}
 .quilleditor{
-    /* background-color: #9f0505; */
+    background-color: white;
+    
     height: 85%;
+    border: black;
+    outline: none;
     
 }
 .ql-toolbar.ql-snow {

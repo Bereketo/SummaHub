@@ -13,17 +13,12 @@
   position: relative;
   text-align: center;
   transition: all 300ms ease-in;
+  color:var(--primary-text-color);
 }
 .pinnedSymbol {
   position: absolute;
   top: 0px; /* Adjust as needed */
   right: 0px; /* Adjust as needed */
-}
-.card_wrapper:hover{
-  cursor:pointer;
-  transform: scale(1.08);
-  background-color: rgb(218, 246, 255);
-  border-color: rgb(218, 246, 255);
 }
 .notecontent{
   display: flex;
@@ -31,7 +26,16 @@
   gap:1rem;
   text-align: left;
 
+
 }
+.card_wrapper:hover{
+  cursor:pointer;
+  color: black;
+  transform: scale(1.08);
+  background-color: rgb(218, 246, 255);
+  border-color: rgb(218, 246, 255);
+}
+
 .deleteSave{
     display: flex;
     gap:1rem;

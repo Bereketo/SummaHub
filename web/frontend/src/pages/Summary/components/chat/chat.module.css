@@ -1,17 +1,14 @@
 .chat_wrapper{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-evenly;;
     
 }
-.chat_space{
-    height:500px;
-    width:55%;
-    background-color: pink;
-}
+
 .info_space{
     height:500px;
     width:50%;
-    background-color:rgb(255, 255, 255);
+    background-color:rgb(255, 255, 255 0) ;
+    /* background-color: black; */
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr ;
@@ -51,4 +48,86 @@
     background-color:rgb(214, 214, 172);
     color:black;
 }
+.chat_space{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height:470px;
+    width:45%;
+    background-color:rgb(223, 250, 250);
+    margin-right: 20px;
+    border-radius: 10px;
+}
+.chat_input{
+    display: flex;
+}
+.chat_input > textarea{
+    align-self: flex-end;
+    width: 100%;
+    height: 40px;
+    margin: 0 0px 15px 20px;
+    border-radius: 15px;
+    /* padding:5px 0 0 10px; */
+    padding-top:10px;
+    padding-left:20px;
+    outline: none;
+    background-color: rgb(240, 235, 235);
+    border: 0;
 
+}
+.chat_input > textarea::placeholder{
+    color:rgb(48, 48, 48);
+    font-size: 12pt;
+    display: flex;
+    
+    /* padding-left:6px; */
+    
+
+    
+    flex-direction: row;
+}
+.send_arrow{
+    height: 30px;
+    width:30px;
+    border-radius: 50%;
+    align-self: flex-end;
+    margin: 0 20px 20px 20px;
+
+
+}
+.send_arrow >img{
+    width: 100%;
+    height: 100%;
+}
+.response_space{
+    /* background-color: brown; */
+    position: relative;
+    height: 80%;
+    width:100%;
+}
+.response_placeholder{
+    position: absolute;
+    top:40%;
+    left:30%;
+    height: 130px;
+    
+    width: 200px;
+    box-shadow: rgba(109, 240, 255, 0.783) 1.95px 1.95px 2.6px;
+    /* box-shadow: #74f3ffd3 0px 2px 8px 0px; */
+    border-radius: 10px;
+    margin: auto;
+    /* border:1px white solid; */
+    text-align: center;
+    /* background-color: white; */
+    
+}
+.chat_pic{
+    height:50px;
+    width: 50px;
+    margin:auto;
+    margin-bottom: 10px;
+}
+.chat_pic > img{
+    height: 100%;
+    width: 100%;
+}

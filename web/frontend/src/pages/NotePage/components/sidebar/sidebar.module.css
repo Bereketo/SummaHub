@@ -4,6 +4,7 @@
     align-items: center;
     gap:2rem;
     width: 20%;
+    
    
 }
 .addnote_btn{
@@ -22,8 +23,9 @@
     margin-right: 20px;
 }
 .sidebar_menu > button{
-    background-color: white;
-    color:black;
+    background-color:var(--background-color);
+    /* color:black; */
+    color:var(--primary-text-color);
     font-size: 14pt;
     text-align: left;
     font-weight:400;
@@ -36,11 +38,13 @@
     cursor:pointer;
     transform: scale(1.1);
     background-color: rgb(224, 238, 250);
+    color:black;
 }
 .sidebar_menu > button:hover{
     cursor:pointer;
     transform: scale(1.1);
     background-color: rgb(224, 238, 250);
+    color: black;
 
 }
 .addnote_btn:hover{

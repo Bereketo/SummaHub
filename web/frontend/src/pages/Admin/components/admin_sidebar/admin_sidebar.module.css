@@ -3,13 +3,13 @@
     flex-direction: column;
     align-items: center;
     gap:2rem;
+    
    
 }
-.addnote_btn{
-    margin-top: 1.3rem;
-    background-color: rgb(86, 86, 249);
-    width:150px;
-    font-size: 12pt;
+.admin_title{
+    margin-top: 1rem;
+    
+    font-size: 14pt;
     text-align: center;
     padding-bottom:30px;
 }
@@ -18,25 +18,30 @@
     margin-right: 20px;
 }
 .sidebar_menu > button{
-    background-color: white;
+    /* background-color: white; */
+   
+    background-color: rgb(224, 238, 250);
     color:black;
     font-size: 14pt;
     text-align: left;
     font-weight:400;
     margin-bottom: 10px;
     transition: all 300ms ease-in;
+    
     padding-bottom:2rem;
 }
 
 .sidebar_menu > button.active {
     cursor:pointer;
     transform: scale(1.1);
-    background-color: rgb(224, 238, 250);
+    background-color: rgb(96, 153, 202);
 }
 .sidebar_menu > button:hover{
     cursor:pointer;
-    transform: scale(1.1);
-    background-color: rgb(224, 238, 250);
+    font-size: 13pt;
+    transform: scale(1);
+    color:white;
+    background-color: rgb(61, 110, 152);
 
 }
 .addnote_btn:hover{

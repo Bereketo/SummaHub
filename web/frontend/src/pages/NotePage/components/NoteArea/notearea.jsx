@@ -42,6 +42,7 @@ const NoteArea = () => {
   return (
     <div className={styles.notearea_wrapper}>
     <div className={styles.notearea}>
+    <input type="text" placeholder="Enter your title here" className={styles.note_title } />
       <QuillEditor
       theme = {'snow'}
       ref = {(el)=>(quill.current = el)}

@@ -6,11 +6,11 @@ import NoteArea from "./components/NoteArea/notearea";
 import NotesFront from "./components/NotesFront/notesFront";
 import styles from "./note.module.css";
 
-const Note = () => {
+const Note = ({theme , setTheme}) => {
   const [showNoteArea, setShowNoteArea] = useState(" ");
   return (
     <div className={styles.notepage_wrapper}>
-      <Header useButtons={false} />
+      <Header useButtons={false} theme = {theme} setTheme = {setTheme}/>
       <div className={styles.note_wrapper}>
         <Sidebar setShowNoteArea={setShowNoteArea} />
         {showNoteArea === "newnote" && <NoteArea />}

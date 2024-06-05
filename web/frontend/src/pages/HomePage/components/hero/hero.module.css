@@ -3,7 +3,9 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+    color:var(--primary-text-color)
 }
+
 .hero_text{
     text-align: left; 
     margin-bottom: 100px;
@@ -27,7 +29,7 @@
     width:29rem;
     height: 20rem;
     overflow: hidden;
-    padding-right:5rem;
+    padding-right:1rem;
 }
 .img_container>img{
     height:100%;
