@@ -2,15 +2,15 @@ import React from "react";
 import Header from "../HomePage/components/header/header";
 import styles from "./question.module.css";
 
-function Question() {
+function Question({theme , setTheme}) {
   return (
     <div>
-      <Header useButtons={false} />
-      <div>
+      <Header useButtons={false} theme = {theme} setTheme = {setTheme} />
+      <div className={styles.question_wrapper}>
       <div className={styles.textarea_wrapper}>
         <div className={styles.left_menu}>
           <h1> Difficulty</h1>
-          <form>
+          <form className={styles.question_form}>
             <input type="radio" id="hard" name="fav_language" value="Hard" />
             <em> Hard</em><br></br>
             <input type="radio" id="hard" name="fav_language" value="Hard" />
@@ -20,7 +20,7 @@ function Question() {
           </form>
           <br></br>
           <h1> Type</h1>
-          <form>
+          <form className={styles.question_form}>
             <input type="radio" id="hard" name="fav_language" value="Hard" />
             <em> True / False</em><br></br>
             <input type="radio" id="hard" name="fav_language" value="Hard" />

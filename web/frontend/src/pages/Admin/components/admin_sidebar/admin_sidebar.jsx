@@ -22,6 +22,9 @@ const AdminSidebar = ({setShowNoteArea}) => {
 
     <div className={styles.sidebar_wrapper}>
     <div className={styles.sidebar_menu}>
+    <div className={styles.admin_title}>
+        <h1> Admin Hub</h1>
+    </div>
     <button  onClick = {handleNotesbtn} className={activeButton === 'notes' ? styles.active : ''}><strong className={styles.emoji} > 👤</strong>Admin Profile </button>
     <button  onClick = {handleReminderbtn} className={activeButton === 'reminder' ? styles.active : ''}><strong className={styles.emoji}>👥</strong> User List </button>
     <button onClick={handlePinnedNotes} className={activeButton === 'pinnedNotes' ? styles.active : ''}><strong className={styles.emoji}>📝</strong> Feedbacks </button>

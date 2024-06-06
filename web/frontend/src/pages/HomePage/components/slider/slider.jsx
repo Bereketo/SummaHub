@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./slider.module.css";
+import { Link } from "react-router-dom";
 
 function Slider() {
   return (
@@ -31,7 +32,10 @@ function Slider() {
         </div>
       </div>
       <div>
-        <button  className = {`btn_1 ${styles.startnow_btn} `}>  Start Now</button>
+      <Link to = '/Question'>
+      <button  className = {`btn_1 ${styles.startnow_btn} `}>  Start Now</button>
+      </Link>
+        
       </div>
     </div>
   );

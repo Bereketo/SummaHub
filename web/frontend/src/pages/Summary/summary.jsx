@@ -3,10 +3,10 @@ import styles from "./summary.module.css";
 import Header from "../HomePage/components/header/header";
 import Chat from "./components/chat/chat";
 
-function Summary() {
+function Summary({theme , setTheme}) {
   return (
     <div>
-     <Header />
+     <Header theme = {theme} setTheme = {setTheme} />
     <div className={styles.summary_wrapper}>
       <h1> ✨Find The Best Summaries Here✨</h1>
       <div className={styles.top_bar}>
@@ -40,6 +40,7 @@ function Summary() {
       <div className={styles.chat_title}>
       <h1> Do you have questions? <strong> Ask me anything</strong></h1>
       </div>
+      <img />
 
       <Chat />
     </div>

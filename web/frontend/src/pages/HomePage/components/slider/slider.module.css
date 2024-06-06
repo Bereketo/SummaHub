@@ -8,10 +8,12 @@
     align-content: space-around;
     align-items: center;
    
+   
 }
 .slide_wrapper > h1{
     font-size: 18pt;
     text-align: center;
+    color:var(--primary-text-color)
 }
 .demo_slider{
     display: flex;
