@@ -1,0 +1,77 @@
+.user-view__content {
+    padding: 2rem;
+}
+
+.user-view__form-container {
+    margin-bottom: 2rem;
+}
+
+.heading-secondary {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.form__group {
+    margin-bottom: 1.5rem;
+}
+
+.form__label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.form__input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form__photo-upload {
+    display: flex;
+    align-items: center;
+}
+
+.form__user-photo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+.form__upload {
+    display: none;
+}
+
+.form__photo-upload label {
+    cursor: pointer;
+    color: #1674e0;
+    background-color: #f7f7f7;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+.form__group.right {
+    text-align: right;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn--small {
+    padding: 0.5rem 1rem;
+}
+
+.btn--green {
+    background-color: #1674e0;
+    color: white;
+}
+
+.btn--save--password {
+    margin-top: 1rem;
+}

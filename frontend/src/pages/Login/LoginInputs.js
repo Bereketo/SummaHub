@@ -12,15 +12,13 @@ const inputs = [
     {
         id: 2,
         name : 'password',
-        type : 'text',
+        type : 'password',
         placeholder: '',
         errorMessage:" Password should be 8 -20 characters and iinclude at least 1 letter , 1 number and 1 special character!",
         label:<div><img src="./images/password.png" alt="mk"></img>Password</div>,
         required:true,
         // pattern:"^(?=.*[0-9])(?=.*[a-z])(?=.*[@$!%*?&])([a-zA-Z0-9@$!%*?&]{8,20})$"
         pattern:"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^A-Za-z0-9]).{8,20}$"
-       
-    
     },
 
   

@@ -4,62 +4,55 @@ import "./Login.css";
 import FormInput from "./components/formInputLogin";
 import LoginInputs from "./LoginInputs";
 import axios from "../../api/axios";
+import { useUser } from '../../context/UserContext';
 
-const LOGIN_URL = "http://localhost:4040/api/v1/users/login";
+
 
 function Login() {
   const [values, setValues] = useState({ email: "", password: "" });
   const [errMsg, setErrMsg] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const errRef = useRef();
+  const { login } = useUser();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-  };
-
   useEffect(() => {
-    const submitForm = async () => {
-      if (!isSubmitting) {
-        return
-      };
+    errRef.current && errMsg && errRef.current.focus();
+  }, [errMsg]);
 
-      try {
-        const response = await axios.post(
-          LOGIN_URL,
-          { email: values.email, password: values.password }
-        );
-        console.log(JSON.stringify(response?.data.status));
-        if (response?.data.status === "Success") {
-          navigate("/");
-        }
-      } catch (err) {
-        handleErrorResponse(err);
-        errRef.current.focus();
-      } finally {
-        setIsSubmitting(false);
-      }
-    };
-
-    submitForm();
-  }, [isSubmitting, values, navigate]);
-
-  const handleErrorResponse = (err) => {
-    if (!err?.response) {
-      setErrMsg("No Server Response");
-    } else if (err.response?.status === 400) {
-      setErrMsg("Missing Username or Password");
-    } else if (err.response?.status === 401) {
-      setErrMsg("Unauthorized");
-    } else {
-      setErrMsg("Unable to login");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!values.email || !values.password) {
+      setErrMsg("Email and password are required");
+      return;
     }
+    setIsSubmitting(true);
+    try {
+      const response = await axios.post("http://localhost:4040/api/v1/users/login", {
+        email: values.email,
+        password: values.password,
+      });
+      console.log(response.data);
+      login(response.data);
+      navigate('/');  // Adjust as per your route settings
+    } catch (err) {
+      if (!err?.response) {
+        setErrMsg("No Server Response");
+      } else if (err.response?.status === 400) {
+        setErrMsg("Missing Username or Password");
+      } else if (err.response?.status === 401) {
+        setErrMsg("Unauthorized");
+      } else {
+        setErrMsg("Login Failed");
+      }
+      errRef.current.focus();
+    }
+    setIsSubmitting(false);
   };
 
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
-    setErrMsg(""); // Clear the error message when the user starts typing
+    setErrMsg("");  // Clear the error message when the user starts typing
   };
 
   return (
