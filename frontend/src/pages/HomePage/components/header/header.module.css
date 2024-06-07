@@ -85,3 +85,23 @@
     height:30px;
     /* width:30px */
 }
+.user_info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.user_photo {
+    height: 40px; /* Adjust the height and width to your desired size */
+    width: 40px; /* Adjust the height and width to your desired size */
+    border-radius: 50%; /* Make the photo round */
+}
+
+.user_name {
+    color: rgb(59, 62, 59);
+    font-size: 10pt;
+}
+.logout_btn{
+    margin: 20px;
+    background-color: rgb(86, 86, 249);
+}
