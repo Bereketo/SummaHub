@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 app.use(cors());
 
+const path = require('path');
 const helmet = require('helmet');
 const mongoSanitizer = require('express-mongo-sanitize');
 const xss = require('xss-clean');
@@ -33,7 +34,7 @@ app.use(xss());
 // Serving static files
 // Test middleware
 // Limiting request from the same API
-
+app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res, next) => {
     req.requestTime = new Date().toISOString();
     console.log(req.cookies);
