@@ -26,7 +26,8 @@
 }
 
 .form__group {
-    position: relative;  /* Positioning context for labels */
+    position: relative;
+    /* Positioning context for labels */
     margin-bottom: 1.5rem;
 }
 
@@ -35,11 +36,15 @@
     top: 50%;
     left: 0.75rem;
     transform: translateY(-50%);
-    background-color: white;  /* Background color to prevent overlap with input border */
-    padding: 0 0.25rem;  /* Some padding around the label */
-    transition: all 0.3s;  /* Smooth transition for the floating effect */
+    background-color: white;
+    /* Background color to prevent overlap with input border */
+    padding: 0 0.25rem;
+    /* Some padding around the label */
+    transition: all 0.3s;
+    /* Smooth transition for the floating effect */
     color: #666;
-    pointer-events: none;  /* Prevent mouse events on the label */
+    pointer-events: none;
+    /* Prevent mouse events on the label */
 }
 
 .form__input {
@@ -47,16 +52,19 @@
     padding: 0.75rem;
     border: 1px solid #ccc;
     border-radius: 5px;
-    outline: none;  /* Remove default outline */
+    outline: none;
+    /* Remove default outline */
 }
 
-.form__input:focus + .form__label,
-.form__input:not(:placeholder-shown) + .form__label {
+.form__input:focus+.form__label,
+.form__input:not(:placeholder-shown)+.form__label {
     top: -0.75rem;
     left: 0.5rem;
     font-size: 0.75rem;
-    color: #1674e0;  /* Change color to indicate focus */
-    background-color: white;  /* Ensure the background color stays the same */
+    color: #1674e0;
+    /* Change color to indicate focus */
+    background-color: white;
+    /* Ensure the background color stays the same */
 }
 
 .form__photo-upload {
@@ -112,6 +120,7 @@
 
 /* Responsive Styles */
 @media only screen and (max-width: 600px) {
+
     .user-view__form-container,
     .user-view__form-container-2 {
         width: 90%;
@@ -120,9 +129,51 @@
     .heading-secondary {
         font-size: 1.5rem;
     }
-    
+
     .form__user-photo {
         width: 40px;
         height: 40px;
     }
+}
+
+.alert {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    z-index: 9999;
+    color: #fff;
+    font-size: 1.6rem;
+    /* Adjust font size if needed */
+    font-weight: 400;
+    text-align: center;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    padding: 0.8rem 10rem;
+    /* Reduced padding for a thinner box */
+    -webkit-box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.25);
+}
+
+.alert--Success {
+    background-color: #20bf6b;
+}
+
+.alert--error {
+    background-color: #eb4d4b;
+}
+
+
+.alert--Success {
+    background-color: #20bf6b;
+}
+
+.alert--error {
+    background-color: #eb4d4b;
+}
+.btn-back{
+    position: relative;
+    top: 0;
+    left: -40%;
 }

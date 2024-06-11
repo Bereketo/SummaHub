@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useUser } from '../../context/UserContext';
+import { showAlert } from '../../utils/alert';
 import './UserProfile.css';
 import axios from 'axios';
 
@@ -65,9 +66,11 @@ const UserProfile = () => {
       });
       console.log(response.data.data)
       setUser(response.data.data);
+      showAlert('Success', 'user info updated successfully!');
       console.log('Settings saved:', response.data.data);
     } catch (err) {
       console.error('Error updating user settings:', err);
+      showAlert('error', 'Error updating settings. Please try again.');
     }
   }
 
@@ -77,7 +80,7 @@ const UserProfile = () => {
       try {
         const userToken = JSON.parse(localStorage.getItem('user'));
         const { token } = userToken;
-
+        
         const response = await axios.patch(`http://localhost:4040/api/v1/users/updatePassword/${user._id}`, {
           currentPassword: passwordCurrent,
           password,
@@ -89,6 +92,7 @@ const UserProfile = () => {
         });
 
         console.log('Password updated:', response.data);
+        showAlert('Success', 'Password updated successfully!');
         // Optionally, log out the user or refresh tokens
       } catch (err) {
         console.error('Error updating password:', err);
@@ -99,10 +103,19 @@ const UserProfile = () => {
     }
   };
 
+  const handleBack =()=>{
+    window.location.href = '/';
+  }
+
   return (
     <div className="user-view__content">
+
+      <div className='btn-back'>
+        <button onClick={handleBack}>back</button>
+      </div>
+
       <div className="user-view__form-container">
-        <h2 className="heading-secondary ma-bt-md">Your account settings</h2>
+        <h2 className="heading-secondary ma-bt-md">Your account info</h2>
         <form className="form form-user-data" encType="multipart/form-data" onSubmit={handleSaveSettings}>
           <div className="form__group">
             <input
