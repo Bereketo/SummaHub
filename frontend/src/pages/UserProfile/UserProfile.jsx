@@ -42,10 +42,34 @@ const UserProfile = () => {
     setUser({ ...user, photo: URL.createObjectURL(e.target.files[0]) });
   };
 
-  const handleSaveSettings = (e) => {
+  const handleSaveSettings = async (e) => {
     e.preventDefault();
-    console.log('Settings saved:', user);
-  };
+
+    const userToken = JSON.parse(localStorage.getItem('user'));
+    const { token } = userToken;
+
+    const formData = new FormData();
+    formData.append('firstname', user.firstname);
+    formData.append('lastname', user.lastname);
+    formData.append('email', user.email);
+    // if (photo) {
+    //   formData.append('photo', photo);
+    // }
+
+    try {
+      const response = await axios.patch('http://localhost:4040/api/v1/users/updateMe', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response.data.data)
+      setUser(response.data.data);
+      console.log('Settings saved:', response.data.data);
+    } catch (err) {
+      console.error('Error updating user settings:', err);
+    }
+  }
 
   const handleSavePassword = (e) => {
     e.preventDefault();
