@@ -1,7 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useUser } from '../../context/UserContext';
 import './UserProfile.css';
+import axios from 'axios';
 
-const UserProfile = ({ user, setUser, updatePassword }) => {
+const UserProfile = () => {
+  const { user, setUser } = useUser();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const userToken = JSON.parse(localStorage.getItem('user'));
+        const { token } = userToken;
+        if (!token) {
+          throw new Error('No token found');
+        }
+        const response = await axios.get('http://localhost:4040/api/v1/users/me', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        console.log(response.data.data)
+        setUser(response.data.data);
+      } catch (err) {
+        console.error('Error fetching user data:', err);
+        if (err.response && err.response.data.message === 'jwt expired') {
+          console.log('JWT expired. Redirecting to login page...');
+        } else {
+          console.error('Error details:', err.response.data);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [setUser]);
+
   const [passwordCurrent, setPasswordCurrent] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -12,14 +44,13 @@ const UserProfile = ({ user, setUser, updatePassword }) => {
 
   const handleSaveSettings = (e) => {
     e.preventDefault();
-    // Here we assume the save settings logic would be handled by passing updated user data to a server
     console.log('Settings saved:', user);
   };
 
   const handleSavePassword = (e) => {
     e.preventDefault();
     if (password === passwordConfirm) {
-      updatePassword(passwordCurrent, password);
+      // updatePassword(passwordCurrent, password);
     } else {
       alert('Passwords do not match!');
     }
@@ -29,31 +60,42 @@ const UserProfile = ({ user, setUser, updatePassword }) => {
     <div className="user-view__content">
       <div className="user-view__form-container">
         <h2 className="heading-secondary ma-bt-md">Your account settings</h2>
-        <form className="form form-user-data" onSubmit={handleSaveSettings}>
+        <form className="form form-user-data" encType="multipart/form-data" onSubmit={handleSaveSettings}>
           <div className="form__group">
-            <label htmlFor="name" className="form__label">Name</label>
             <input
               type="text"
               id="name"
               className="form__input"
+              placeholder="First Name"
               required
-              value={user.name}
-              onChange={(e) => setUser({ ...user, name: e.target.value })}
+              value={user?.firstname || ''}
+              onChange={(e) => setUser({ ...user, firstname: e.target.value })}
+            />
+          </div>
+          <div className="form__group">
+            <input
+              type="text"
+              id="name"
+              className="form__input"
+              placeholder="Last Name"
+              required
+              value={user?.lastname || ''}
+              onChange={(e) => setUser({ ...user, lastname: e.target.value })}
             />
           </div>
           <div className="form__group ma-bt-md">
-            <label htmlFor="email" className="form__label">Email address</label>
             <input
               type="email"
               id="email"
               className="form__input"
+              placeholder="Email address"
               required
-              value={user.email}
+              value={user?.email || ''}
               onChange={(e) => setUser({ ...user, email: e.target.value })}
             />
           </div>
           <div className="form__group form__photo-upload">
-            <img className="form__user-photo" src={`/img/users/${user.photo}`} alt="User" />
+            <img className="form__user-photo" src="/images/users/default.jpg" alt="User" />
             <input
               type="file"
               className="form__upload"
@@ -62,7 +104,7 @@ const UserProfile = ({ user, setUser, updatePassword }) => {
               accept="image/*"
               onChange={handlePhotoChange}
             />
-            <label htmlFor="photo">Choose new photo</label>
+            <label htmlFor="photo" className="photo">Choose new photo</label>
           </div>
           <button className="btn btn--small btn--green" type="submit">Save settings</button>
         </form>
@@ -70,16 +112,15 @@ const UserProfile = ({ user, setUser, updatePassword }) => {
 
       <div className="line">&nbsp;</div>
 
-      <div className="user-view__form-container">
+      <div className="user-view__form-container-2">
         <h2 className="heading-secondary ma-bt-md">Password change</h2>
         <form className="form form-user-settings" onSubmit={handleSavePassword}>
           <div className="form__group">
-            <label htmlFor="password-current" className="form__label">Current password</label>
             <input
               type="password"
               id="password-current"
               className="form__input"
-              placeholder="••••••••"
+              placeholder="Current password"
               required
               minLength="8"
               value={passwordCurrent}
@@ -87,12 +128,11 @@ const UserProfile = ({ user, setUser, updatePassword }) => {
             />
           </div>
           <div className="form__group">
-            <label htmlFor="password" className="form__label">New password</label>
             <input
               type="password"
               id="password"
               className="form__input"
-              placeholder="••••••••"
+              placeholder="New password"
               required
               minLength="8"
               value={password}
@@ -100,12 +140,11 @@ const UserProfile = ({ user, setUser, updatePassword }) => {
             />
           </div>
           <div className="form__group ma-bt-lg">
-            <label htmlFor="password-confirm" className="form__label">Confirm password</label>
             <input
               type="password"
               id="password-confirm"
               className="form__input"
-              placeholder="••••••••"
+              placeholder="Confirm password"
               required
               minLength="8"
               value={passwordConfirm}

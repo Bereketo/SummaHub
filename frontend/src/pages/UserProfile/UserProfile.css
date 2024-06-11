@@ -1,9 +1,23 @@
+/* General Styles */
 .user-view__content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 2rem;
+}
+
+.user-view__form-container,
+.user-view__form-container-2 {
+    width: 50%;
+    padding: 20px;
 }
 
 .user-view__form-container {
     margin-bottom: 2rem;
+}
+
+.user-view__form-container-2 {
+    margin-top: 2rem;
 }
 
 .heading-secondary {
@@ -12,12 +26,20 @@
 }
 
 .form__group {
+    position: relative;  /* Positioning context for labels */
     margin-bottom: 1.5rem;
 }
 
 .form__label {
-    display: block;
-    margin-bottom: 0.5rem;
+    position: absolute;
+    top: 50%;
+    left: 0.75rem;
+    transform: translateY(-50%);
+    background-color: white;  /* Background color to prevent overlap with input border */
+    padding: 0 0.25rem;  /* Some padding around the label */
+    transition: all 0.3s;  /* Smooth transition for the floating effect */
+    color: #666;
+    pointer-events: none;  /* Prevent mouse events on the label */
 }
 
 .form__input {
@@ -25,6 +47,16 @@
     padding: 0.75rem;
     border: 1px solid #ccc;
     border-radius: 5px;
+    outline: none;  /* Remove default outline */
+}
+
+.form__input:focus + .form__label,
+.form__input:not(:placeholder-shown) + .form__label {
+    top: -0.75rem;
+    left: 0.5rem;
+    font-size: 0.75rem;
+    color: #1674e0;  /* Change color to indicate focus */
+    background-color: white;  /* Ensure the background color stays the same */
 }
 
 .form__photo-upload {
@@ -45,10 +77,12 @@
 
 .form__photo-upload label {
     cursor: pointer;
-    color: #1674e0;
+    color: #b9cee5;
     background-color: #f7f7f7;
     padding: 0.5rem 1rem;
     border-radius: 5px;
+    margin: 20px;
+    margin-left: 50px;
 }
 
 .form__group.right {
@@ -74,4 +108,21 @@
 
 .btn--save--password {
     margin-top: 1rem;
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 600px) {
+    .user-view__form-container,
+    .user-view__form-container-2 {
+        width: 90%;
+    }
+
+    .heading-secondary {
+        font-size: 1.5rem;
+    }
+    
+    .form__user-photo {
+        width: 40px;
+        height: 40px;
+    }
 }

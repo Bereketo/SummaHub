@@ -94,14 +94,17 @@
 .user_photo {
     height: 40px; /* Adjust the height and width to your desired size */
     width: 40px; /* Adjust the height and width to your desired size */
-    border-radius: 50%; /* Make the photo round */
+    border-radius: 50%;
+ 
 }
 
 .user_name {
-    color: rgb(59, 62, 59);
+    color: rgb(69, 57, 240);
     font-size: 10pt;
+    margin: 20px;
 }
-.logout_btn{
+
+.logout_btn {
     margin: 20px;
     background-color: rgb(86, 86, 249);
 }

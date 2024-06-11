@@ -5,12 +5,12 @@ import styles from './header.module.css';
 
 const Header = ({ useButtons }) => {
   const { user, logout } = useUser();
-  console.log('user', user);
+  // console.log('user', user.data);
   const location = useLocation();
 
   const isActive = (path) => location.pathname === path; // Function to determine if the current path is active
 
- 
+
   return (
     <div className={styles.head_wrapper}>
       <div className={styles.head_container}>
@@ -26,9 +26,9 @@ const Header = ({ useButtons }) => {
         </div>
         {user ? (
           <div className={styles.user_info}>
-            <img className={styles.user_photo} src='/images/users/default.jpg' alt="User" />
-            <span>{user.firstname}</span>
             <button className={`btn_1 ${styles.logout_btn}`} onClick={logout}>Logout</button>
+            <img className={styles.user_photo} src='/images/users/default.jpg' alt="User" />
+            <NavLink className={styles.user_name} to="/myprofile">{user.data.firstname}</NavLink>
           </div>
         ) : (
           useButtons && (
@@ -39,6 +39,7 @@ const Header = ({ useButtons }) => {
             </div>
           )
         )}
+
       </div>
     </div>
   );
