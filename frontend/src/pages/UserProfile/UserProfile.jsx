@@ -71,10 +71,29 @@ const UserProfile = () => {
     }
   }
 
-  const handleSavePassword = (e) => {
+  const handleSavePassword = async (e) => {
     e.preventDefault();
     if (password === passwordConfirm) {
-      // updatePassword(passwordCurrent, password);
+      try {
+        const userToken = JSON.parse(localStorage.getItem('user'));
+        const { token } = userToken;
+
+        const response = await axios.patch(`http://localhost:4040/api/v1/users/updatePassword/${user._id}`, {
+          currentPassword: passwordCurrent,
+          password,
+          passwordConfirm,
+        }, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        console.log('Password updated:', response.data);
+        // Optionally, log out the user or refresh tokens
+      } catch (err) {
+        console.error('Error updating password:', err);
+        alert(err.response?.data?.message || 'Error updating password');
+      }
     } else {
       alert('Passwords do not match!');
     }
