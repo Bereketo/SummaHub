@@ -29,9 +29,12 @@ function Summary({theme , setTheme}) {
           <button className={styles.summary_btn}> Summarize </button>
         </div>
         <div className={styles.summary_output}> 
-        <textarea
-            className={styles.summoutput_textarea} readOnly>
-          </textarea>
+        <div className={styles.summoutput_textarea} readOnly>
+
+
+       
+        </div>
+    
           <p>  0 words </p>
           </div>
       </div>
