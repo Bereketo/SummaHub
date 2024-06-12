@@ -1,9 +1,17 @@
 import React from "react";
 import styles from "./chat.module.css";
+import Header from "../HomePage/components/header/header";
 
-function Chat() {
+function Chat({theme , setTheme}) {
   return (
+    <div>
+   <Header theme = {theme} setTheme = {setTheme} />
+   <div className={styles.chat_title}>
+      <h1> Do you have questions? <strong> Ask me anything</strong></h1>
+      </div>
+   
     <div className={styles.chat_wrapper}>
+  
       <div className={styles.info_space}>
         <div className={styles.person_img}>
           <img src="./images/online-chat.png" />
@@ -55,6 +63,7 @@ function Chat() {
         </div>
 
       </div>
+    </div>
     </div>
   );
 }

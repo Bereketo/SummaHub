@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./summary.module.css";
 import Header from "../HomePage/components/header/header";
-import Chat from "./components/chat/chat";
 
 function Summary({theme , setTheme}) {
   return (
@@ -29,20 +28,21 @@ function Summary({theme , setTheme}) {
           <button className={styles.summary_btn}> Summarize </button>
         </div>
         <div className={styles.summary_output}> 
-        <textarea
-            className={styles.summoutput_textarea} readOnly>
-          </textarea>
+        <div className={styles.summoutput_textarea} readOnly>
+
+
+       
+        </div>
+    
           <p>  0 words </p>
           </div>
       </div>
       </div>
       {/* <hr></hr> */}
-      <div className={styles.chat_title}>
-      <h1> Do you have questions? <strong> Ask me anything</strong></h1>
-      </div>
+      
       <img />
 
-      <Chat />
+
     </div>
   );
 }

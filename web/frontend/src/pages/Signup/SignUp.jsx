@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import './SignUp.css'
+import styles from './SignUp.module.css'
 import FormInput from "./components/forminput";
 import inputs from "./inputs";
 // import logo from "./images/logo.png";
@@ -25,9 +25,9 @@ function SignUp(){
 
     return <div className="loginWrapper">
         <form onSubmit={handleSubmit}>
-        <img className='logo' src= "./images/logo.png"/>
+        <img className={styles.logo} src= "./images/logo.png"/>
         {inputs.map((input) => (<FormInput key = {input.id} {...input} value = {values[input.name]} onChange = {handleChange}/>))}
-        <button > Sign Up</button>
+        <button  className={styles.signup_btn}> Sign Up</button>
         <p> Have an account? <a href=""> Login here</a></p>
         </form> 
     </div>

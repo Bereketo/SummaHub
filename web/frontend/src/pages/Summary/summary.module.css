@@ -67,8 +67,11 @@
     height: 100%;
     width: 100%;
     background-color:rgb(224, 248, 249);
-    padding: 1rem;
+    padding: 2rem;
+    padding-right: 1rem;
     border-radius: 10px;
+    line-height: 1.6rem;
+    overflow: scroll;
    
 }
 .summoutput_textarea:focus{
