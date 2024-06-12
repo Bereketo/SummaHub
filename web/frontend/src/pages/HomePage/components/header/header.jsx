@@ -23,9 +23,9 @@ const Header = ({useButtons, onScrollToBottom ,theme ,setTheme}) => {
           <NavLink className = {`${styles.link} ${isActive("/") ? styles.active : ""} `} to = "/"> Home</NavLink>
           <NavLink className = {`${styles.link} ${isActive("/Summary") ? styles.active : ""} `} to = "/Summary"> Summarize Text</NavLink>
           <NavLink className = {`${styles.link} ${isActive("/Question") ? styles.active : ""} `} to = "/Question"> Generate Question</NavLink>
+          <NavLink className = {`${styles.link} ${isActive("/Chat") ? styles.active : ""} `} to = "/Chat"> Chat </NavLink>
           <NavLink className = {`${styles.link} ${isActive("/Note") ? styles.active : ""} `} to = "/Note"> Note </NavLink>
-          {/* <NavLink className = {`${styles.link} ${isActive("/About") ? styles.active : ""} `} to = "/About"> ab </NavLink> */}
-          <NavLink onClick = {onScrollToBottom} className = {`${styles.link} ${isActive("/About") ? styles.active : ""} `} > About </NavLink>
+          {/* <NavLink onClick = {onScrollToBottom} className = {`${styles.link} ${isActive("/About") ? styles.active : ""} `} > About </NavLink> */}
 
         </div>
         <div className={styles.daynight_btn}>
