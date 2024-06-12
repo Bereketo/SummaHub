@@ -1,7 +1,6 @@
 import React from "react";
 import styles from "./summary.module.css";
 import Header from "../HomePage/components/header/header";
-import Chat from "./components/chat/chat";
 
 function Summary({theme , setTheme}) {
   return (
@@ -40,12 +39,10 @@ function Summary({theme , setTheme}) {
       </div>
       </div>
       {/* <hr></hr> */}
-      <div className={styles.chat_title}>
-      <h1> Do you have questions? <strong> Ask me anything</strong></h1>
-      </div>
+      
       <img />
 
-      <Chat />
+
     </div>
   );
 }
