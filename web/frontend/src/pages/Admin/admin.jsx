@@ -52,12 +52,12 @@ function Admin() {
           <h1>👤Yonas Alemu</h1>
         </div>
       </div>
-      <hr></hr>
+      {/* <hr></hr> */}
       <div className={styles.admin_body}>
         <div className={styles.admin_sidemenu}>
        <AdminSidebar />
         </div>
-        <div className={styles.vertical_line}></div>
+        {/* <div className={styles.vertical_line}></div> */}
         <div className={styles.user_display}>
           <div className={styles.user_listtitle}>
           <h1> Manage users</h1>
