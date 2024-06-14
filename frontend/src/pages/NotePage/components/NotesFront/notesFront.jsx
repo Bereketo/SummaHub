@@ -7,7 +7,6 @@ function NotesFront() {
   return (
     <div className={styles.notefront_wrapper}>
        <Notecard />
-       {/* <button> + Add Note</button> */}
     </div>
   )
 }

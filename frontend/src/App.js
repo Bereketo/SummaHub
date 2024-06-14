@@ -5,6 +5,7 @@ import Note from './pages/NotePage/Note';
 import Home from './pages/HomePage/home';
 import SignUp from './pages/Signup/SignUp';
 import Login from './pages/Login/Login';
+import NoteArea from './pages/NotePage/components/NoteArea/notearea';
 import NoteEdit from './pages/NotePage/components/NoteEdit/noteedit';
 import Summary from './pages/Summary/summary';
 import About from './pages/HomePage/components/AboutUs/aboutus';
@@ -21,10 +22,11 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Signup" element={<SignUp />} />
           <Route path="/Note" element={<Note />} />
+          <Route path="/NoteAdd" element={<NoteArea />} />
+          <Route path="/NoteEdit" element={<NoteEdit />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Summary" element={<Summary />} />
           <Route path="/About" element={<About />} />
-          <Route path="/NoteEdit" element={<NoteEdit />} />
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/resetPassword/:resetToken" element={<ResetPassword />} />
           <Route path="/myprofile" element={<UserProfile />} />
