@@ -6,6 +6,9 @@ import axios from 'axios';
 
 const UserProfile = () => {
   const { user, setUser } = useUser();
+  const [passwordCurrent, setPasswordCurrent] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -20,14 +23,14 @@ const UserProfile = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(response.data.data)
+        console.log(response.data.data);
         setUser(response.data.data);
       } catch (err) {
         console.error('Error fetching user data:', err);
         if (err.response && err.response.data.message === 'jwt expired') {
           console.log('JWT expired. Redirecting to login page...');
         } else {
-          console.error('Error details:', err.response.data);
+          console.error('Error details:', err.response?.data);
         }
       }
     };
@@ -35,12 +38,11 @@ const UserProfile = () => {
     fetchUserData();
   }, [setUser]);
 
-  const [passwordCurrent, setPasswordCurrent] = useState('');
-  const [password, setPassword] = useState('');
-  const [passwordConfirm, setPasswordConfirm] = useState('');
-
   const handlePhotoChange = (e) => {
-    setUser({ ...user, photo: URL.createObjectURL(e.target.files[0]) });
+    const file = e.target.files[0];
+    if (file) {
+      setUser({ ...user, photo: URL.createObjectURL(file) });
+    }
   };
 
   const handleSaveSettings = async (e) => {
@@ -53,9 +55,9 @@ const UserProfile = () => {
     formData.append('firstname', user.firstname);
     formData.append('lastname', user.lastname);
     formData.append('email', user.email);
-    // if (photo) {
-    //   formData.append('photo', photo);
-    // }
+    if (user.photo instanceof Blob) {
+      formData.append('photo', user.photo);
+    }
 
     try {
       const response = await axios.patch('http://localhost:4040/api/v1/users/updateMe', formData, {
@@ -64,15 +66,14 @@ const UserProfile = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response.data.data)
+      console.log(response.data.data);
       setUser(response.data.data);
-      showAlert('Success', 'user info updated successfully!');
-      console.log('Settings saved:', response.data.data);
+      showAlert('Success', 'User info updated successfully!');
     } catch (err) {
       console.error('Error updating user settings:', err);
       showAlert('error', 'Error updating settings. Please try again.');
     }
-  }
+  };
 
   const handleSavePassword = async (e) => {
     e.preventDefault();
@@ -80,7 +81,7 @@ const UserProfile = () => {
       try {
         const userToken = JSON.parse(localStorage.getItem('user'));
         const { token } = userToken;
-        
+
         const response = await axios.patch(`http://localhost:4040/api/v1/users/updatePassword/${user._id}`, {
           currentPassword: passwordCurrent,
           password,
@@ -93,7 +94,6 @@ const UserProfile = () => {
 
         console.log('Password updated:', response.data);
         showAlert('Success', 'Password updated successfully!');
-        // Optionally, log out the user or refresh tokens
       } catch (err) {
         console.error('Error updating password:', err);
         alert(err.response?.data?.message || 'Error updating password');
@@ -103,15 +103,14 @@ const UserProfile = () => {
     }
   };
 
-  const handleBack =()=>{
+  const handleBack = () => {
     window.location.href = '/';
-  }
+  };
 
   return (
     <div className="user-view__content">
-
       <div className='btn-back'>
-        <button onClick={handleBack}>back</button>
+        <button onClick={handleBack}>Back</button>
       </div>
 
       <div className="user-view__form-container">
@@ -120,7 +119,6 @@ const UserProfile = () => {
           <div className="form__group">
             <input
               type="text"
-              id="name"
               className="form__input"
               placeholder="First Name"
               required
@@ -131,7 +129,6 @@ const UserProfile = () => {
           <div className="form__group">
             <input
               type="text"
-              id="name"
               className="form__input"
               placeholder="Last Name"
               required
@@ -142,7 +139,6 @@ const UserProfile = () => {
           <div className="form__group ma-bt-md">
             <input
               type="email"
-              id="email"
               className="form__input"
               placeholder="Email address"
               required
@@ -151,7 +147,7 @@ const UserProfile = () => {
             />
           </div>
           <div className="form__group form__photo-upload">
-            <img className="form__user-photo" src="/images/users/default.jpg" alt="User" />
+            <img className="form__user-photo" src={user?.photo || '/img/users/default.jpg'} alt="User" />
             <input
               type="file"
               className="form__upload"

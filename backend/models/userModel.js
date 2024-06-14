@@ -23,10 +23,13 @@ const userSchema = new mongoose.Schema({
             message: props => `${props.value} is not a valid email!`
         }
     },
-    photo: String,
+    photo: {
+        type: String,
+        default: 'default.jpeg',
+    },
     role: {
         type: String,
-        enum: ['user','admin'],
+        enum: ['user', 'admin'],
         default: 'user'
     },
     password: {
@@ -57,17 +60,17 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre('save', async function (next) {
     // Only run if password was modified
-    if (!this.isModified('password')) {return next();}
+    if (!this.isModified('password')) { return next(); }
 
     // Hash password with cost of 12
-    this.password = await  bycrypt.hash(this.password, 12);
+    this.password = await bycrypt.hash(this.password, 12);
     this.passwordConfirm = undefined; // Remove confirmed password
     console.log('hello from hashing middleware')
     next(); // Ensure middleware chain continues
 });
 
 userSchema.pre('save', async function (next) {
-    if (!this.isModified('password') || this.isNew) {return next();}
+    if (!this.isModified('password') || this.isNew) { return next(); }
 
     this.passwordChangeAt = Date.now() - 1000;
     console.log('password change middleware');
