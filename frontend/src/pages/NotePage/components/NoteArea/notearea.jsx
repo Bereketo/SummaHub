@@ -84,6 +84,7 @@ const NoteArea = () => {
 
   return (
     <div className={styles.notearea_wrapper}>
+        <div className={styles.notearea}>
       <input
         type="text"
         placeholder="Enter your title here"
@@ -103,10 +104,12 @@ const NoteArea = () => {
           onChange={(value) => setContent(value)}
         />
       </div>
+      </div>
       <button onClick={handleSave} className={styles.savebtn}>
         Save
       </button>
     </div>
+    
   );
 };
 

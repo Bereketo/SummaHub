@@ -3,13 +3,14 @@
     top:0px;
     left:0;
     width: 100vw;
+    
 }
 .head_container{
     display: flex;
     justify-content:space-between;
     margin: 10px 20px 5px 20px;
     padding:0.7rem;
-    background-color:rgba(171, 211, 249, 0.7);
+    background-color:var(--header-background);
     align-items:center;
     height:45px;
     gap: 2rem;
@@ -18,14 +19,16 @@
 
 }
 .head_menu{
-    gap:rem
+    gap:1.5rem;
+    color:black;
 }
 .head_menu > .link {
     font-weight: 500;
     display: inline-block; 
     padding: 0.5rem; 
     border-radius: 0.8rem;
-    
+    /* color:rgb(249, 252, 255); */
+    color:var(--primary-text-color);
     transition: all 300ms ease-in;
 }
 
@@ -48,6 +51,7 @@
     font-size: 14pt;
 
 }
+
  
 
 .daynight_btn > img{
@@ -56,8 +60,7 @@
 }
 .buttons{
     
-    /* margin-top: auto; */
-    margin-top: 26px;
+    margin-top: 0px;
     display: flex;
     align-items: center;
     gap:1rem;
@@ -72,39 +75,18 @@
 .account{
     display: flex;
     gap:0.5rem;
+   
 }
 .account_img  > img{
     height:30px;
     width:30px
 }
 .account_detail >*{
-    color: rgb(59, 62, 59);
+    /* color: rgb(59, 62, 59); */
     font-size: 10pt;
+    color : var(--primary-text-color);
 }
 .account_detail{
     height:30px;
     /* width:30px */
-}
-.user_info {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.user_photo {
-    height: 40px; /* Adjust the height and width to your desired size */
-    width: 40px; /* Adjust the height and width to your desired size */
-    border-radius: 50%;
- 
-}
-
-.user_name {
-    color: rgb(69, 57, 240);
-    font-size: 10pt;
-    margin: 20px;
-}
-
-.logout_btn {
-    margin: 20px;
-    background-color: rgb(86, 86, 249);
 }

@@ -13,8 +13,11 @@ import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import UserProfile from './pages/UserProfile/UserProfile';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
+import Question from './pages/Question/question';
+import Chat from './pages/Chat/chat'
+import { useState } from "react";
 function App() {
+  const  [theme , setTheme] = useState('light')
   return (
     <UserProvider>
       <BrowserRouter>
@@ -30,6 +33,9 @@ function App() {
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/resetPassword/:resetToken" element={<ResetPassword />} />
           <Route path="/myprofile" element={<UserProfile />} />
+          <Route path = '/Question' element = {<Question theme = {theme} setTheme = {setTheme}/>} />
+          <Route path = '/Chat' element = {<Chat theme = {theme} setTheme = {setTheme}/>} />
+
         </Routes>
       </BrowserRouter>
     </UserProvider>
