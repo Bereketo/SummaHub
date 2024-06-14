@@ -34,6 +34,27 @@ function Notecard() {
     fetchNotes();
   }, [navigate, setNotes]);
 
+  const handleDelete = async (id) => {
+    try {
+      const userToken = JSON.parse(localStorage.getItem('user'));
+      const { token } = userToken;
+      if (!token) {
+        throw new Error('No token found');
+      }
+      await axios.delete(`http://localhost:4040/api/v1/notes/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      // Filter out the deleted note from the state
+      setNotes(notes.filter(note => note._id !== id));
+      console.log('Note deleted successfully');
+    } catch (err) {
+      console.error('Error deleting note:', err);
+      // Handle error as needed
+    }
+  };
+
   return (
     <div className={styles.grid_container}>
       {notes.map((note) => (
@@ -46,12 +67,22 @@ function Notecard() {
               <p>{note.content}</p>
             </div>
           </div>
-            <footer>
-              <div className={styles.deleteSave}>
-                <button className={styles.deletebtn}>Delete</button>
-                <Link className={styles.pinnedSymbol} to='/NoteEdit'>🖊️</Link>
-              </div>
-            </footer>
+          <footer>
+            <div className={styles.deleteSave}>
+              <button
+                className={styles.deletebtn}
+                onClick={() => handleDelete(note._id)}
+              >
+                Delete
+              </button>
+              <Link
+                className={styles.pinnedSymbol}
+                to={`/NoteEdit/${note._id}`}
+              >
+                🖊️
+              </Link>
+            </div>
+          </footer>
         </div>
       ))}
     </div>
