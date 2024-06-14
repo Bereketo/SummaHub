@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styles from "./notecard.module.css";
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Notecard() {
-  // const currentdate = new Date();
-  // const formattedDate = currentdate.toLocaleString();
   const [notes, setNotes] = useState([]);
   const navigate = useNavigate();
+
   useEffect(() => {
     const fetchNotes = async () => {
       try {
@@ -21,8 +20,7 @@ function Notecard() {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(response.data.data[0].title);
-        setNotes(response.data.data); // Update this line to correctly set the notes
+        setNotes(response.data.data);
       } catch (err) {
         console.error('Error fetching notes:', err);
         if (err.response && err.response.data.message === 'jwt expired') {
@@ -37,7 +35,7 @@ function Notecard() {
   }, [navigate, setNotes]);
 
   return (
-    <div>
+    <div className={styles.grid_container}>
       {notes.map((note) => (
         <div key={note._id} className={styles.card_wrapper}>
           <div className={styles.notecontent}>
@@ -47,16 +45,13 @@ function Notecard() {
             <div className={styles.card_content}>
               <p>{note.content}</p>
             </div>
+          </div>
             <footer>
               <div className={styles.deleteSave}>
                 <button className={styles.deletebtn}>Delete</button>
                 <Link className={styles.pinnedSymbol} to='/NoteEdit'>🖊️</Link>
               </div>
-              {/* <p className={styles.noteDate}>{formattedDate}</p>
-              <div className={styles.pinnedSymbol}></div> */}
             </footer>
-          </div>
-          {/* <div className={styles.pinnedSymbol}>🖊️</div> */}
         </div>
       ))}
     </div>
