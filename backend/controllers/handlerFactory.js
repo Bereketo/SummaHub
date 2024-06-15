@@ -20,7 +20,7 @@ exports.updateOne = Model => catchAsync(async (req, res, next) => {
         req.body,
         { new: true, runValidators: true }
     );
-    
+
     if (!doc) {
         return next(new AppError('No document found with this ID', 404))
     }
@@ -45,7 +45,7 @@ exports.createOne = Model => catchAsync(async (req, res, next) => {
 exports.getOne = (Model, popOptions) => catchAsync(async (req, res, next) => {
     let query = Model.findOne({ _id: req.params.id })
     if (popOptions) {
-      query = query.populate(popOptions);
+        query = query.populate(popOptions);
     }
     const doc = await query
 
@@ -58,12 +58,34 @@ exports.getOne = (Model, popOptions) => catchAsync(async (req, res, next) => {
     })
 })
 exports.getAll = Model => catchAsync(async (req, res, next) => {
-    
-    const doc = await Model.find(req.query)
+    // Parse page and limit from query parameters, defaulting to 1 and 6 respectively
+    const page = parseInt(req.query.page, 10) || 1;
+    const limitValue = parseInt(req.query.limit, 10) || 6;
+    const skipValue = (page - 1) * limitValue;
+
+    // Exclude limit, skip, and page from the query passed to Model.find
+    const { limit, skip, page: pg, ...query } = req.query;
+
+    // Log the query parameters for debugging
+    console.log('Query:', query);
+    console.log('Limit:', limitValue);
+    console.log('Skip:', skipValue);
+
+    // Execute the query with pagination
+    const doc = await Model.find(query)
+        .skip(skipValue)
+        .limit(limitValue);
+
+    // Log the documents returned for debugging
+    console.log('Documents returned:', doc);
+
+    // Send the response with the documents and metadata
     res.status(200).json({
         status: 'success',
-        requistedAt: req.requestTime,
+        requestedAt: req.requestTime,
         result: doc.length,
         data: doc
-    })
-})
+    });
+});
+
+
