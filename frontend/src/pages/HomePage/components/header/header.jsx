@@ -1,28 +1,36 @@
 import React from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useUser } from '../../../../context/UserContext';
+import PropTypes from 'prop-types';
 import styles from './header.module.css';
 
-const Header = ({ useButtons }) => {
+const Header = ({ useButtons, theme, setTheme }) => {
   const { user, logout } = useUser();
-  // console.log('user', user.data);
   const location = useLocation();
 
-  const isActive = (path) => location.pathname === path; // Function to determine if the current path is active
+  const toggle_mode = () => {
+    theme === 'light' ? setTheme('dark') : setTheme('light');
+  };
 
+  const isActive = (path) => location.pathname === path;
 
   return (
     <div className={styles.head_wrapper}>
       <div className={styles.head_container}>
-        <img src="./images/logo.png" alt="logo" width={50} />
+      <img src="./images/summa.png" alt="logo" width={170} />
         <div className={`flexCenter ${styles.head_menu}`}>
           <NavLink className={`${styles.link} ${isActive("/") ? styles.active : ""}`} to="/">Home</NavLink>
           <NavLink className={`${styles.link} ${isActive("/Summary") ? styles.active : ""}`} to="/Summary">Summarize Text</NavLink>
           <NavLink className={`${styles.link} ${isActive("/Question") ? styles.active : ""}`} to="/Question">Generate Question</NavLink>
+          <NavLink className={`${styles.link} ${isActive("/Chat") ? styles.active : ""}`} to="/Chat">Chat</NavLink>
           <NavLink className={`${styles.link} ${isActive("/Note") ? styles.active : ""}`} to="/Note">Note</NavLink>
         </div>
         <div className={styles.daynight_btn}>
-          <img src="./images/night-mode.png" alt="night mode toggle" />
+          <img
+            onClick={toggle_mode}
+            src={theme === 'light' ? "./images/moon.png" : "./images/sun.png"}
+            alt="Toggle Theme"
+          />
         </div>
         {user ? (
           <div className={styles.user_info}>
@@ -39,10 +47,15 @@ const Header = ({ useButtons }) => {
             </div>
           )
         )}
-
       </div>
     </div>
   );
+};
+
+Header.propTypes = {
+  useButtons: PropTypes.bool,
+  theme: PropTypes.string.isRequired,
+  setTheme: PropTypes.func.isRequired,
 };
 
 export default Header;

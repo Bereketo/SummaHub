@@ -4,13 +4,17 @@ import QuillEditor from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Header from '../../../HomePage/components/header/header';
+import Sidebar from '../sidebar/sidebar';
+import NotesFront from '../NotesFront/notesFront'
+import Reminder from '../Reminder/reminder'
 
 const NoteArea = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const navigate = useNavigate();
   const quill = useRef();
-
+  const [showNoteArea, setShowNoteArea] = useState("notes");
   const handleSave = async () => {
     try {
       const userToken = JSON.parse(localStorage.getItem('user'));
@@ -84,6 +88,15 @@ const NoteArea = () => {
 
   return (
     <div className={styles.notearea_wrapper}>
+    <Header />
+    <div className={styles.notearea_container}>
+
+    <Sidebar />
+      
+      
+ 
+    
+        <div className={styles.notearea}>
       <input
         type="text"
         placeholder="Enter your title here"
@@ -91,7 +104,7 @@ const NoteArea = () => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <div className={styles.notearea}>
+   
         <QuillEditor
           theme="snow"
           ref={(el) => (quill.current = el)}
@@ -102,11 +115,16 @@ const NoteArea = () => {
           placeholder="Start your note here"
           onChange={(value) => setContent(value)}
         />
-      </div>
-      <button onClick={handleSave} className={styles.savebtn}>
+         <button onClick={handleSave} className={styles.savebtn}>
         Save
       </button>
+      </div>
+   </div>
     </div>
+
+   
+  
+    
   );
 };
 
