@@ -107,7 +107,7 @@ function Notecard() {
         </button>
         <span>Page {page} of {totalPages}</span>
         <button
-          disabled={page === totalPages}
+          disabled={totalPages < page}
           onClick={() => handlePageChange(page + 1)}
         >
           Next
