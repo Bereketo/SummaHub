@@ -5,7 +5,6 @@
   padding: 20px;
 }
 
-
 .card_wrapper {
   width: 280px;
   height: 200px;
@@ -70,4 +69,33 @@
   position: absolute;
   top: -120px;
   right: 10px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  border: none;
+  background-color: #ddd;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pagination button:hover {
+  background-color: #bbb;
+}
+
+.pagination button:disabled {
+  background-color: #f0f0f0;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  margin: 0 10px;
 }
