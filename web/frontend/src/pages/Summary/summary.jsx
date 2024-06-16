@@ -20,14 +20,11 @@ function Summary({ theme, setTheme }) {
   };
 
   const formatSummaryText = (summary) => {
-    return summary.map(text => {
-      if (text.includes('user:')) {
-        return `**user:**\n\n${text.replace(/user:/i, '').trim()}`;
-      } else if (text.includes('model:')) {
-        return `**model:**\n\n${text.replace(/model:/i, '').trim()}`;
-      }
-      return text;
-    }).join('\n\n');
+    const modelResponse = summary.find(text => text.includes('model:'));
+    if (modelResponse) {
+      return modelResponse.replace(/model:/i, '').trim()
+    }
+    return ''
   };
 
   const summarizeText = async () => {
@@ -107,18 +104,10 @@ function Summary({ theme, setTheme }) {
           </div>
           <div className={styles.summary_output}>
             <div className={styles.summoutput_textarea}>
-
-              {isTyping ? (
-                <Typewriter
-                  options={{
-                    strings: [outputText],
-                    autoStart: true,
-                    loop: false,
-                  }}
-                />
-              ) : (
+              <div className={styles.markdown_output}>
                 <ReactMarkdown>{outputText}</ReactMarkdown>
-              )}
+              </div>
+              <p> {outputText.split(' ').length} words </p>
 
             </div>
             <p> {outputText.split(' ').length} words </p>
