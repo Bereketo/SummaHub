@@ -2,16 +2,23 @@ const catchAsync = require('../utils/catchAsync')
 const AppError = require('../utils/appError')
 
 exports.deleteOne = Model => catchAsync(async (req, res, next) => {
-    // Using findOneAndDelete with a query object to specify the document ID
-    const doc = await Model.findOneAndDelete({ _id: req.params.id });
+    // Soft delete: Update isDeleted to true
+    const doc = await Model.findByIdAndUpdate(
+        req.params.id,
+        { isDeleted: true },
+        { new: true }
+    );
+
     if (!doc) {
         return next(new AppError('No document found with this ID', 404));
     }
+
     res.status(204).json({
         status: 'success',
         data: null
     });
 });
+
 
 
 exports.updateOne = Model => catchAsync(async (req, res, next) => {
@@ -58,33 +65,28 @@ exports.getOne = (Model, popOptions) => catchAsync(async (req, res, next) => {
     })
 })
 exports.getAll = Model => catchAsync(async (req, res, next) => {
-    // Parse page and limit from query parameters, defaulting to 1 and 6 respectively
     const page = parseInt(req.query.page, 10) || 1;
     const limitValue = parseInt(req.query.limit, 10) || 6;
     const skipValue = (page - 1) * limitValue;
-
-    // Exclude limit, skip, and page from the query passed to Model.find
     const { limit, skip, page: pg, ...query } = req.query;
 
-    // Log the query parameters for debugging
-    console.log('Query:', query);
-    console.log('Limit:', limitValue);
-    console.log('Skip:', skipValue);
+    // Ensure we are not fetching soft-deleted notes
+    query.isDeleted = { $ne: true };
 
-    // Execute the query with pagination
     const doc = await Model.find(query)
+        .sort({ _id: -1 }) // Sort in descending order
         .skip(skipValue)
         .limit(limitValue);
 
-    // Log the documents returned for debugging
-    console.log('Documents returned:', doc);
+    const totalDocs = await Model.countDocuments(query);
 
-    // Send the response with the documents and metadata
     res.status(200).json({
         status: 'success',
         requestedAt: req.requestTime,
         result: doc.length,
-        data: doc
+        data: doc,
+        totalPages: Math.ceil(totalDocs / limitValue),
+        currentPage: page
     });
 });
 

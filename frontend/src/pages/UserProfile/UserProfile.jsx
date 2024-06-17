@@ -38,12 +38,7 @@ const UserProfile = () => {
     fetchUserData();
   }, [setUser]);
 
-  const handlePhotoChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setUser({ ...user, photo: URL.createObjectURL(file) });
-    }
-  };
+
 
   const handleSaveSettings = async (e) => {
     e.preventDefault();
@@ -147,16 +142,16 @@ const UserProfile = () => {
             />
           </div>
           <div className="form__group form__photo-upload">
-            <img className="form__user-photo" src={user?.photo || '/img/users/default.jpg'} alt="User" />
+            <img className="form__user-photo" src={'/images/users/default.jpg'||user?.photo} alt="User" />
             <input
               type="file"
               className="form__upload"
               id="photo"
               name="photo"
               accept="image/*"
-              onChange={handlePhotoChange}
+             
             />
-            <label htmlFor="photo" className="photo">Choose new photo</label>
+         
           </div>
           <button className="btn btn--small btn--green" type="submit">Save settings</button>
         </form>

@@ -1,62 +1,60 @@
+@import url("https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=League+Spartan:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=League+Spartan:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=League+Spartan:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
-
-@import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&family=Crimson+Pro:ital,wght@0,200..900;1,200..900&family=League+Spartan:wght@500;600;700&family=Montserrat:wght@300;400;500;600&display=swap');
-
-*{
-    margin: 0;
-    /* font-family: "Arvo", serif; */
-    font-family: "Crimson Pro", serif;
-    font-size: 13pt;
-    padding: 0;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    color:black;
+* {
+  margin: 0;
+  /* font-family: "Arvo", serif; */
+  font-family: "Crimson Pro", serif;
+  font-size: 13pt;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  /* color:black; */
 }
-a{
-    text-decoration: none;
+a {
+  text-decoration: none;
 }
-.paddings{
-    padding:1.5rem
+.paddings {
+  padding: 1.5rem;
 }
-.innerWidth{
-    width:100%
+.innerWidth {
+  width: 100%;
 }
-.flexCenter{
-    display: flex;
-    gap: 2rem;
-    row-gap: 2rem;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: nowrap;
+.flexCenter {
+  display: flex;
+  gap: 2rem;
+  row-gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
 }
-.flexColCenter{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+.flexColCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-.flexStart{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+.flexStart {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 /* media queries */
 @media (mid-width: 1536px) {
-    .innerWidth{
-        max-width: 1200px;
-        margin: auto;
-    }
+  .innerWidth {
+    max-width: 1200px;
+    margin: auto;
+  }
 }
 @media (mid-width: 640px) {
-    .paddings{
-        padding: 4rem;
-    }
+  .paddings {
+    padding: 4rem;
+  }
 }
-@media (mid-width: 1280px) , (min-width:768px) {
-    .paddings{
-        padding: 2rem;
-    }
+@media (mid-width: 1280px), (min-width: 768px) {
+  .paddings {
+    padding: 2rem;
+  }
 }
 /* @media (max-width: 640px) {
     .innerWidth{
@@ -64,31 +62,54 @@ a{
         margin: auto;
     }
 } */
-.btn_1{
-    background-color: rgb(40, 40, 255);
-    padding: 0.2rem  1rem;
-    font-weight: bolder;
-    font-size: 12pt;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    transition: all 300ms ease-in;
-    text-align: center;
+.btn_1 {
+  background-color: rgb(40, 40, 255);
+  padding: 0.2rem 1rem;
+  font-weight: bolder;
+  font-size: 12pt;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  transition: all 300ms ease-in;
+  text-align: center;
 }
-.btn_2{
-    background-image: linear-gradient(20deg, #8bb0ff, #afc4ff,rgb(138, 138, 255));
-    padding: 0.2rem  1rem;
-    font-weight: bolder;
-    font-size: 12pt;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    transition: all 300ms ease-in;
-    text-align: center;
+.btn_2 {
+  background-image: linear-gradient(
+    20deg,
+    #8bb0ff,
+    #afc4ff,
+    rgb(138, 138, 255)
+  );
+  padding: 0.2rem 1rem;
+  font-weight: bolder;
+  font-size: 12pt;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  transition: all 300ms ease-in;
+  text-align: center;
 }
 
+.btn_1:hover,
+.btn_2:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+.container.dark{
+  background-color: black;
+}
 
-.btn_1:hover ,.btn_2:hover{
-    cursor:pointer;
-    transform: scale(1.1);
+:root{
+  --background-color: white;
+  --header-background:rgba(171, 211, 249, 0.7);
+  --primary-text-color:black;
+  --secondary-text-color:blue;
+}
+[theme = 'dark']{
+  --background-color: rgb(35, 33, 33);;
+  --primary-text-color:white;
+  --header-background:rgba(23, 174, 255, 0);
+  --secondary-text-color:rgb(34, 240, 255);
+    background-color: rgb(35, 33, 33);
+
 }

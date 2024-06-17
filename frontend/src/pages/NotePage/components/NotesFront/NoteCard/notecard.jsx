@@ -6,7 +6,7 @@ import axios from 'axios';
 function Notecard() {
   const [notes, setNotes] = useState([]);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1); // Set your desired limit per page
+  const [totalPages, setTotalPages] = useState(1);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,21 +23,16 @@ function Notecard() {
           },
         });
         setNotes(response.data.data);
-        console.log(response.data.result);
-        setTotalPages(Math.ceil(response.data.result));
-        console.log(totalPages);
+        setTotalPages(response.data.totalPages);
       } catch (err) {
         console.error('Error fetching notes:', err);
         if (err.response && err.response.data.message === 'jwt expired') {
-          console.log('JWT expired. Redirecting to login page...');
           navigate('/Login');
-        } else {
-          console.error('Error details:', err.response?.data);
         }
       }
     };
     fetchNotes();
-  }, [navigate, page, totalPages]);
+  }, [navigate, page]);
 
   const handleDelete = async (id) => {
     try {
@@ -51,12 +46,9 @@ function Notecard() {
           Authorization: `Bearer ${token}`,
         },
       });
-      // Filter out the deleted note from the state
       setNotes(notes.filter(note => note._id !== id));
-      console.log('Note deleted successfully');
     } catch (err) {
       console.error('Error deleting note:', err);
-      // Handle error as needed
     }
   };
 
@@ -107,7 +99,7 @@ function Notecard() {
         </button>
         <span>Page {page} of {totalPages}</span>
         <button
-          disabled={totalPages < page}
+          disabled={notes.length < 6}
           onClick={() => handlePageChange(page + 1)}
         >
           Next

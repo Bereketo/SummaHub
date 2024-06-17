@@ -2,10 +2,10 @@ import React from "react";
 import styles from "./summary.module.css";
 import Header from "../HomePage/components/header/header";
 
-function Summary() {
+function Summary({theme , setTheme}) {
   return (
     <div>
-     <Header />
+     <Header theme = {theme} setTheme = {setTheme} />
     <div className={styles.summary_wrapper}>
       <h1> ✨Find The Best Summaries Here✨</h1>
       <div className={styles.top_bar}>
@@ -28,13 +28,18 @@ function Summary() {
           <button className={styles.summary_btn}> Summarize </button>
         </div>
         <div className={styles.summary_output}> 
-        <textarea
-            className={styles.summoutput_textarea}>
-          </textarea>
+        <div className={styles.summoutput_textarea} readOnly>
+
+        
+        </div>
+    
           <p>  0 words </p>
           </div>
       </div>
       </div>
+      <img />
+
+
     </div>
   );
 }

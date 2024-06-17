@@ -4,54 +4,46 @@
     align-items: center;
     gap: 2rem;
     width: 20%;
+   
 }
-
-.addnote_btn {
-    display: inline-block; /* Ensure the link is treated like a button */
-    margin-top: 1.5rem;
+.addnote_btn{
+    margin-top: 1.3rem;
     background-color: rgb(86, 86, 249);
     width: 170px;
     font-size: 12pt;
     text-align: center;
-    padding: 10px 0; /* Adjusted padding to cover top and bottom */
-    color: aliceblue;
-    text-decoration: none; /* Remove underline from the link */
-    border-radius: 5px; /* Optional: rounded corners */
+    padding-bottom:30px;
 }
-
-.addnote_btn:hover {
-    cursor: pointer;
-    transform: scale(1.02);
-    background-color: rgb(65, 65, 230); /* Optional: slightly darker on hover */
+.sidebar_menu{
+    padding:0px 20px;
+    
 }
-
-.sidebar_menu {
-    padding: 0px 20px;
-}
-
-.emoji {
+.emoji{
     margin-right: 20px;
 }
-
-.sidebar_menu > button {
+.sidebar_menu > button{
     background-color: white;
     color: black;
     font-size: 14pt;
     text-align: left;
-    font-weight: 400;
+    font-weight:400;
     margin-bottom: 10px;
     transition: all 300ms ease-in;
     padding-bottom: 2rem;
 }
 
 .sidebar_menu > button.active {
-    cursor: pointer;
+    cursor:pointer;
     transform: scale(1.1);
     background-color: rgb(224, 238, 250);
 }
-
-.sidebar_menu > button:hover {
-    cursor: pointer;
+.sidebar_menu > button:hover{
+    cursor:pointer;
     transform: scale(1.1);
     background-color: rgb(224, 238, 250);
+
+}
+.addnote_btn:hover{
+    cursor:pointer;
+    transform: scale(1.02);
 }
