@@ -9,11 +9,11 @@ import styles from './home.module.css';
 function Home({ theme, setTheme }) {
   const bottomRef = useRef(null);
 
-  const scrollToBottom = () => {
-    if (bottomRef.current) {
-      bottomRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  // const scrollToBottom = () => {
+  //   if (bottomRef.current) {
+  //     bottomRef.current.scrollIntoView({ behavior: 'smooth' });
+  //   }
+  // };
 
   return (
     <div className={styles.home_wrapper}>

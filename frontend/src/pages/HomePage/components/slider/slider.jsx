@@ -23,7 +23,7 @@ function Slider() {
           </div>
         </div>
         <div className={styles.the_arrow}>
-          <img src="./images/arrow.png" />
+          <img src="./images/arrow.png" alt=""/>
         </div>
         <div className={styles.textbox_left}>
           <div className={styles.right_text}>

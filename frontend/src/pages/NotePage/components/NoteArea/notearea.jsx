@@ -4,6 +4,7 @@ import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './notearea.module.css';
+import Sidebar from '../sidebar/sidebar';
 
 const NoteArea = () => {
   const [title, setTitle] = useState('');
@@ -82,30 +83,33 @@ const NoteArea = () => {
   );
 
   return (
-    <div className={styles.notearea_wrapper}>
-      <input
-        type="text"
-        placeholder="Enter your title here"
-        className={styles.note_title}
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <div className={styles.notearea}>
-        <ReactQuill
-          theme="snow"
-          ref={quill}
-          className={styles.quilleditor}
-          value={content}
-          formats={formats}
-          modules={modules}
-          placeholder="Start your note here"
-          onChange={(value) => setContent(value)}
+    <>
+      <Sidebar />
+      <div className={styles.notearea_wrapper}>
+        <input
+          type="text"
+          placeholder="Enter your title here"
+          className={styles.note_title}
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
         />
+        <div className={styles.notearea}>
+          <ReactQuill
+            theme="snow"
+            ref={quill}
+            className={styles.quilleditor}
+            value={content}
+            formats={formats}
+            modules={modules}
+            placeholder="Start your note here"
+            onChange={(value) => setContent(value)}
+          />
+        </div>
+        <button onClick={handleSave} className={styles.savebtn}>
+          Save
+        </button>
       </div>
-      <button onClick={handleSave} className={styles.savebtn}>
-        Save
-      </button>
-    </div>
+    </>
   );
 };
 
