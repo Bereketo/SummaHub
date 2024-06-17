@@ -13,7 +13,7 @@ router.route('/trash')
 
 router.route('/:id')
     .patch(noteController.updateNote)
-    .delete(noteController.deleteNote)
+    .patch(noteController.deleteNote)
     .get(noteController.getNote)
 
 module.exports = router;

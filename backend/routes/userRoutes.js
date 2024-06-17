@@ -21,7 +21,7 @@ router.delete('/deleteMe', userController.deleteMe)
 router.use(authController.restrictTo('admin'))
 router.route('/').get(userController.getAllusers)
 router.route('/:id')
-    .delete(userController.deleteUser)
+    .patch(userController.deleteUser)
     .patch(userController.updateUser)
     .get(userController.getUser)
 module.exports = router

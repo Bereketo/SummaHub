@@ -22,7 +22,7 @@ function TrashNote() {
             Authorization: `Bearer ${token}`,
           },
         });
-
+        console.log(response.data)
         setNotes(response.data.data);
         setTotalPages(response.data.totalPages);
       } catch (err) {

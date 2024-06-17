@@ -1,27 +1,18 @@
 import React, { useState } from 'react'
 import styles from './sidebar.module.css';
-import { Link } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import NotesFront from '../NotesFront/notesFront';
 
 const Sidebar = ({ setShowNoteArea }) => {
 
-  const [activeButton, setActiveButton] = useState("")
-  function handleNotesbtn() {
-    setActiveButton('notes')
-  }
+  const [, setActiveButton] = useState("")
+// sourcery skip: avoid-function-declarations-in-blocks
 
-  function handleReminderbtn() {
-    setActiveButton('reminder')
-  }
 
+  // eslint-disable-next-line no-unused-vars
   function handlePinnedNotes() {
     setActiveButton('pinnedNotes');
   }
 
-  function handleTrashedNotes() {
-    setActiveButton('trashedNotes');
-  }
 
   return (
 
