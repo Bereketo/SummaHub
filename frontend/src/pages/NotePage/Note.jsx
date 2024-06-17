@@ -11,7 +11,7 @@ const Note = () => {
   const [showNoteArea, setShowNoteArea] = useState(" ");
   return (
     <div className={styles.notepage_wrapper}>
-      <Header useButtons={false} />
+      <Header useButtons={true} />
       <div className={styles.note_wrapper}>
         <Sidebar setShowNoteArea={setShowNoteArea} />
         {/* {showNoteArea === "newnote" && <NoteArea />} */}
