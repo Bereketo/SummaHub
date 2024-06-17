@@ -17,17 +17,16 @@ function TrashNote() {
         if (!token) {
           throw new Error('No token found');
         }
-        const response = await axios.get(`http://localhost:4040/api/v1/notes?page=${page}`, {
+        const response = await axios.get(`http://localhost:4040/api/v1/notes/trash?page=${page}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        
+
         setNotes(response.data.data);
-        console.log(response.data.data);
         setTotalPages(response.data.totalPages);
       } catch (err) {
-        console.error('Error fetching notes:', err);
+        console.error('Error fetching trashed notes:', err);
         if (err.response && err.response.data.message === 'jwt expired') {
           navigate('/Login');
         }
@@ -49,6 +48,7 @@ function TrashNote() {
         },
       });
       setNotes(notes.filter(note => note._id !== id));
+      window.location.reload();
     } catch (err) {
       console.error('Error restoring note:', err);
     }
@@ -64,7 +64,6 @@ function TrashNote() {
     <div>
       <div className={styles.grid_container}>
         {notes.map((note) => (
-          note.isDeleted === true &&
           <div key={note._id} className={styles.card_wrapper}>
             <div className={styles.notecontent}>
               <div className={styles.card_title}>
@@ -77,7 +76,7 @@ function TrashNote() {
             <footer>
               <div className={styles.deleteSave}>
                 <button
-                  className={styles.deletebtn}
+                  className={styles.restorebtn}
                   onClick={() => handleRestore(note._id)}
                 >
                   Restore

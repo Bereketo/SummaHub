@@ -71,23 +71,24 @@ exports.getAll = Model => catchAsync(async (req, res, next) => {
     const { limit, skip, page: pg, ...query } = req.query;
 
     // Ensure we are not fetching soft-deleted notes
-    // query.isDeleted = { $ne: true };
+    query.isDeleted = { $ne: true };
 
     const doc = await Model.find(query)
         .sort({ _id: -1 }) // Sort in descending order
         .skip(skipValue)
         .limit(limitValue);
 
-    // const totalDocs = await Model.countDocuments(query);
+    const totalDocs = await Model.countDocuments(query);
 
     res.status(200).json({
         status: 'success',
         requestedAt: req.requestTime,
         result: doc.length,
         data: doc,
-        // totalPages: Math.ceil(totalDocs / limitValue),
+        totalPages: Math.ceil(totalDocs / limitValue),
         currentPage: page
     });
 });
+
 
 

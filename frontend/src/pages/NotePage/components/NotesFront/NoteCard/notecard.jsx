@@ -48,6 +48,7 @@ function Notecard() {
         },
       });
       setNotes(notes.filter(note => note._id !== id));
+      window.location.reload();
     } catch (err) {
       console.error('Error deleting note:', err);
     }
@@ -62,9 +63,8 @@ function Notecard() {
   return (
     <div>
       <div className={styles.grid_container}>
-        
+
         {notes.map((note) => (
-          note.isDeleted === false &&
           <div key={note._id} className={styles.card_wrapper}>
             <div className={styles.notecontent}>
               <div className={styles.card_title}>
