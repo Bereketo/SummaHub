@@ -1,31 +1,26 @@
 import React, { useState, useRef, useMemo } from 'react';
-import styles from './notearea.module.css';
-import QuillEditor from 'react-quill';
+import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import Header from '../../../HomePage/components/header/header';
-import Sidebar from '../sidebar/sidebar';
-// import NotesFront from '../NotesFront/notesFront'
-// import Reminder from '../Reminder/reminder'
+import styles from './notearea.module.css';
 
 const NoteArea = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const navigate = useNavigate();
   const quill = useRef();
-  // const [showNoteArea, setShowNoteArea] = useState("notes");
+
   const handleSave = async () => {
     try {
       const userToken = JSON.parse(localStorage.getItem('user'));
-      const { token } = userToken;
-      if (!token) {
+      if (!userToken) {
         throw new Error('No token found');
       }
-
+      const { token } = userToken;
       const response = await axios.post(
         'http://localhost:4040/api/v1/notes',
-        { title: title, content: content },
+        { title, content },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -33,7 +28,7 @@ const NoteArea = () => {
         }
       );
       console.log(response.data.data);
-      if(response.data.status === 'success'){
+      if (response.data.status === 'success') {
         navigate('/Note'); // Redirect to notes list or home page after successful save
       }
     } catch (err) {
@@ -88,15 +83,6 @@ const NoteArea = () => {
 
   return (
     <div className={styles.notearea_wrapper}>
-    <Header />
-    <div className={styles.notearea_container}>
-
-    <Sidebar />
-      
-      
- 
-    
-        <div className={styles.notearea}>
       <input
         type="text"
         placeholder="Enter your title here"
@@ -104,10 +90,10 @@ const NoteArea = () => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-   
-        <QuillEditor
+      <div className={styles.notearea}>
+        <ReactQuill
           theme="snow"
-          ref={(el) => (quill.current = el)}
+          ref={quill}
           className={styles.quilleditor}
           value={content}
           formats={formats}
@@ -115,16 +101,11 @@ const NoteArea = () => {
           placeholder="Start your note here"
           onChange={(value) => setContent(value)}
         />
-         <button onClick={handleSave} className={styles.savebtn}>
+      </div>
+      <button onClick={handleSave} className={styles.savebtn}>
         Save
       </button>
-      </div>
-   </div>
     </div>
-
-   
-  
-    
   );
 };
 
