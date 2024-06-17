@@ -55,7 +55,13 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: true,
         select: false
+    },
+    isDeleted:{
+        type:Boolean,
+        default:false
     }
+}, {
+    timestamps: true // This option will add `createdAt` and `updatedAt` fields
 })
 
 userSchema.pre('save', async function (next) {

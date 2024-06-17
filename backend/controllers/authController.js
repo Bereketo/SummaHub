@@ -39,15 +39,16 @@ exports.logout = (req, res) => {
 }
 exports.signup = catchAsync(async (req, res, next) => {
     const newUser = await User.create({
-        name: req.body.name,
+        firstname: req.body.firstname,
+        lastname:req.body.lastname,
         email: req.body.email,
         password: req.body.password,
         passwordConfirm: req.body.passwordConfirm,
         role: req.body.role
     })
-    const url = `${req.protocol}://${req.get('host')}/me`;
-    console.log(url);
-    await new Email(newUser, url).sendWelcome()
+    // const url = `${req.protocol}://${req.get('host')}/me`;
+    // console.log(url);
+    // await new Email(newUser, url).sendWelcome()
     createSendToken(newUser, 201, res)
 })
 exports.login = catchAsync(async (req, res, next) => {

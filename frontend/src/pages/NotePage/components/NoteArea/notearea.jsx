@@ -6,15 +6,15 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Header from '../../../HomePage/components/header/header';
 import Sidebar from '../sidebar/sidebar';
-import NotesFront from '../NotesFront/notesFront'
-import Reminder from '../Reminder/reminder'
+// import NotesFront from '../NotesFront/notesFront'
+// import Reminder from '../Reminder/reminder'
 
 const NoteArea = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const navigate = useNavigate();
   const quill = useRef();
-  const [showNoteArea, setShowNoteArea] = useState("notes");
+  // const [showNoteArea, setShowNoteArea] = useState("notes");
   const handleSave = async () => {
     try {
       const userToken = JSON.parse(localStorage.getItem('user'));

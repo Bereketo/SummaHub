@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import styles from "./notecard.module.css";
-import { Link, useNavigate } from 'react-router-dom';
+import styles from "../NotesFront/NoteCard/notecard.module.css";
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function Notecard() {
+function TrashNote() {
   const [notes, setNotes] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -22,8 +22,9 @@ function Notecard() {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(response.data.data[0].isDeleted);
+        
         setNotes(response.data.data);
+        console.log(response.data.data);
         setTotalPages(response.data.totalPages);
       } catch (err) {
         console.error('Error fetching notes:', err);
@@ -35,21 +36,21 @@ function Notecard() {
     fetchNotes();
   }, [navigate, page]);
 
-  const handleDelete = async (id) => {
+  const handleRestore = async (id) => {
     try {
       const userToken = JSON.parse(localStorage.getItem('user'));
       const { token } = userToken;
       if (!token) {
         throw new Error('No token found');
       }
-      await axios.delete(`http://localhost:4040/api/v1/notes/${id}`, {
+      await axios.patch(`http://localhost:4040/api/v1/notes/${id}`, { isDeleted: false }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
       setNotes(notes.filter(note => note._id !== id));
     } catch (err) {
-      console.error('Error deleting note:', err);
+      console.error('Error restoring note:', err);
     }
   };
 
@@ -62,9 +63,8 @@ function Notecard() {
   return (
     <div>
       <div className={styles.grid_container}>
-        
         {notes.map((note) => (
-          note.isDeleted === false &&
+          note.isDeleted === true &&
           <div key={note._id} className={styles.card_wrapper}>
             <div className={styles.notecontent}>
               <div className={styles.card_title}>
@@ -78,16 +78,10 @@ function Notecard() {
               <div className={styles.deleteSave}>
                 <button
                   className={styles.deletebtn}
-                  onClick={() => handleDelete(note._id)}
+                  onClick={() => handleRestore(note._id)}
                 >
-                  Delete
+                  Restore
                 </button>
-                <Link
-                  className={styles.pinnedSymbol}
-                  to={`/NoteEdit/${note._id}`}
-                >
-                  🖊️
-                </Link>
               </div>
             </footer>
           </div>
@@ -112,4 +106,4 @@ function Notecard() {
   );
 }
 
-export default Notecard;
+export default TrashNote;

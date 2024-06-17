@@ -1,12 +1,54 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useEffect, useState } from "react";
+import axios from "axios";
 import styles from "./admin.module.css";
-import Mock_Data from "./components/mock_data.json";
 import { useTable, useSortBy, useGlobalFilter } from "react-table";
-import { Columns } from "./components/columns";
+import { Columns } from "./components/columns";  // Ensure this path is correct
 import GlobalFilter from "./components/GlobalFilter";
-import AdminSidebar from "./components/admin_sidebar/admin_sidebar";
+import AdminSidebar from "./components/admin_sidebar/admin_sidebar";  // Ensure this path is correct
 
 function Admin() {
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const userToken = JSON.parse(localStorage.getItem('user'));
+        const { token } = userToken;
+        const response = await axios.get('http://localhost:4040/api/v1/users', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setData(response.data.data);
+        setLoading(false);
+      } catch (err) {
+        setError(err);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleDelete = async (rowIndex) => {
+    const userToDelete = data[rowIndex];
+    const userToken = JSON.parse(localStorage.getItem('user'));
+    const { token } = userToken;
+    try {
+      await axios.delete(`http://localhost:4040/api/v1/users/${userToDelete._id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setData(data.filter((_, index) => index !== rowIndex));
+    } catch (err) {
+      console.error("Error deleting user:", err);
+    }
+  };
+
   const columns = useMemo(
     () => [
       ...Columns,
@@ -17,15 +59,9 @@ function Admin() {
         ),
       },
     ],
-    []
+    [handleDelete]
   );
 
-  const handleDelete = (rowIndex) => {
-    // Implement deletion logic here if needed
-    console.log("Delete action for row index:", rowIndex);
-  };
-
-  const data = useMemo(() => Mock_Data, []);
   const tableInstance = useTable(
     {
       columns,
@@ -45,6 +81,13 @@ function Admin() {
     setGlobalFilter,
   } = tableInstance;
   const { globalFilter } = state;
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Error fetching data</div>;
+  }
 
   return (
     <div className={styles.admin_wrapper}>
@@ -74,18 +117,14 @@ function Admin() {
                   <tr {...headerGroup.getHeaderGroupProps()}>
                     {headerGroup.headers.map((column) => (
                       <th
-                        {...column.getHeaderProps(
-                          column.getSortByToggleProps()
-                        )}
+                        {...column.getHeaderProps(column.getSortByToggleProps())}
                       >
                         {column.render("Header")}
-                        <strong>
-                          {column.isSorted
-                            ? column.isSortedDesc
-                              ? " ⬇️"
-                              : " ⬆️"
-                            : ""}
-                        </strong>
+                        {column.isSorted
+                          ? column.isSortedDesc
+                            ? " ⬇️"
+                            : " ⬆️"
+                          : ""}
                       </th>
                     ))}
                   </tr>
@@ -97,9 +136,7 @@ function Admin() {
                   return (
                     <tr {...row.getRowProps()}>
                       {row.cells.map((cell) => (
-                        <td {...cell.getCellProps()}>
-                          {cell.render("Cell")}
-                        </td>
+                        <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
                       ))}
                     </tr>
                   );

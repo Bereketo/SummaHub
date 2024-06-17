@@ -6,7 +6,7 @@ import styles from './header.module.css';
 
 const Header = ({ useButtons, theme, setTheme }) => {
   const { user, logout } = useUser();
-  console.log(user.data.role)
+  // console.log(user.data.role)
   const location = useLocation();
 
   const toggle_mode = () => {

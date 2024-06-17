@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import Header from "../HomePage/components/header/header";
 import Sidebar from "./components/sidebar/sidebar";
-import NoteArea from "./components/NoteArea/notearea";
+// import NoteArea from "./components/NoteArea/notearea";
 import NotesFront from "./components/NotesFront/notesFront";
 import styles from "./note.module.css";
 

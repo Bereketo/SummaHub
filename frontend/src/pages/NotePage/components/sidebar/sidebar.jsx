@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styles from './sidebar.module.css';
 import { Link } from 'react-router-dom';
 
+
 const Sidebar = ({ setShowNoteArea }) => {
   // const [showNotearea , setShowNoteArea] = useState(false);
   const [activeButton, setActiveButton] = useState("")
@@ -20,9 +21,10 @@ const Sidebar = ({ setShowNoteArea }) => {
     setActiveButton('pinnedNotes');
   }
 
-  function handleTrashedNotes() {
-    setActiveButton('trashedNotes');
-  }
+  // function handleTrashedNotes() {
+  //   setActiveButton('trashedNotes');
+  // }
+
 
   return (
 
@@ -35,7 +37,7 @@ const Sidebar = ({ setShowNoteArea }) => {
         <button onClick={handleNotesbtn} className={activeButton === 'notes' ? styles.active : ''}><strong className={styles.emoji}> 📃</strong>  Notes</button>
         <button onClick={handleReminderbtn} className={activeButton === 'reminder' ? styles.active : ''}><strong className={styles.emoji}> 🕒</strong> Reminders </button>
         <button onClick={handlePinnedNotes} className={activeButton === 'pinnedNotes' ? styles.active : ''}><strong className={styles.emoji}> 🧷</strong> Pinned Notes</button>
-        <button onClick={handleTrashedNotes} className={activeButton === 'trashedNotes' ? styles.active : ''}><strong className={styles.emoji}> 🗑️</strong> Trashed </button>
+        <Link to='/TrashNote' className={activeButton === 'trashedNotes' ? styles.active : ''}><strong className={styles.emoji}> 🗑️</strong> Trashed </Link>
       </div>
     </div>
   );

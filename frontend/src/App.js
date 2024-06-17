@@ -18,6 +18,8 @@ import Question from './pages/question/question';
 import Chat from './pages/Chat/chat';
 import Reminder from './pages/NotePage/components/Reminder/reminder';
 import Admin from './pages/Admin/admin';
+import TrashNote from './pages/NotePage/components/TrashNote/TrashNote';
+
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -41,6 +43,7 @@ function App() {
           <Route path="/Question" element={<Question theme={theme} setTheme={setTheme} />} />
           <Route path="/Chat" element={<Chat theme={theme} setTheme={setTheme} />} />
           <Route path="/Reminder" element={<Reminder theme={theme} setTheme={setTheme} />} />
+          <Route path='/TrashNote' element={<TrashNote/>}/>
         </Routes>
 
       </BrowserRouter>
