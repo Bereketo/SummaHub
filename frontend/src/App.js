@@ -43,7 +43,7 @@ function App() {
           <Route path="/Question" element={<Question theme={theme} setTheme={setTheme} />} />
           <Route path="/Chat" element={<Chat theme={theme} setTheme={setTheme} />} />
           <Route path="/Reminder" element={<Reminder theme={theme} setTheme={setTheme} />} />
-          <Route path='/TrashNote' element={<TrashNote/>}/>
+          <Route path='/trash' element={<TrashNote/>}/>
         </Routes>
 
       </BrowserRouter>

@@ -14,15 +14,18 @@ function Notecard() {
       try {
         const userToken = JSON.parse(localStorage.getItem('user'));
         const { token } = userToken;
+        console.log("Fetched Token:", token); // Debugging line
+  
         if (!token) {
           throw new Error('No token found');
         }
+  
         const response = await axios.get(`http://localhost:4040/api/v1/notes?page=${page}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(response.data.data[0].isDeleted);
+  
         setNotes(response.data.data);
         setTotalPages(response.data.totalPages);
       } catch (err) {
@@ -32,27 +35,39 @@ function Notecard() {
         }
       }
     };
+  
     fetchNotes();
   }, [navigate, page]);
+  
 
   const handleDelete = async (id) => {
     try {
       const userToken = JSON.parse(localStorage.getItem('user'));
-      const { token } = userToken;
-      if (!token) {
+      if (!userToken || !userToken.token) {
         throw new Error('No token found');
       }
-      await axios.delete(`http://localhost:4040/api/v1/notes/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      setNotes(notes.filter(note => note._id !== id));
-      window.location.reload();
+      const { token } = userToken;
+      
+      const response = await axios.patch(`http://localhost:4040/api/v1/notes/${id}`, 
+        { isDeleted: true }, // Ensure the correct data is being sent
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+      if (response.status === 200) {
+        setNotes(notes.filter(note => note._id !== id));
+        window.location.reload();
+      } else {
+        console.error('Error deleting note:', response);
+      }
     } catch (err) {
       console.error('Error deleting note:', err);
     }
   };
+  
 
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPages) {
