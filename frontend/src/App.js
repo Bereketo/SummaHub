@@ -14,7 +14,7 @@ import About from './pages/HomePage/components/AboutUs/aboutus';
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword';
 import ResetPassword from './pages/ResetPassword/ResetPassword';
 import UserProfile from './pages/UserProfile/UserProfile';
-import Question from './pages/question/question';
+import Question from './pages/Question/question';
 import Chat from './pages/Chat/chat';
 import Reminder from './pages/NotePage/components/Reminder/reminder';
 import Admin from './pages/Admin/admin';

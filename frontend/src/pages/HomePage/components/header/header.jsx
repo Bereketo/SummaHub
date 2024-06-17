@@ -18,13 +18,15 @@ const Header = ({ useButtons, theme, setTheme }) => {
   return (
     <div className={styles.head_wrapper}>
       <div className={styles.head_container}>
+       
+        <div className={`flexCenter ${styles.head_menu}`}> 
         <img src="./images/summa.png" alt="logo" width={170} />
-        <div className={`flexCenter ${styles.head_menu}`}>
           <NavLink className={`${styles.link} ${isActive("/") ? styles.active : ""}`} to="/">Home</NavLink>
           <NavLink className={`${styles.link} ${isActive("/Summary") ? styles.active : ""}`} to="/Summary">Summarize Text</NavLink>
           <NavLink className={`${styles.link} ${isActive("/Question") ? styles.active : ""}`} to="/Question">Generate Question</NavLink>
           <NavLink className={`${styles.link} ${isActive("/Chat") ? styles.active : ""}`} to="/Chat">Chat</NavLink>
           <NavLink className={`${styles.link} ${isActive("/Note") ? styles.active : ""}`} to="/Note">Note</NavLink>
+   
         </div>
         <div className={styles.daynight_btn}>
           <img
@@ -35,11 +37,13 @@ const Header = ({ useButtons, theme, setTheme }) => {
         </div>
         {user ? (
           <div className={styles.user_info}>
-            <button className={`btn_1 ${styles.logout_btn}`} onClick={logout}>Logout</button>
-            <img className={styles.user_photo} src='/images/users/default.jpg' alt="User" />
+            {/* <button className={`btn_1 ${styles.logout_btn}`} onClick={logout}>Logout</button> */}
+            <img className={styles.user_photo} src='/images/user.png' alt="User" />
+         
             <NavLink className={styles.user_name} to={user.data.role === 'user' ? "/myprofile" : "/admin"}>
               {user.data.firstname}
             </NavLink>
+    
 
           </div>
         ) : (
