@@ -4,7 +4,7 @@ import styles from './admin_sidebar.module.css'
 
 const AdminSidebar = ({setShowNoteArea}) => {
   // const [showNotearea , setShowNoteArea] = useState(false);
-  const [activeButton , setActiveButton] = useState("");
+  const [activeButton] = useState("");
 // sourcery skip: avoid-function-declarations-in-blocks
  function handleNotesbtn(){
 

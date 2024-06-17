@@ -17,6 +17,7 @@ import UserProfile from './pages/UserProfile/UserProfile';
 import Question from './pages/question/question';
 import Chat from './pages/Chat/chat';
 import Reminder from './pages/NotePage/components/Reminder/reminder';
+import Admin from './pages/Admin/admin';
 
 function App() {
   const [theme, setTheme] = useState('light');
@@ -36,6 +37,7 @@ function App() {
           <Route path="/ForgotPassword" element={<ForgotPassword />} />
           <Route path="/resetPassword/:resetToken" element={<ResetPassword />} />
           <Route path="/myprofile" element={<UserProfile />} />
+          <Route path="/admin" element={<Admin />} />
           <Route path="/Question" element={<Question theme={theme} setTheme={setTheme} />} />
           <Route path="/Chat" element={<Chat theme={theme} setTheme={setTheme} />} />
           <Route path="/Reminder" element={<Reminder theme={theme} setTheme={setTheme} />} />

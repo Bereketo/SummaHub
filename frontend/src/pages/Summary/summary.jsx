@@ -37,7 +37,6 @@ function Summary({theme , setTheme}) {
           </div>
       </div>
       </div>
-      <img />
 
 
     </div>

@@ -6,6 +6,7 @@ import styles from './header.module.css';
 
 const Header = ({ useButtons, theme, setTheme }) => {
   const { user, logout } = useUser();
+  console.log(user.data.role)
   const location = useLocation();
 
   const toggle_mode = () => {
@@ -36,7 +37,10 @@ const Header = ({ useButtons, theme, setTheme }) => {
           <div className={styles.user_info}>
             <button className={`btn_1 ${styles.logout_btn}`} onClick={logout}>Logout</button>
             <img className={styles.user_photo} src='/images/users/default.jpg' alt="User" />
-            <NavLink className={styles.user_name} to="/myprofile">{user.data.firstname}</NavLink>
+            <NavLink className={styles.user_name} to={user.data.role === 'user' ? "/myprofile" : "/admin"}>
+              {user.data.firstname}
+            </NavLink>
+
           </div>
         ) : (
           useButtons && (

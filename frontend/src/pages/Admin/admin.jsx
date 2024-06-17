@@ -1,6 +1,5 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import styles from "./admin.module.css";
-import DataTable from "react-data-table-component";
 import Mock_Data from "./components/mock_data.json";
 import { useTable, useSortBy, useGlobalFilter } from "react-table";
 import { Columns } from "./components/columns";
@@ -8,7 +7,6 @@ import GlobalFilter from "./components/GlobalFilter";
 import AdminSidebar from "./components/admin_sidebar/admin_sidebar";
 
 function Admin() {
-  const [data1, setData] = useState(Mock_Data);
   const columns = useMemo(
     () => [
       ...Columns,
@@ -21,9 +19,12 @@ function Admin() {
     ],
     []
   );
+
   const handleDelete = (rowIndex) => {
-    setData((prevData) => prevData.filter((_, index) => index !== rowIndex));
+    // Implement deletion logic here if needed
+    console.log("Delete action for row index:", rowIndex);
   };
+
   const data = useMemo(() => Mock_Data, []);
   const tableInstance = useTable(
     {
@@ -44,6 +45,7 @@ function Admin() {
     setGlobalFilter,
   } = tableInstance;
   const { globalFilter } = state;
+
   return (
     <div className={styles.admin_wrapper}>
       <div className={styles.admin_header}>
@@ -52,15 +54,13 @@ function Admin() {
           <h1>👤Yonas Alemu</h1>
         </div>
       </div>
-      {/* <hr></hr> */}
       <div className={styles.admin_body}>
         <div className={styles.admin_sidemenu}>
-       <AdminSidebar />
+          <AdminSidebar />
         </div>
-        {/* <div className={styles.vertical_line}></div> */}
         <div className={styles.user_display}>
           <div className={styles.user_listtitle}>
-          <h1> Manage users</h1>
+            <h1>Manage users</h1>
             <GlobalFilter
               className={styles.user_search}
               filter={globalFilter}
@@ -68,7 +68,6 @@ function Admin() {
             />
           </div>
           <div className={styles.user_list}>
-            <></>
             <table {...getTableProps()}>
               <thead>
                 {headerGroups.map((headerGroup) => (
@@ -83,8 +82,8 @@ function Admin() {
                         <strong>
                           {column.isSorted
                             ? column.isSortedDesc
-                              ? "⬆️"
-                              : "⬇️"
+                              ? " ⬇️"
+                              : " ⬆️"
                             : ""}
                         </strong>
                       </th>
@@ -97,14 +96,11 @@ function Admin() {
                   prepareRow(row);
                   return (
                     <tr {...row.getRowProps()}>
-                      {row.cells.map((cell) => {
-                        return (
-                          <td {...cell.getCellProps()}>
-                            {" "}
-                            {cell.render("Cell")}
-                          </td>
-                        );
-                      })}
+                      {row.cells.map((cell) => (
+                        <td {...cell.getCellProps()}>
+                          {cell.render("Cell")}
+                        </td>
+                      ))}
                     </tr>
                   );
                 })}
