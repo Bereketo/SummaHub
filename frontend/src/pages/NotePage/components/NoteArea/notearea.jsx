@@ -5,6 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import styles from './notearea.module.css';
 import Sidebar from '../sidebar/sidebar';
+import Header from "../../../HomePage/components/header/header"
 
 const NoteArea = () => {
   const [title, setTitle] = useState('');
@@ -83,7 +84,9 @@ const NoteArea = () => {
   );
 
   return (
-    <>
+    <div>
+    <div className={styles.noteadd_header}><Header useButtons = {true} /></div>
+     <div className={styles.noteadd_area}>
       <Sidebar />
       <div className={styles.notearea_wrapper}>
         <input
@@ -109,7 +112,8 @@ const NoteArea = () => {
           Save
         </button>
       </div>
-    </>
+    </div>
+    </div>
   );
 };
 
