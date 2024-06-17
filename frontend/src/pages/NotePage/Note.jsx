@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+
 import Header from "../HomePage/components/header/header";
 import Sidebar from "./components/sidebar/sidebar";
 // import NoteArea from "./components/NoteArea/notearea";
@@ -8,7 +8,7 @@ import styles from "./note.module.css";
 
 const Note = () => {
   
-  const [showNoteArea, setShowNoteArea] = useState(" ");
+  
   return (
     <div className={styles.notepage_wrapper}>
       <Header useButtons={true} />
