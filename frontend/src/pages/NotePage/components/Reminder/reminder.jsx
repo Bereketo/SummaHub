@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styles from "./reminder.module.css";
-import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
-import Sidebar from "../sidebar/sidebar";
 import Header from "../../../HomePage/components/header/header";
-function Reminder({theme , setTheme}) {
+import Sidebar from "../sidebar/sidebar";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+function Reminder() {
   const now = new Date();
   const hours = now.getHours();
   const minutes = now.getMinutes().toString().padStart(2, "0");
@@ -41,6 +42,8 @@ function Reminder({theme , setTheme}) {
   const [remDate, setRemDate] = useState("");
   const [remTime, setRemTime] = useState("");
   const [reminders, setReminders] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(3); // Number of items per page
 
   useEffect(() => {
     if (Notification.permission !== "granted") {
@@ -81,13 +84,13 @@ function Reminder({theme , setTheme}) {
       toast.error("Please fill in all fields.");
       return;
     }
-  
+
     const reminderDateTime = new Date(`${remDate}T${remTime}`);
     if (reminderDateTime <= new Date()) {
       toast.error("Selected time is in the past. Please choose a future time.");
       return;
     }
-  
+
     const newReminder = {
       title: remTitle,
       description: remDescription,
@@ -104,11 +107,11 @@ function Reminder({theme , setTheme}) {
     setRemTime("");
     toast.success("Reminder saved successfully!");
   };
-  
+
   const scheduleNotification = (reminder) => {
     const reminderDateTime = new Date(`${reminder.date}T${reminder.time}`);
     const timeDifference = reminderDateTime.getTime() - new Date().getTime();
-  
+
     if (timeDifference > 0) {
       setTimeout(() => {
         sendNotification(reminder.title, reminder.description);
@@ -118,13 +121,12 @@ function Reminder({theme , setTheme}) {
       toast.error("Selected time is in the past. Please choose a future time.");
     }
   };
-  
+
   const removeReminder = (reminder) => {
-    const updatedReminders = reminders.filter(r => r !== reminder);
+    const updatedReminders = reminders.filter((r) => r !== reminder);
     setReminders(updatedReminders);
     saveReminders(updatedReminders);
   };
-  
 
   const sendNotification = (title, body) => {
     console.log("Sending notification...");
@@ -138,103 +140,149 @@ function Reminder({theme , setTheme}) {
       });
     }
   };
-  
+
+  // Pagination Logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = reminders.slice(indexOfFirstItem, indexOfLastItem);
+
+  const nextPage = () => {
+    if (currentPage < Math.ceil(reminders.length / itemsPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
   return (
-    <div>
-    <Header />
-    <div className={styles.reminder_container}>
-
-   
-<Sidebar />
-
     <div className={styles.reminder_wrapper}>
-      <div className={styles.top_part}>
-        <div className={styles.today_box}>
-          <h1>Today's Date</h1>
-          <h2 className={styles.hour}>
-            {hours}:{minutes}
-          </h2>
-          <h2 className={styles.date}>
-            {day}, {date}th {month}, {year}
-          </h2>
-        </div>
-        <div className={styles.reminder_input}>
-          <div className={styles.text_input}>
-            <input
-              type="text"
-              placeholder="Title"
-              className={styles.title_input}
-              value={remTitle}
-              onChange={handleTitleChange}
-            />
-            <textarea
-              type="text"
-              placeholder="Description"
-              className={styles.description_input}
-              value={remDescription}
-              onChange={handleDescriptionChange}
-            />
-            <button className={styles.remsave} onClick={handleSave}>
-              Save
-            </button>
-          </div>
-          <div className={styles.date_timeinput}>
-            <div className={styles.date_input}>
-              <p>Date</p>
-              <input
-                type="date"
-                id="date"
-                value={remDate}
-                onChange={handleDateChange}
-              />
+      <Header useButtons ={true} />
+      <div className={styles.bottom_container}>
+        <Sidebar />
+        <div className={styles.content}>
+          <div className={styles.top_part}>
+            <div className={styles.today_box}>
+              <h1>Today's Date</h1>
+              <h2 className={styles.hour}>
+                {hours}:{minutes}
+              </h2>
+              <h2 className={styles.date}>
+                {day}, {date}th {month}, {year}
+              </h2>
             </div>
-            <div className={styles.time_input}>
-              <p>Time</p>
-              <input
-                type="time"
-                id="time"
-                value={remTime}
-                onChange={handleTimeChange}
-              />
+            <div className={styles.reminder_input}>
+              <div className={styles.text_input}>
+                <input
+                  type="text"
+                  placeholder="Title"
+                  className={styles.title_input}
+                  value={remTitle}
+                  onChange={handleTitleChange}
+                />
+                <textarea
+                  type="text"
+                  placeholder="Description"
+                  className={styles.description_input}
+                  value={remDescription}
+                  onChange={handleDescriptionChange}
+                />
+                <button className={styles.remsave} onClick={handleSave}>
+                  Save
+                </button>
+              </div>
+              <div className={styles.date_timeinput}>
+                <div className={styles.date_input}>
+                  <p>Date</p>
+                  <input
+                    type="date"
+                    id="date"
+                    value={remDate}
+                    onChange={handleDateChange}
+                  />
+                </div>
+                <div className={styles.time_input}>
+                  <p>Time</p>
+                  <input
+                    type="time"
+                    id="time"
+                    value={remTime}
+                    onChange={handleTimeChange}
+                  />
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div className={styles.bottom_part}>
-        <table>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {reminders.length === 0 ? (
-              <tr>
-                <td colSpan="5">No reminders</td>
-              </tr>
-            ) : (
-              reminders.map((reminder, index) => (
-                <tr key={index}>
-                  <td>{reminder.title}</td>
-                  <td>{reminder.description}</td>
-                  <td>{reminder.date}</td>
-                  <td>{reminder.time}</td>
-                  <td>
-                    <button onClick={() => removeReminder(reminder)}>Delete</button>
-                  </td>
+          <div className={styles.bottom_part}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>Description</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Action</th>
                 </tr>
-              ))
+              </thead>
+              <tbody>
+                {currentItems.length === 0 ? (
+                  <tr>
+                    <td colSpan="5">No reminders</td>
+                  </tr>
+                ) : (
+                  currentItems.map((reminder, index) => (
+                    <tr key={index}>
+                      <td>{reminder.title}</td>
+                      <td>{reminder.description}</td>
+                      <td>{reminder.date}</td>
+                      <td>{reminder.time}</td>
+                      <td>
+                        <button onClick={() => removeReminder(reminder)}>
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+            <div className={styles.pagination_controls}>
+              <button onClick={prevPage} disabled={currentPage === 1}>
+                Previous
+              </button>
+              <button
+                onClick={nextPage}
+                disabled={
+                  currentPage === Math.ceil(reminders.length / itemsPerPage)
+                }
+              >
+                Next
+              </button>
+            </div>
+            {reminders.length > itemsPerPage && (
+              <ul className={styles.pagination}>
+                {Array(Math.ceil(reminders.length / itemsPerPage))
+                  .fill()
+                  .map((_, index) => (
+                    <li
+                      key={index}
+                      onClick={() => paginate(index + 1)}
+                      className={currentPage === index + 1 ? styles.active : ""}
+                    >
+                      {index + 1}
+                    </li>
+                  ))}
+              </ul>
             )}
-          </tbody>
-        </table>
+          </div>
+        </div>
       </div>
       <ToastContainer />
-    </div>
-    </div>
     </div>
   );
 }

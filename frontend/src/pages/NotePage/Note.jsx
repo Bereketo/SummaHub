@@ -13,10 +13,8 @@ const Note = () => {
     <div className={styles.notepage_wrapper}>
       <Header useButtons={true} />
       <div className={styles.note_wrapper}>
-        <Sidebar setShowNoteArea={setShowNoteArea} />
-        {/* {showNoteArea === "newnote" && <NoteArea />} */}
-        {showNoteArea === "notes" && <NotesFront />}
-        {showNoteArea === " " && <NotesFront />}
+        <Sidebar/>
+        <NotesFront />
       </div>
     </div>
   );
