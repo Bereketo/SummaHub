@@ -5,7 +5,7 @@ import Header from "../HomePage/components/header/header";
 function Summary({theme , setTheme}) {
   return (
     <div>
-     <Header theme = {theme} setTheme = {setTheme} />
+     <Header theme = {theme} setTheme = {setTheme} useButtons ={true} />
     <div className={styles.summary_wrapper}>
       <h1> ✨Find The Best Summaries Here✨</h1>
       <div className={styles.top_bar}>

@@ -1,19 +1,17 @@
 import React, { useState } from 'react'
 import styles from './sidebar.module.css';
 import { Link } from 'react-router-dom';
-
+import { NavLink } from 'react-router-dom';
+import NotesFront from '../NotesFront/notesFront';
 
 const Sidebar = ({ setShowNoteArea }) => {
-  // const [showNotearea , setShowNoteArea] = useState(false);
+
   const [activeButton, setActiveButton] = useState("")
-  // sourcery skip: avoid-function-declarations-in-blocks
   function handleNotesbtn() {
-    setShowNoteArea('notes');
     setActiveButton('notes')
   }
 
   function handleReminderbtn() {
-    setShowNoteArea("reminder")
     setActiveButton('reminder')
   }
 
@@ -21,23 +19,33 @@ const Sidebar = ({ setShowNoteArea }) => {
     setActiveButton('pinnedNotes');
   }
 
-  // function handleTrashedNotes() {
-  //   setActiveButton('trashedNotes');
-  // }
-
+  function handleTrashedNotes() {
+    setActiveButton('trashedNotes');
+  }
 
   return (
 
     <div className={styles.sidebar_wrapper}>
       <div className={styles.addbtn_wrapper}>
-        {/* <button onClick={handlenewNotebtn} className={styles.addnote_btn}> + New Note</button> */}
-        <Link to="/NoteAdd" className={styles.addnote_btn}> + New Note</Link>
+      <NavLink to="/NoteAdd" className={({ isActive }) => isActive ? styles.active : ''} >
+      + New Note
+      </NavLink>
+    
       </div>
       <div className={styles.sidebar_menu}>
-        <button onClick={handleNotesbtn} className={activeButton === 'notes' ? styles.active : ''}><strong className={styles.emoji}> 📃</strong>  Notes</button>
-        <button onClick={handleReminderbtn} className={activeButton === 'reminder' ? styles.active : ''}><strong className={styles.emoji}> 🕒</strong> Reminders </button>
-        <button onClick={handlePinnedNotes} className={activeButton === 'pinnedNotes' ? styles.active : ''}><strong className={styles.emoji}> 🧷</strong> Pinned Notes</button>
-        <Link to='/TrashNote' className={activeButton === 'trashedNotes' ? styles.active : ''}><strong className={styles.emoji}> 🗑️</strong> Trashed </Link>
+  
+      <NavLink to="/notefront" className={({ isActive }) => isActive ? styles.active : ''} >
+        <strong className={styles.emoji}> 📃</strong> Notes
+      </NavLink>
+      <NavLink to="/reminders" className={({ isActive }) => isActive ? styles.active : ''} onClick={() => setShowNoteArea('reminder')}>
+        <strong className={styles.emoji}> 🕒</strong> Reminders
+      </NavLink>
+      <NavLink to="/pinned" className={({ isActive }) => isActive ? styles.active : ''} onClick={() => setShowNoteArea('pinnedNotes')}>
+        <strong className={styles.emoji}> 🧷</strong> Pinned Notes
+      </NavLink>
+      <NavLink to="/trash" className={({ isActive }) => isActive ? styles.active : ''} onClick={() => setShowNoteArea('trashedNotes')}>
+        <strong className={styles.emoji}> 🗑️</strong> Trashed
+      </NavLink>
       </div>
     </div>
   );

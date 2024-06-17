@@ -1,10 +1,11 @@
 import React, { useState, useRef, useMemo } from 'react';
-import styles from './notearea.module.css';
-import QuillEditor from 'react-quill';
+import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import styles from './notearea.module.css';
 import Sidebar from '../sidebar/sidebar';
+
 const NoteArea = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
@@ -14,14 +15,13 @@ const NoteArea = () => {
   const handleSave = async () => {
     try {
       const userToken = JSON.parse(localStorage.getItem('user'));
-      const { token } = userToken;
-      if (!token) {
+      if (!userToken) {
         throw new Error('No token found');
       }
-
+      const { token } = userToken;
       const response = await axios.post(
         'http://localhost:4040/api/v1/notes',
-        { title: title, content: content },
+        { title, content },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -94,9 +94,9 @@ const NoteArea = () => {
           onChange={(e) => setTitle(e.target.value)}
         />
         <div className={styles.notearea}>
-          <QuillEditor
+          <ReactQuill
             theme="snow"
-            ref={(el) => (quill.current = el)}
+            ref={quill}
             className={styles.quilleditor}
             value={content}
             formats={formats}

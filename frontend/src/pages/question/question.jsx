@@ -5,7 +5,7 @@ import styles from "./question.module.css";
 function Question() {
   return (
     <div>
-      <Header useButtons={false} />
+      <Header useButtons={true} />
       <div>
       <div className={styles.textarea_wrapper}>
         <div className={styles.left_menu}>
