@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './App.css';
 import { UserProvider } from './context/UserContext';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import Home from './pages/HomePage/home';
 import SignUp from './pages/Signup/SignUp';
 import Login from './pages/Login/Login';
@@ -47,7 +46,9 @@ function App() {
         </Routes>
 
       </BrowserRouter>
+    
     </UserProvider>
+   
   );
 }
 

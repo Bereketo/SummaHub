@@ -2,11 +2,15 @@ import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useUser } from "../../../../context/UserContext";
 import PropTypes from "prop-types";
+import { toast, ToastContainer } from "react-toastify";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import 'react-toastify/dist/ReactToastify.css';
 import styles from "./header.module.css";
+// import CustomToast from "../../../Toast/toast";
 
 const Header = ({ useButtons, theme, setTheme }) => {
   const { user, logout } = useUser();
-  // console.log(user.data.role)
   const location = useLocation();
 
   const toggle_mode = () => {
@@ -14,6 +18,26 @@ const Header = ({ useButtons, theme, setTheme }) => {
   };
 
   const isActive = (path) => location.pathname === path;
+
+  const handleLogout = () => {
+    confirmAlert({
+      title: 'Confirm to logout',
+      message: 'Are you sure you want to logout?',
+      buttons: [
+        {
+          label: 'Yes',
+          onClick: () => {
+            logout();
+            toast.success("You have successfully logged out!");
+          }
+        },
+        {
+          label: 'No',
+          onClick: () => {}
+        }
+      ]
+    });
+  };
 
   return (
     <div className={styles.head_wrapper}>
@@ -68,14 +92,11 @@ const Header = ({ useButtons, theme, setTheme }) => {
         </div>
         {user ? (
           <div className={styles.user_info}>
-            <button className={`btn_1 ${styles.logout_btn}`} onClick={logout}>Logout</button>
             <img className={styles.user_photo} src='/images/user.png' alt="User" />
-         
             <NavLink className={styles.user_name} to={user.data.role === 'user' ? "/myprofile" : "/admin"}>
               {user.data.firstname}
             </NavLink>
-    
-
+            <button className={`btn_1 ${styles.logout_btn}`} onClick={handleLogout}>Logout</button>
           </div>
         ) : (
           useButtons && (
@@ -86,16 +107,15 @@ const Header = ({ useButtons, theme, setTheme }) => {
                 </NavLink>
               </button>
               <button className={`btn_2 ${styles.signUp_btn}`}>
-                {" "}
                 <NavLink className={styles.signup_link} to="/Signup">
-                  {" "}
-                  SignUp{" "}
-                </NavLink>{" "}
+                  SignUp
+                </NavLink>
               </button>
             </div>
           )
         )}
       </div>
+      <ToastContainer />
     </div>
   );
 };
