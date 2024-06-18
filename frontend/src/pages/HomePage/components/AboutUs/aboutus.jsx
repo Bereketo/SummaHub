@@ -27,30 +27,30 @@ const About = () => {
         <div className={styles.features}>
           <h1 className={styles.aboutus_title}> What we offer </h1>
           <ul>
-            <li> text summarization </li>
-            <li> question generation</li>
-            <li> note taking </li>
-            <li> Enhanced learning</li>
-            <li> time saving </li>
+            <li>🔹Text summarization </li>
+            <li>🔹Question generation</li>
+            <li>🔹Note taking </li>
+            <li>🔹Enhanced learning</li>
+            <li>🔹Time saving </li>
           </ul>
         </div>
         <div className={styles.vision_team}>
           <div className={styles.vision} >
             <h1 className={styles.aboutus_title}> Vision </h1>
             <ul>
-              <li> simplify complex text</li>
-              <li> empower students </li>
-              <li> enhance learning </li>
-              <li> generate question</li>
+              <li>🔹simplify complex text</li>
+              <li>🔹empower students </li>
+              <li>🔹enhance learning </li>
+              <li>🔹generate question</li>
             </ul>
           </div>
           <div className={styles.team}>
-            <h1 className={styles.aboutus_title}> team </h1>
+            <h1 className={styles.aboutus_title}> Team </h1>
             <ul>
-              <li> Abemelek </li>
-              <li> Bereket </li>
-              <li> Eyosyas </li>
-              <li> Eyerusalem </li>
+              <li>🔹Abemelek </li>
+              <li>🔹Bereket Alebachew </li>
+              <li>🔹Eyosyas Getahun</li>
+              <li>🔹Eyerusalem Abate</li>
             </ul>
           </div>
           <div></div>
@@ -58,12 +58,13 @@ const About = () => {
 
         <div className={styles.contactUs}>
         <h1 className={styles.aboutus_title}> Contact Us</h1>
-          <ul>
-            <li> Linkedin</li>
-            <li> Telegram </li>
-            <li> Instagram  </li>
-            <li> Facebook </li>
-          </ul>
+        <form className={styles.feedback_form} >
+      <textarea
+        placeholder="Write your feedback here..."
+        required
+      />
+      <button type="submit">Send Feedback</button>
+    </form>
         </div>
       </div>
       <footer>

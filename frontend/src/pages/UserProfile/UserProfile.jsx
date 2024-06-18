@@ -112,7 +112,7 @@ const UserProfile = () => {
       <h1> Welcome Back,  </h1>
       <p> {user.firstname}</p>
       
-        <button onClick={handleBack} className={styles.back_btn}>Back</button>
+        <button onClick={handleBack} className={styles.back_btn}>Go Back</button>
       
       </div>
       

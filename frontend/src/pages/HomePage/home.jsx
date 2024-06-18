@@ -5,24 +5,20 @@ import Slider from "./components/slider/slider";
 import Info from "./components/Info/info";
 import About from "./components/AboutUs/aboutus";
 import styles from './home.module.css';
+import Section from './components/Section/section';
 
 function Home({ theme, setTheme }) {
-  const bottomRef = useRef(null);
 
-  // const scrollToBottom = () => {
-  //   if (bottomRef.current) {
-  //     bottomRef.current.scrollIntoView({ behavior: 'smooth' });
-  //   }
-  // };
 
   return (
     <div className={styles.home_wrapper}>
       <Header useButtons={true} theme={theme} setTheme={setTheme} />
       <Hero />
       <Slider />
+      <Section />
       <Info />
       <About />
-      <div ref={bottomRef}></div>
+      
     </div>
   );
 }

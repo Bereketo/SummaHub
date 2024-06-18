@@ -9,9 +9,10 @@
     align-items: center;
    
 }
-.slide_wrapper > h1{
-    font-size: 18pt;
+.slide_title > h1{
+    font-size: 2rem;
     text-align: center;
+    color:rgb(3, 9, 123)
 }
 .demo_slider{
     display: flex;
@@ -47,9 +48,12 @@
     text-align: left;
     height: 11rem;
     margin:2rem;
-    padding:2rem;
+    padding:1rem;
     background-color: white;
 
+}
+.left_text > h3 , .right_text > h3{
+    padding-bottom: 10px;
 }
 
 .left_text{

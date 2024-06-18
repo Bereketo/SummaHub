@@ -6,12 +6,12 @@ import Sidebar from "./components/sidebar/sidebar";
 import NotesFront from "./components/NotesFront/notesFront";
 import styles from "./note.module.css";
 
-const Note = () => {
+const Note = ({theme , setTheme}) => {
   
   
   return (
     <div className={styles.notepage_wrapper}>
-      <Header useButtons={true} />
+      <Header useButtons={true} theme = {theme} setTheme = {setTheme}  />
       <div className={styles.note_wrapper}>
         <Sidebar/>
         <NotesFront />

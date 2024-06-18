@@ -6,7 +6,7 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function Reminder() {
+function Reminder({theme , setTheme}) {
   const now = new Date();
   const hours = now.getHours();
   const minutes = now.getMinutes().toString().padStart(2, "0");
@@ -192,7 +192,7 @@ function Reminder() {
 
   return (
     <div className={styles.reminder_wrapper}>
-      <Header useButtons={true} />
+      <Header useButtons={true} theme={theme} setTheme={setTheme}/>
       <div className={styles.bottom_container}>
         <Sidebar />
         <div className={styles.content}>
