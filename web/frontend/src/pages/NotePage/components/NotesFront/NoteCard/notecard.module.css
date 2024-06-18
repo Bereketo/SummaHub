@@ -1,24 +1,26 @@
 .grid_container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px; /* Adjusted gap between cards */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 50px; /* Adjusted gap between cards */
   padding: 20px;
+  padding-bottom: 0;
 }
 
 .card_wrapper {
-  width: 280px;
+  width: 200px;
   height: 200px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  border: 2px solid rgb(205, 201, 255);
-  border-radius: 40px 5px 15px 15px;
-  padding: 2rem;
+  border: 2px solid lightcyan;
+  border-radius: 20px 5px 15px 15px;
+  padding: 1.5rem;
   justify-content: space-between;
   position: relative;
   text-align: center;
   transition: all 300ms ease-in;
   overflow: hidden; /* To handle overflow content */
+  background-color: lightcyan
 }
 
 .card_wrapper:hover {
@@ -34,10 +36,12 @@
   -webkit-line-clamp: 4; /* Limit to three lines */
   overflow: hidden;
   text-overflow: ellipsis;
+
 }
 
 .card_title h1 {
   text-transform: capitalize;
+  margin-bottom: 10px;
 }
 
 .deleteSave {
@@ -99,125 +103,11 @@
 .pagination span {
   margin: 0 10px;
 }
-
-.no_notes {
-  width: 100%;
-  height: 100%;
-  background-color: lightblue;
-  border-radius: 12px;
-  border: 1px solid white;.grid_container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px; /* Adjusted gap between cards */
-    padding: 20px;
-  }
-  
-  .card_wrapper {
-    width: 280px;
-    height: 200px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    border: 2px solid rgb(205, 201, 255);
-    border-radius: 40px 5px 15px 15px;
-    padding: 2rem;
-    justify-content: space-between;
-    position: relative;
-    text-align: center;
-    transition: all 300ms ease-in;
-    overflow: hidden; /* To handle overflow content */
-  }
-  
-  .card_wrapper:hover {
-    cursor: pointer;
-    transform: scale(1.08);
-    background-color: rgb(218, 246, 255);
-    border-color: rgb(218, 246, 255);
-  }
-  
-  .notecontent {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4; /* Limit to three lines */
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  
-  .card_title h1 {
-    text-transform: capitalize;
-  }
-  
-  .deleteSave {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .deleteSave > button {
-    height: 30px;
-    width: 50px;
-    padding: 0;
-    margin-bottom: 10px;
-    background-color: rgb(182, 182, 255);
-  }
-  
-  .deleteSave > .deletebtn {
-    background-image: linear-gradient(20deg, #d4e1fd, #afc4ff, rgb(170, 170, 255));
-    color: black;
-  }
-  
-  .deleteSave > .editbtn {
+.pagination{
+  display: flex;
+  justify-content: space-between;
+}
+.pagination > button{
+    width: 100px;
     background-color: blue;
-  }
-  
-  .pinnedSymbol {
-    position: absolute;
-    top: -120px;
-    right: 10px;
-  }
-  
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-  }
-  
-  .pagination button {
-    padding: 10px 20px;
-    margin: 0 5px;
-    border: none;
-    background-color: #ddd;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .pagination button:hover {
-    background-color: #bbb;
-  }
-  
-  .pagination button:disabled {
-    background-color: #f0f0f0;
-    cursor: not-allowed;
-  }
-  
-  .pagination span {
-    margin: 0 10px;
-  }
-  
-  .no_notes {
-    width: 400px;
-    height: 100%;
-    background-color: lightblue;
-    border-radius: 12px;
-    border: 1px solid white;
-    padding: 20px;
-    text-align: center;
-  }
-  
-
-  padding: 20px;
-  text-align: center;
 }
