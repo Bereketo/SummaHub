@@ -150,7 +150,17 @@ function Reminder({theme , setTheme}) {
 
   const removeReminder = async (id) => {
     try {
-      await axios.delete(`/api/v1/reminders/${id}`);
+      
+      const userToken = JSON.parse(localStorage.getItem('user'));
+      if (!userToken || !userToken.token) {
+        throw new Error('No token found');
+      }
+      const { token } = userToken;
+      await axios.delete(`http://localhost:4040/api/v1/reminders/${id}`,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setReminders(reminders.filter((r) => r._id !== id));
       toast.success("Reminder deleted successfully!");
     } catch (error) {
