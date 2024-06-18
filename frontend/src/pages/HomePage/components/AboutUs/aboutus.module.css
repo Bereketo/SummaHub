@@ -86,7 +86,7 @@
     border: none;
     /* background-color: red; */
   }
-  .feedback_form > textarea{
+  .feedback_form > textarea {
     padding:10px;
     background-color: transparent;
     height: 150px;
@@ -94,6 +94,15 @@
     border:3px gray solid;
   }
   .feedback_form > textarea::placeholder{
+    color:rgb(215, 208, 208);
+    font-size: 11pt;
+  }
+  .email_input{
+    background-color: transparent;
+    color:rgb(249, 238, 217);
+    font-size: 11pt;
+  }
+  .email_input::placeholder{
     color:rgb(215, 208, 208);
     font-size: 11pt;
   }

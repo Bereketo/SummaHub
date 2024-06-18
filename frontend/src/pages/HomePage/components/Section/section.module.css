@@ -19,12 +19,12 @@
   }
   
   .text_content h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-bottom: 1rem;
   }
   
   .text_content p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 1.6;
   }
   
@@ -43,7 +43,7 @@
     color: #fff;
     padding: 0 2rem;
     /* padding-bottom: 2rem; */
-    font-size: 1.2rem;
+    font-size: 1rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
