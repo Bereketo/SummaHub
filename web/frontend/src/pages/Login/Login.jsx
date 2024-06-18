@@ -1,87 +1,88 @@
-import React, { useRef, useState, useContext, useEffect } from "react";
-import AuthContext from "../../context/AuthProvider";
+import React, { useRef, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
-import FormInputLogin from "./components/formInputLogin";
+import FormInput from "./components/formInputLogin";
 import LoginInputs from "./LoginInputs";
 import axios from "../../api/axios";
-const Login_url = "/auth";
+import { useUser } from '../../context/UserContext';
+
+
+
 function Login() {
-  const [values, setValues] = useState({email: "",password: "", });
-  const errRef = useRef();
+  const [values, setValues] = useState({ email: "", password: "" });
   const [errMsg, setErrMsg] = useState("");
-  const { setAuth } = useContext(AuthContext);
-  // useEffect (()=>{useRef.current.focus();} , [])
-  useEffect(() => { setErrMsg("");}, [values.email, values.password]);
-  
-  // const [success, setSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const errRef = useRef();
+  const { login } = useUser();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    errRef.current && errMsg && errRef.current.focus();
+  }, [errMsg]);
+
   const handleSubmit = async (e) => {
-    console.log(values.email , values.password)
-    try {
-      e.preventDefault();
-      const response = await axios.post(
-        Login_url,
-        JSON.stringify({ email: values.email, password: values.password }),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
-      console.log(JSON.stringify(response?.data));
-      const accessToken = response?.data?.accessToken;
-      const roles = response?.data?.roles;
-      setValues({ email: "", password: "", });
-      setAuth({email: values.email,password: values.password,roles,accessToken,});
+    e.preventDefault();
+    if (!values.email || !values.password) {
+      setErrMsg("Email and password are required");
+      return;
     }
-     catch (err) {
+    setIsSubmitting(true);
+    try {
+      const response = await axios.post("http://localhost:4040/api/v1/users/login", {
+        email: values.email,
+        password: values.password,
+      });
+      console.log(response.data);
+      login(response.data);
+      navigate('/');  // Adjust as per your route settings
+    } catch (err) {
       if (!err?.response) {
         setErrMsg("No Server Response");
       } else if (err.response?.status === 400) {
-        setErrMsg("Missing Username or password");
+        setErrMsg("Missing Username or Password");
       } else if (err.response?.status === 401) {
         setErrMsg("Unauthorized");
       } else {
-        setErrMsg("Unable to login");
+        setErrMsg("Login Failed");
       }
       errRef.current.focus();
     }
-
-    
+    setIsSubmitting(false);
   };
+
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
+    setErrMsg("");  // Clear the error message when the user starts typing
   };
 
   return (
-        <div className="loginWrapper">
-          <form onSubmit={handleSubmit}>
-            <p
-              ref={errRef}
-              className={errMsg ? "errmsg" : "offscreen"}
-              aria-live="assertive"
-            >
-              {errMsg}{" "}
-            </p>
-            <img className="logo" src="./images/logo.png" />
-            {LoginInputs.map((input) => (
-              <FormInputLogin
-                key={input.id}
-                {...input}
-                value={values[input.name]}
-                onChange={handleChange}
-              />
-            ))}
-            <a href=""> forgot your password? </a>
-            <button  type="submit"> Login</button>
-
-            <p>
-              {" "}
-              Don't have an account? <a href=""> SignUp Here</a>
-            </p>
-          </form>
-        </div>
-
+    <div className="loginWrapper">
+      <form onSubmit={handleSubmit}>
+        <p
+          ref={errRef}
+          className={errMsg ? "errmsg" : "offscreen"}
+          aria-live="assertive"
+        >
+          {errMsg}
+        </p>
+        <img className="logo" src="./images/logo.png" alt="logo" />
+        {LoginInputs.map((input) => (
+          <FormInput
+            key={input.id}
+            {...input}
+            value={values[input.name]}
+            onChange={handleChange}
+          />
+        ))}
+        <a href="/ForgotPassword">Forgot your password?</a>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? "Logging in..." : "Login"}
+        </button>
+        <p>
+          Don't have an account? <a href="/signup">Sign Up Here</a>
+        </p>
+      </form>
+    </div>
   );
 }
 

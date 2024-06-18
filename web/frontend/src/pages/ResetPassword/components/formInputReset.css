@@ -6,14 +6,12 @@ input{
     font-size: 12px;
     text-align: left;
 }
-
-
-
 .formInput{
     display: flex;
     flex-direction: column;
     width: 300px;  
     position: relative; 
+    
 }
 label{
     font-size: 9pt;
@@ -26,6 +24,7 @@ label{
     left:15px;
     transition: top 200ms ease-in , left 200ms ease-in  ;
     cursor:auto;
+    display: flex;
 }
 input:-webkit-autofill{
     -webkit-box-shadow: 0 0 0px 1000px white inset;
@@ -67,4 +66,13 @@ input:invalid[focused = 'true'] ~ span{
 }
 input:invalid[focused = 'true']{
     border: 1px solid rgb(255, 82, 82);
+}
+label > div > img{
+    height: 15px;
+
+
+}
+label> div{
+    display: flex;
+    gap: 5px;
 }

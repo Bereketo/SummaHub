@@ -1,58 +1,51 @@
 const inputs = [
     {
         id: 1,
-        name : 'firstName',
-        type : 'text',
+        name: 'firstName',
+        type: 'text',
         placeholder: '',
-        errorMessage:"First Name should be 3 -16 characters and shouldn't include any special character! ",
-        label: 'FirstName',
+        errorMessage: "First Name should be 3 -16 characters and shouldn't include any special character!",
+        label: 'First Name',
         required: true,
-        pattern:"^[a-zA-Z]{3,16}$"
+        pattern: "^[a-zA-Z]{3,16}$"
     },
     {
         id: 2,
-        name : 'lastName',
-        type : 'text',
+        name: 'lastName',
+        type: 'text',
         placeholder: '',
-        errorMessage:"Last Name should be 3 -16 characters and shouldn't include any special character! ",
-        label: 'LastName',
-        pattern:"^[a-zA-Z]{3,16}$",
+        errorMessage: "Last Name should be 3 -16 characters and shouldn't include any special character!",
+        label: 'Last Name',
+        pattern: "^[a-zA-Z]{3,16}$"
     },
-
     {
         id: 3,
-        name : 'email',
-        type : 'email',
+        name: 'email',
+        type: 'email',
         placeholder: '',
-        errorMessage:"It should be valid email address",
+        errorMessage: "It should be a valid email address",
         label: 'Email',
-        required:true
+        required: true
     },
     {
         id: 4,
-        name : 'password',
-        type : 'text',
+        name: 'password',
+        type: 'password',
         placeholder: '',
-        errorMessage:" Password should be 8 -20 characters and iinclude at least 1 letter , 1 number and 1 special character!",
+        errorMessage: "Password should be 8-20 characters and include at least 1 letter, 1 number, and 1 special character!",
         label: 'Password',
-        required:true,
-        // pattern:"^(?=.*[0-9])(?=.*[a-z])(?=.*[@$!%*?&])([a-zA-Z0-9@$!%*?&]{8,20})$"
-        pattern:"^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^A-Za-z0-9]).{8,20}$"
-       
-    
+        required: true,
+        pattern: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^A-Za-z0-9]).{8,20}$"
     },
     {
         id: 5,
-        name : 'confirmPassword',
-        type : 'text',
+        name: 'passwordConfirm',
+        type: 'password',
         placeholder: '',
-        errorMessage:" Password don't match",
+        errorMessage: "Passwords don't match",
         label: 'Confirm Password',
-        required:true,
-        pattern:""
+        required: true,
     }
-  
-   
-]
+];
 
-export default inputs
+export default inputs;
