@@ -18,8 +18,6 @@ import Chat from './pages/Chat/chat';
 import Reminder from './pages/NotePage/components/Reminder/reminder';
 import Admin from './pages/Admin/admin';
 import TrashNote from './pages/NotePage/components/TrashNote/TrashNote';
-import { set } from 'mongoose';
-import Section from './pages/HomePage/components/Section/section';
 
 
 function App() {

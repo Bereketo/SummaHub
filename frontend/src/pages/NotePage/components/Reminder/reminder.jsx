@@ -60,7 +60,7 @@ function Reminder({theme , setTheme}) {
         throw new Error('No token found');
       }
       const { token } = userToken;
-      const response = await axios.get("http://localhost:4040/api/v1/reminders",{
+      const response = await axios.get("http://localhost:4040/api/v1/reminders", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -97,9 +97,11 @@ function Reminder({theme , setTheme}) {
 
     const reminderDateTime = new Date(`${remDate}T${remTime}`);
     if (reminderDateTime <= new Date()) {
-      toast.error("Selected time is in the past. Please choose a future time.");
+      toast.error("Selected time is in the past or current. Please choose a future time.");
       return;
     }
+    
+    console.log(remTitle,remDescription,remDate,remTime)
 
     const newReminder = {
       title: remTitle,
@@ -109,7 +111,16 @@ function Reminder({theme , setTheme}) {
     };
 
     try {
-      const response = await axios.post("http://localhost:4040/api/v1/reminders", newReminder);
+      const userToken = JSON.parse(localStorage.getItem('user'));
+      if (!userToken || !userToken.token) {
+        throw new Error('No token found');
+      }
+      const { token } = userToken;
+      const response = await axios.post("http://localhost:4040/api/v1/reminders", newReminder, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setReminders([...reminders, response.data.data]);
       scheduleNotification(response.data.data);
       setRemTitle("");
@@ -139,7 +150,17 @@ function Reminder({theme , setTheme}) {
 
   const removeReminder = async (id) => {
     try {
-      await axios.delete(`/api/v1/reminders/${id}`);
+      
+      const userToken = JSON.parse(localStorage.getItem('user'));
+      if (!userToken || !userToken.token) {
+        throw new Error('No token found');
+      }
+      const { token } = userToken;
+      await axios.delete(`http://localhost:4040/api/v1/reminders/${id}`,{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       setReminders(reminders.filter((r) => r._id !== id));
       toast.success("Reminder deleted successfully!");
     } catch (error) {
@@ -192,7 +213,7 @@ function Reminder({theme , setTheme}) {
                 {hours}:{minutes}
               </h2>
               <h2 className={styles.date}>
-                {day}, {date}th {month}, {year}
+                {`${day}, ${date} ${month} ${year}`}
               </h2>
             </div>
             <div className={styles.reminder_input}>

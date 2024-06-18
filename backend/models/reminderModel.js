@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const reminderSchema = new mongoose.Schema({
     title: {
         type: String,
@@ -18,15 +17,13 @@ const reminderSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-    isDeleted: {
-        type: Boolean,
-        default: false
+    time: {
+        type: String,
+        required: [true, 'Please enter a time']
     }
-},
-{
-    timestamps: true
 });
 
 const Reminder = mongoose.model('Reminder', reminderSchema);
 
 module.exports = Reminder;
+
