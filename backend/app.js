@@ -15,7 +15,7 @@ const globalErrorHandler = require('./controllers/errorController');
 
 const userRouter = require('./routes/userRoutes');
 const noteRouter = require('./routes/noteRoutes');
-
+const reminderRouter = require('./routes/reminderRoutes');
 // 1) Global Middlewares
 // Set secure http headers
 app.use(helmet({ contentSecurityPolicy: false }));
@@ -45,7 +45,7 @@ app.use((req, res, next) => {
 app.get('/', (req, res, next) => { res.send('Welcome from backend ? Yeah am working!😁😀🚀🚀🚀'); });
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/notes', noteRouter);
-
+app.use('/api/v1/reminders', reminderRouter);
 app.all('*', (req, res, next) => {
     const err = new Error();
     err.status = 'fail';
