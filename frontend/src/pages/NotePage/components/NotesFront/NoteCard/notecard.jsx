@@ -86,7 +86,8 @@ function Notecard() {
                 <h1>{note.title}</h1>
               </div>
               <div className={styles.card_content}>
-                <p>{note.content}</p>
+              
+                <p>Pay as you go  typically refers to a billing model where you pay for a service or product as you use it, </p>
               </div>
             </div>
             <footer>
@@ -97,12 +98,12 @@ function Notecard() {
                 >
                   Delete
                 </button>
-                <Link
+                {/* <Link
                   className={styles.pinnedSymbol}
                   to={`/NoteEdit/${note._id}`}
                 >
                   🖊️
-                </Link>
+                </Link> */}
               </div>
             </footer>
           </div>

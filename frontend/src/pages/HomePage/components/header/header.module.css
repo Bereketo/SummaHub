@@ -94,6 +94,7 @@
   
   }
   .user_data{
+    padding-top: 10px;
     text-align: center;
     width: max-content;
   }
@@ -104,3 +105,4 @@
     font-size: 11pt;
     padding-top: 10px;
   }
+  

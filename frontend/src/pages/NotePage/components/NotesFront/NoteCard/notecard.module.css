@@ -1,24 +1,26 @@
 .grid_container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px; /* Adjusted gap between cards */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 50px; /* Adjusted gap between cards */
   padding: 20px;
+  padding-bottom: 0;
 }
 
 .card_wrapper {
-  width: 280px;
+  width: 200px;
   height: 200px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  border: 2px solid rgb(205, 201, 255);
-  border-radius: 40px 5px 15px 15px;
-  padding: 2rem;
+  border: 2px solid lightcyan;
+  border-radius: 20px 5px 15px 15px;
+  padding: 1.5rem;
   justify-content: space-between;
   position: relative;
   text-align: center;
   transition: all 300ms ease-in;
   overflow: hidden; /* To handle overflow content */
+  background-color: lightcyan
 }
 
 .card_wrapper:hover {
@@ -34,10 +36,12 @@
   -webkit-line-clamp: 4; /* Limit to three lines */
   overflow: hidden;
   text-overflow: ellipsis;
+
 }
 
 .card_title h1 {
   text-transform: capitalize;
+  margin-bottom: 10px;
 }
 
 .deleteSave {
@@ -98,4 +102,12 @@
 
 .pagination span {
   margin: 0 10px;
+}
+.pagination{
+  display: flex;
+  justify-content: space-between;
+}
+.pagination > button{
+    width: 100px;
+    background-color: blue;
 }
