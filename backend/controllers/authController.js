@@ -28,8 +28,6 @@ const createSendToken = (user, statusCode, res) => {
     })
 }
 class AuthController {
-
-
     logout = (req, res) => {
         res.cookie('jwt', 'logout', {
             expires: new Date(Date.now() + 10 * 1000),
