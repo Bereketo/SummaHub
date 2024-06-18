@@ -2,10 +2,10 @@ import React from "react";
 import Header from "../HomePage/components/header/header";
 import styles from "./question.module.css";
 
-function Question() {
+function Question({theme , setTheme}) {
   return (
     <div>
-      <Header useButtons={true} />
+      <Header useButtons={true} theme = {theme} setTheme = {setTheme}  />
       <div>
         <div className={styles.quepage_title}>
         <img src="images/bulb.png" width={50}/>

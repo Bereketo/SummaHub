@@ -18,12 +18,15 @@ import Chat from './pages/Chat/chat';
 import Reminder from './pages/NotePage/components/Reminder/reminder';
 import Admin from './pages/Admin/admin';
 import TrashNote from './pages/NotePage/components/TrashNote/TrashNote';
+import { set } from 'mongoose';
+import Section from './pages/HomePage/components/Section/section';
 
 
 function App() {
   const [theme, setTheme] = useState('light');
 
   return (
+    <div theme ={theme} setTheme ={setTheme}>
     <UserProvider>
       <BrowserRouter>
         <Routes>
@@ -42,13 +45,14 @@ function App() {
           <Route path="/Question" element={<Question theme={theme} setTheme={setTheme} />} />
           <Route path="/Chat" element={<Chat theme={theme} setTheme={setTheme} />} />
           <Route path="/Reminder" element={<Reminder theme={theme} setTheme={setTheme} />} />
-          <Route path='/trash' element={<TrashNote/>}/>
+          <Route path='/trash' element={<TrashNote  theme={theme} setTheme={setTheme}/>}/>
         </Routes>
 
       </BrowserRouter>
     
     </UserProvider>
-   
+    
+    </div>
   );
 }
 

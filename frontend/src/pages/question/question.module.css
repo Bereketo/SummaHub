@@ -1,6 +1,7 @@
 .textarea_wrapper {
   display: flex;
   height: 70vh;
+  background-color: var(--secondary-text-color);
   justify-content: space-around;
   margin: 0.5rem 1rem;
   margin-bottom: 0px;

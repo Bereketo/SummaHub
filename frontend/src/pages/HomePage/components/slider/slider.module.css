@@ -9,9 +9,10 @@
     align-items: center;
    
 }
-.slide_wrapper > h1{
-    font-size: 18pt;
+.slide_title > h1{
+    font-size: 2rem;
     text-align: center;
+    color:rgb(3, 9, 123)
 }
 .demo_slider{
     display: flex;

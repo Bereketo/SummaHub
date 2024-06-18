@@ -5,7 +5,7 @@ import axios from 'axios';
 import Header from "../../../HomePage/components/header/header";
 import Sidebar from "../sidebar/sidebar";
 
-function TrashNote() {
+function TrashNote({theme ,setTheme}) {
   const [notes, setNotes] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -66,7 +66,7 @@ function TrashNote() {
 
   return (
     <div className={styles.trashnote_wrapper}>
-      <Header useButtons={true} />
+      <Header useButtons={true} theme={theme} setTheme={setTheme} />
       <div className={styles.bottom_container}>
         <Sidebar />
         <div className={styles.content}>
