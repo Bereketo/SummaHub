@@ -208,7 +208,7 @@
   }
   
   .no_notes {
-    width: 100%;
+    width: 400px;
     height: 100%;
     background-color: lightblue;
     border-radius: 12px;
@@ -217,6 +217,7 @@
     text-align: center;
   }
   
+
   padding: 20px;
   text-align: center;
 }
