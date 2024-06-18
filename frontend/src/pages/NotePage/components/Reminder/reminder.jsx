@@ -55,7 +55,17 @@ function Reminder() {
 
   const fetchReminders = async () => {
     try {
-      const response = await axios.get("http://localhost:4040/api/v1/reminders");
+      const userToken = JSON.parse(localStorage.getItem('user'));
+      if (!userToken || !userToken.token) {
+        throw new Error('No token found');
+      }
+      const { token } = userToken;
+      const response = await axios.get("http://localhost:4040/api/v1/reminders",{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      console.log(response.data);
       setReminders(response.data.data);
     } catch (error) {
       console.error("Error fetching reminders", error);
