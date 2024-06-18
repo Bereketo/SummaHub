@@ -1,13 +1,17 @@
 const mongoose = require('mongoose');
 
-const noteSchema = new mongoose.Schema({
+const  reminderSchema = new mongoose.Schema({
     title: {
         type: String,
         required: [true, 'Please enter a title']
     },
-    content: {
+    description: {
         type: String,
-        required: [true, 'Please enter content']
+        required: [true, 'Please enter description']
+    },
+    date: {
+        type: Date,
+        required: [true, 'Please enter a date']
     },
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -18,10 +22,11 @@ const noteSchema = new mongoose.Schema({
         type: Boolean,
         default: false
     }
-}, {
+},
+{
     timestamps: true
 });
 
-const Note = mongoose.model('Note', noteSchema);
+const Reminder = mongoose.model('Reminder', remiderSchema);
 
-module.exports = Note;
+module.exports = Reminder;
