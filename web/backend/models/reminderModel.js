@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const  reminderSchema = new mongoose.Schema({
+const reminderSchema = new mongoose.Schema({
     title: {
         type: String,
         required: [true, 'Please enter a title']
@@ -27,6 +27,6 @@ const  reminderSchema = new mongoose.Schema({
     timestamps: true
 });
 
-const Reminder = mongoose.model('Reminder', remiderSchema);
+const Reminder = mongoose.model('Reminder', reminderSchema);
 
 module.exports = Reminder;
