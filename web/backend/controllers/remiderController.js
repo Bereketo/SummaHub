@@ -30,7 +30,8 @@ class ReminderController {
             title: req.body.title,
             description: req.body.description,
             date: req.body.date,
-            user: req.user._id
+            user: req.user._id,
+            time:req.body.time
         });
     
         res.status(201).json({
