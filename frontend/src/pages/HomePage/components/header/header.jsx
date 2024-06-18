@@ -68,22 +68,14 @@ const Header = ({ useButtons, theme, setTheme }) => {
         </div>
         {user ? (
           <div className={styles.user_info}>
-            {/* <button className={`btn_1 ${styles.logout_btn}`} onClick={logout}>
-              Logout
-            </button> */}
-            <img
-              className={styles.user_photo}
-              src="/images/user.png"
-              alt="User"
-            />
-            <div className={styles.user_data}>
-              <NavLink
-                className={styles.user_name}
-                to={user.data.role === "user" ? "/myprofile" : "/admin"}
-              >
-                {user.data.firstname}
-              </NavLink>
-            </div>
+            <button className={`btn_1 ${styles.logout_btn}`} onClick={logout}>Logout</button>
+            <img className={styles.user_photo} src='/images/user.png' alt="User" />
+         
+            <NavLink className={styles.user_name} to={user.data.role === 'user' ? "/myprofile" : "/admin"}>
+              {user.data.firstname}
+            </NavLink>
+    
+
           </div>
         ) : (
           useButtons && (

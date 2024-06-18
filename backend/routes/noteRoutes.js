@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const noteController = require('../controllers/noteController');
-const authController = require('../controllers/authController');
+const NoteController = require('../controllers/noteController');
+const AuthController = require('../controllers/authController');
 
-router.use(authController.protect);
-router.use(authController.restrictTo('user'))
+router.use(AuthController.protect);
+router.use(AuthController.restrictTo('user'))
 router.route('/')
-    .post(noteController.createNote)
-    .get(noteController.getAllNotes)
+    .post(NoteController.createNote)
+    .get(NoteController.getAllNotes)
 router.route('/trash')
-    .get(noteController.trashedNotes);
+    .get(NoteController.trashedNotes);
 
 router.route('/:id')
-    .patch(noteController.updateNote)
-    .patch(noteController.deleteNote)
-    .get(noteController.getNote)
+    .patch(NoteController.updateNote)
+    .patch(NoteController.deleteNote)
+    .get(NoteController.getNote)
 
 module.exports = router;

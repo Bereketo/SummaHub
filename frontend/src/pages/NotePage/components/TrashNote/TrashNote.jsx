@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import styles from "../NotesFront/NoteCard/notecard.module.css";
+import styles from "./trashnote.module.css";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Header from "../../../HomePage/components/header/header";
+import Sidebar from "../sidebar/sidebar";
 
 function TrashNote() {
   const [notes, setNotes] = useState([]);
@@ -13,16 +15,17 @@ function TrashNote() {
     const fetchNotes = async () => {
       try {
         const userToken = JSON.parse(localStorage.getItem('user'));
-        const { token } = userToken;
-        if (!token) {
+        if (!userToken || !userToken.token) {
           throw new Error('No token found');
         }
+        const { token } = userToken;
+
         const response = await axios.get(`http://localhost:4040/api/v1/notes/trash?page=${page}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-        console.log(response.data)
+
         setNotes(response.data.data);
         setTotalPages(response.data.totalPages);
       } catch (err) {
@@ -38,17 +41,18 @@ function TrashNote() {
   const handleRestore = async (id) => {
     try {
       const userToken = JSON.parse(localStorage.getItem('user'));
-      const { token } = userToken;
-      if (!token) {
+      if (!userToken || !userToken.token) {
         throw new Error('No token found');
       }
+      const { token } = userToken;
+
       await axios.patch(`http://localhost:4040/api/v1/notes/${id}`, { isDeleted: false }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
+
       setNotes(notes.filter(note => note._id !== id));
-      window.location.reload();
     } catch (err) {
       console.error('Error restoring note:', err);
     }
@@ -61,45 +65,59 @@ function TrashNote() {
   };
 
   return (
-    <div>
-      <div className={styles.grid_container}>
-        {notes.map((note) => (
-          <div key={note._id} className={styles.card_wrapper}>
-            <div className={styles.notecontent}>
-              <div className={styles.card_title}>
-                <h1>{note.title}</h1>
+    <div className={styles.trashnote_wrapper}>
+      <Header useButtons={true} />
+      <div className={styles.bottom_container}>
+        <Sidebar />
+        <div className={styles.content}>
+          {notes.length > 0 ? (
+            <div>
+              <div className={styles.grid_container}>
+                {notes.map((note) => (
+                  <div key={note._id} className={styles.card_wrapper}>
+                    <div className={styles.notecontent}>
+                      <div className={styles.card_title}>
+                        <h1>{note.title}</h1>
+                      </div>
+                      <div className={styles.card_content}>
+                        <p>{note.content}</p>
+                      </div>
+                    </div>
+                    <footer>
+                      <div className={styles.deleteSave}>
+                        <button
+                          className={styles.restorebtn}
+                          onClick={() => handleRestore(note._id)}
+                        >
+                          Restore
+                        </button>
+                      </div>
+                    </footer>
+                  </div>
+                ))}
               </div>
-              <div className={styles.card_content}>
-                <p>{note.content}</p>
-              </div>
-            </div>
-            <footer>
-              <div className={styles.deleteSave}>
+              <div className={styles.pagination}>
                 <button
-                  className={styles.restorebtn}
-                  onClick={() => handleRestore(note._id)}
+                  disabled={page === 1}
+                  onClick={() => handlePageChange(page - 1)}
                 >
-                  Restore
+                  Previous
+                </button>
+                {/* <span>Page {page} of {totalPages}</span> */}
+                <button
+                  disabled={page < 6}
+                  onClick={() => handlePageChange(page + 1)}
+                >
+                  Next
                 </button>
               </div>
-            </footer>
-          </div>
-        ))}
-      </div>
-      <div className={styles.pagination}>
-        <button
-          disabled={page === 1}
-          onClick={() => handlePageChange(page - 1)}
-        >
-          Previous
-        </button>
-        <span>Page {page} of {totalPages}</span>
-        <button
-          disabled={notes.length < 6}
-          onClick={() => handlePageChange(page + 1)}
-        >
-          Next
-        </button>
+            </div>
+          ) : (
+            <p className={styles.no_notes}>
+              No trash notes
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

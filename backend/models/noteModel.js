@@ -19,7 +19,7 @@ const noteSchema = new mongoose.Schema({
         default: false
     }
 }, {
-    timestamps: true // This option will add `createdAt` and `updatedAt` fields
+    timestamps: true
 });
 
 const Note = mongoose.model('Note', noteSchema);

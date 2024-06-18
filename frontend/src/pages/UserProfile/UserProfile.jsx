@@ -3,7 +3,7 @@ import { useUser } from '../../context/UserContext';
 import { showAlert } from '../../utils/alert';
 import styles from './UserProfile.module.css';
 import axios from 'axios';
-import { styleText } from 'util';
+// import { styleText } from 'util';
 
 const UserProfile = () => {
   const { user, setUser } = useUser();
@@ -108,7 +108,7 @@ const UserProfile = () => {
 
       <div className={styles.userprofile_info}>
       <div className={styles.left}>
-      <img src = 'images/summa.png' width={270}/>
+      <img src = 'images/summa.png' width={270} alt=''/>
       <h1> Welcome Back,  </h1>
       <p> {user.firstname}</p>
       

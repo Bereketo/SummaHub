@@ -1,27 +1,27 @@
 const express = require('express');
-const userController = require('../controllers/userController')
-const authController = require('../controllers/authController');
+const UserController = require('../controllers/userController')
+const AuthController = require('../controllers/authController');
 
 
 
 const router = express.Router()
-router.post('/signup', authController.signup)
-router.post('/login', authController.login)
-router.get('/logout', authController.logout)
-router.post('/forgotPassword', authController.forgotPassword)
-router.patch('/resetPassword/:token', authController.resetPassword)
+router.post('/signup', AuthController.signup)
+router.post('/login', AuthController.login)
+router.get('/logout', AuthController.logout)
+router.post('/forgotPassword', AuthController.forgotPassword)
+router.patch('/resetPassword/:token', AuthController.resetPassword)
 
-router.use(authController.protect)
+router.use(AuthController.protect)
 
-router.patch('/updatePassword/:id', authController.updatePassword)
-router.get('/me', userController.getMe, userController.getUser)
-router.patch('/updateMe', userController.uploadUserPhoto,userController.resizeUserPhoto, userController.updateMe)
-router.delete('/deleteMe', userController.deleteMe)
+router.patch('/updatePassword/:id', AuthController.updatePassword)
+router.get('/me', UserController.getMe, UserController.getUser)
+router.patch('/updateMe', UserController.uploadUserPhoto,UserController.resizeUserPhoto, UserController.updateMe)
+router.delete('/deleteMe', UserController.deleteMe)
 
-router.use(authController.restrictTo('admin'))
-router.route('/').get(userController.getAllusers)
+router.use(AuthController.restrictTo('admin'))
+router.route('/').get(UserController.getAllusers)
 router.route('/:id')
-    .patch(userController.deleteUser)
-    .patch(userController.updateUser)
-    .get(userController.getUser)
+    .patch(UserController.deleteUser)
+    .patch(UserController.updateUser)
+    .get(UserController.getUser)
 module.exports = router

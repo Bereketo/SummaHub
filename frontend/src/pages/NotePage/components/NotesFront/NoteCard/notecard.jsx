@@ -15,17 +15,17 @@ function Notecard() {
         const userToken = JSON.parse(localStorage.getItem('user'));
         const { token } = userToken;
         console.log("Fetched Token:", token); // Debugging line
-  
+
         if (!token) {
           throw new Error('No token found');
         }
-  
+
         const response = await axios.get(`http://localhost:4040/api/v1/notes?page=${page}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-  
+
         setNotes(response.data.data);
         setTotalPages(response.data.totalPages);
       } catch (err) {
@@ -35,10 +35,9 @@ function Notecard() {
         }
       }
     };
-  
+
     fetchNotes();
   }, [navigate, page]);
-  
 
   const handleDelete = async (id) => {
     try {
@@ -47,8 +46,8 @@ function Notecard() {
         throw new Error('No token found');
       }
       const { token } = userToken;
-      
-      const response = await axios.patch(`http://localhost:4040/api/v1/notes/${id}`, 
+
+      const response = await axios.patch(`http://localhost:4040/api/v1/notes/${id}`,
         { isDeleted: true }, // Ensure the correct data is being sent
         {
           headers: {
@@ -56,10 +55,9 @@ function Notecard() {
           },
         }
       );
-  
+
       if (response.status === 200) {
         setNotes(notes.filter(note => note._id !== id));
-        window.location.reload();
       } else {
         console.error('Error deleting note:', response);
       }
@@ -67,7 +65,6 @@ function Notecard() {
       console.error('Error deleting note:', err);
     }
   };
-  
 
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPages) {
@@ -77,53 +74,59 @@ function Notecard() {
 
   return (
     <div>
-      <div className={styles.grid_container}>
-
-        {notes.map((note) => (
-          <div key={note._id} className={styles.card_wrapper}>
-            <div className={styles.notecontent}>
-              <div className={styles.card_title}>
-                <h1>{note.title}</h1>
+      {notes.length > 0 ? (
+        <>
+          <div className={styles.grid_container}>
+            {notes.map((note) => (
+              <div key={note._id} className={styles.card_wrapper}>
+                <div className={styles.notecontent}>
+                  <div className={styles.card_title}>
+                    <h1>{note.title}</h1>
+                  </div>
+                  <div className={styles.card_content}>
+                    <p>{note.content}</p>
+                  </div>
+                </div>
+                <footer>
+                  <div className={styles.deleteSave}>
+                    <button
+                      className={styles.deletebtn}
+                      onClick={() => handleDelete(note._id)}
+                    >
+                      Delete
+                    </button>
+                    <Link
+                      className={styles.pinnedSymbol}
+                      to={`/NoteEdit/${note._id}`}
+                    >
+                      🖊️
+                    </Link>
+                  </div>
+                </footer>
               </div>
-              <div className={styles.card_content}>
-              
-                <p>Pay as you go  typically refers to a billing model where you pay for a service or product as you use it, </p>
-              </div>
-            </div>
-            <footer>
-              <div className={styles.deleteSave}>
-                <button
-                  className={styles.deletebtn}
-                  onClick={() => handleDelete(note._id)}
-                >
-                  Delete
-                </button>
-                {/* <Link
-                  className={styles.pinnedSymbol}
-                  to={`/NoteEdit/${note._id}`}
-                >
-                  🖊️
-                </Link> */}
-              </div>
-            </footer>
+            ))}
           </div>
-        ))}
-      </div>
-      <div className={styles.pagination}>
-        <button
-          disabled={page === 1}
-          onClick={() => handlePageChange(page - 1)}
-        >
-          Previous
-        </button>
-        <span>Page {page} of {totalPages}</span>
-        <button
-          disabled={notes.length < 6}
-          onClick={() => handlePageChange(page + 1)}
-        >
-          Next
-        </button>
-      </div>
+          <div className={styles.pagination}>
+            <button
+              disabled={page === 1}
+              onClick={() => handlePageChange(page - 1)}
+            >
+              Previous
+            </button>
+            <span>Page {page} of {totalPages}</span>
+            <button
+              disabled={page === totalPages}
+              onClick={() => handlePageChange(page + 1)}
+            >
+              Next
+            </button>
+          </div>
+        </>
+      ) : (
+        <p className={styles.no_notes}>
+          No notes available
+        </p>
+      )}
     </div>
   );
 }
