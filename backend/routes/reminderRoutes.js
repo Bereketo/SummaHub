@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const ReminderController = require('../controllers/reminderController');
+const ReminderController = require('../controllers/remiderController');
 const AuthController = require('../controllers/authController');
 
 router.use(AuthController.protect);

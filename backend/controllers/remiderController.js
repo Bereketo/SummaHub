@@ -32,7 +32,7 @@ class ReminderController {
             date: req.body.date,
             user: req.user._id
         });
-
+    
         res.status(201).json({
             status: 'success',
             data: newReminder

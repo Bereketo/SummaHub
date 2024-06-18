@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./reminder.module.css";
 import Header from "../../../HomePage/components/header/header";
 import Sidebar from "../sidebar/sidebar";
+import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -43,7 +44,7 @@ function Reminder() {
   const [remTime, setRemTime] = useState("");
   const [reminders, setReminders] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(3); // Number of items per page
+  const [itemsPerPage] = useState(3);
 
   useEffect(() => {
     if (Notification.permission !== "granted") {
@@ -52,15 +53,14 @@ function Reminder() {
     fetchReminders();
   }, []);
 
-  const fetchReminders = () => {
-    const storedReminders = localStorage.getItem("reminders");
-    if (storedReminders) {
-      setReminders(JSON.parse(storedReminders));
+  const fetchReminders = async () => {
+    try {
+      const response = await axios.get("http://localhost:4040/api/v1/reminders");
+      setReminders(response.data.data);
+    } catch (error) {
+      console.error("Error fetching reminders", error);
+      toast.error("Error fetching reminders");
     }
-  };
-
-  const saveReminders = (reminders) => {
-    localStorage.setItem("reminders", JSON.stringify(reminders));
   };
 
   const handleTitleChange = (event) => {
@@ -79,7 +79,7 @@ function Reminder() {
     setRemTime(event.target.value);
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!remTitle || !remDescription || !remDate || !remTime) {
       toast.error("Please fill in all fields.");
       return;
@@ -97,15 +97,20 @@ function Reminder() {
       date: remDate,
       time: remTime,
     };
-    const updatedReminders = [...reminders, newReminder];
-    setReminders(updatedReminders);
-    saveReminders(updatedReminders);
-    scheduleNotification(newReminder);
-    setRemTitle("");
-    setRemDescription("");
-    setRemDate("");
-    setRemTime("");
-    toast.success("Reminder saved successfully!");
+
+    try {
+      const response = await axios.post("http://localhost:4040/api/v1/reminders", newReminder);
+      setReminders([...reminders, response.data.data]);
+      scheduleNotification(response.data.data);
+      setRemTitle("");
+      setRemDescription("");
+      setRemDate("");
+      setRemTime("");
+      toast.success("Reminder saved successfully!");
+    } catch (error) {
+      console.error("Error saving reminder", error);
+      toast.error("Error saving reminder");
+    }
   };
 
   const scheduleNotification = (reminder) => {
@@ -115,17 +120,22 @@ function Reminder() {
     if (timeDifference > 0) {
       setTimeout(() => {
         sendNotification(reminder.title, reminder.description);
-        removeReminder(reminder); // Remove the reminder after notification is shown
+        removeReminder(reminder._id); // Adjusted to use reminder ID
       }, timeDifference);
     } else {
       toast.error("Selected time is in the past. Please choose a future time.");
     }
   };
 
-  const removeReminder = (reminder) => {
-    const updatedReminders = reminders.filter((r) => r !== reminder);
-    setReminders(updatedReminders);
-    saveReminders(updatedReminders);
+  const removeReminder = async (id) => {
+    try {
+      await axios.delete(`/api/v1/reminders/${id}`);
+      setReminders(reminders.filter((r) => r._id !== id));
+      toast.success("Reminder deleted successfully!");
+    } catch (error) {
+      console.error("Error deleting reminder", error);
+      toast.error("Error deleting reminder");
+    }
   };
 
   const sendNotification = (title, body) => {
@@ -141,7 +151,6 @@ function Reminder() {
     }
   };
 
-  // Pagination Logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = reminders.slice(indexOfFirstItem, indexOfLastItem);
@@ -162,7 +171,7 @@ function Reminder() {
 
   return (
     <div className={styles.reminder_wrapper}>
-      <Header useButtons ={true} />
+      <Header useButtons={true} />
       <div className={styles.bottom_container}>
         <Sidebar />
         <div className={styles.content}>
@@ -235,14 +244,14 @@ function Reminder() {
                     <td colSpan="5">No reminders</td>
                   </tr>
                 ) : (
-                  currentItems.map((reminder, index) => (
-                    <tr key={index}>
+                  currentItems.map((reminder) => (
+                    <tr key={reminder._id}>
                       <td>{reminder.title}</td>
                       <td>{reminder.description}</td>
                       <td>{reminder.date}</td>
                       <td>{reminder.time}</td>
                       <td>
-                        <button onClick={() => removeReminder(reminder)}>
+                        <button onClick={() => removeReminder(reminder._id)}>
                           Delete
                         </button>
                       </td>
