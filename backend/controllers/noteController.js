@@ -1,9 +1,12 @@
 const factory = require('./handlerFactory')
 const Note = require('../models/noteModel')
 const catchAsync = require('../utils/catchAsync')
-exports.getAllNotes = factory.getAll(Note)
-exports.getNote = factory.getOne(Note)
-exports.createNote = catchAsync(async (req, res, next) => {
+
+class NoteController {
+
+getAllNotes = factory.getAll(Note)
+getNote = factory.getOne(Note)
+createNote = catchAsync(async (req, res, next) => {
 
     // Extract user ID from JWT token
     const userId = req.user._id;
@@ -23,9 +26,9 @@ exports.createNote = catchAsync(async (req, res, next) => {
     });
 
 });
-exports.updateNote = factory.updateOne(Note)
-exports.deleteNote = factory.deleteOne(Note)
-exports.trashedNotes = catchAsync(async (req, res, next) => {
+updateNote = factory.updateOne(Note)
+deleteNote = factory.deleteOne(Note)
+trashedNotes = catchAsync(async (req, res, next) => {
     const page = parseInt(req.query.page, 10) || 1;
     const limitValue = parseInt(req.query.limit, 10) || 6;
     const skipValue = (page - 1) * limitValue;
@@ -46,3 +49,6 @@ exports.trashedNotes = catchAsync(async (req, res, next) => {
         currentPage: page
     });
 });
+}
+
+module.exports = new NoteController();
