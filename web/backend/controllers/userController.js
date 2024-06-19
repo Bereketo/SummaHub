@@ -1,10 +1,9 @@
-const User = require('../models/userModel')
-const catchAsync = require('../utils/catchAsync')
-const AppError = require('../utils/appError')
+const User = require('../models/userModel');
+const catchAsync = require('../utils/catchAsync');
+const AppError = require('../utils/appError');
 const multer = require('multer');
-const factory = require('./handlerFactory')
-const sharp = require('sharp')
-
+const factory = require('./handlerFactory');
+const sharp = require('sharp');
 
 const multerStorage = multer.memoryStorage();
 const multerFilter = (req, file, cb) => {
@@ -19,6 +18,7 @@ const upload = multer({
     storage: multerStorage,
     fileFilter: multerFilter
 });
+
 const filterObj = (obj, ...allowedFields) => {
     const newObj = {};
     Object.keys(obj).forEach(key => {
@@ -28,9 +28,8 @@ const filterObj = (obj, ...allowedFields) => {
     });
     return newObj;
 };
+
 class UserController {
-
-
     uploadUserPhoto = upload.single('photo');
 
     resizeUserPhoto = catchAsync(async (req, res, next) => {
@@ -47,10 +46,26 @@ class UserController {
         next();
     });
 
-
     getAllusers = factory.getAll(User);
     updateUser = factory.updateOne(User);
-    deleteUser = factory.deleteOne(User);
+    deleteUser = catchAsync(async (req, res, next) => {
+        // Soft delete: Update isDeleted to true
+        const doc = await User.findByIdAndUpdate(
+            req.params.id,
+            { active: false },
+            { new: true }
+        );
+
+        if (!doc) {
+            return next(new AppError('No document found with this ID', 404));
+        }
+
+        res.status(204).json({
+            status: 'success',
+            data: null
+        });
+    });
+
     getUser = factory.getOne(User);
     getMe = (req, res, next) => {
         req.params.id = req.user.id;
@@ -79,14 +94,31 @@ class UserController {
             }
         });
     });
-    deleteMe = catchAsync(async (req, res, next) => {
-        await User.findByIdAndUpdate(req.user.id, { active: false }, { new: true, runValidators: true })
 
-        res.status(204).json({
-            status: 'Success',
-            user: null
-        })
-    })
+    trashedUser = catchAsync(async (req, res, next) => {
+        const users = await User.find({ active: { $ne: true }}); // Corrected syntax
+        
+        console.log('Inactive users:', users);
+    
+        // Count total trashed users
+        res.status(200).json({
+            status: 'success',
+            requestedAt: req.requestTime,
+            result: users.length,
+            data: users,
+        });
+    });
+    
+
+
+deleteMe = catchAsync(async (req, res, next) => {
+    await User.findByIdAndUpdate(req.user.id, { active: false }, { new: true, runValidators: true });
+
+    res.status(204).json({
+        status: 'Success',
+        user: null
+    });
+});
 }
 
 module.exports = new UserController();
