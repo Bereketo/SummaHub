@@ -5,7 +5,7 @@ import styles from './AdminProfile.module.css';
 import axios from 'axios';
 
 const AdminProfile = () => {
-  const { user, setUser } = useUser();
+  const {user, setUser } = useUser();
   const [passwordCurrent, setPasswordCurrent] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -18,7 +18,7 @@ const AdminProfile = () => {
         if (!token) {
           throw new Error('No token found');
         }
-        const response = await axios.get('http://localhost:4040/api/v1/users/me', {
+        const response = await axios.get('http://localhost:4040/api/v1/users', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
