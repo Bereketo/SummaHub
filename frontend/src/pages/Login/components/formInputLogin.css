@@ -4,7 +4,7 @@ input{
     border-radius: 5px;
     border: 1px solid gray;
     font-size: 12pt;
-    color: chartreuse;
+    /* color: chartreuse; */
     text-align: left;
 }
 

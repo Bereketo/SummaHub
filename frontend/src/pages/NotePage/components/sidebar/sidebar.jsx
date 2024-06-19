@@ -32,14 +32,7 @@ const Sidebar = () => {
         >
           <strong className={styles.emoji}>🕒</strong> Reminders
         </NavLink>
-        <NavLink 
-          to="/pinned" 
-          className={({ isActive }) => 
-            isActive ? `${styles.navLink_bott} ${styles.active}` : styles.navLink_bott
-          }
-        >
-          <strong className={styles.emoji}>🧷</strong> Pinned Notes
-        </NavLink>
+       
         <NavLink 
           to="/trash" 
           className={({ isActive }) => 
