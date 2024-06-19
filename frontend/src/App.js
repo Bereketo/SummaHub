@@ -18,13 +18,14 @@ import Chat from './pages/Chat/chat';
 import Reminder from './pages/NotePage/components/Reminder/reminder';
 import Admin from './pages/Admin/admin';
 import TrashNote from './pages/NotePage/components/TrashNote/TrashNote';
-
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const [theme, setTheme] = useState('light');
 
   return (
     <div theme ={theme} setTheme ={setTheme}>
+    <ToastContainer />
     <UserProvider>
       <BrowserRouter>
         <Routes>

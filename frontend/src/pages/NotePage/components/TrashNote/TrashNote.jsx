@@ -113,9 +113,13 @@ function TrashNote({theme ,setTheme}) {
               </div>
             </div>
           ) : (
-            <p className={styles.no_notes}>
-              No trash notes
+            <div  className={styles.no_notes}>
+            <img src='images/sticky.png' width={200}/>
+            <p >
+              No Trash Notes
             </p>
+            </div>
+           
           )}
         </div>
       </div>

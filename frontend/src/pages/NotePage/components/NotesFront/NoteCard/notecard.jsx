@@ -123,9 +123,13 @@ function Notecard() {
           </div>
         </>
       ) : (
-        <p className={styles.no_notes}>
-          No notes available
-        </p>
+        <div  className={styles.no_notes}>
+            <img src='images/sticky.png' width={200}/>
+            <p >
+              No Notes Available
+            </p>
+            </div>
+           
       )}
     </div>
   );

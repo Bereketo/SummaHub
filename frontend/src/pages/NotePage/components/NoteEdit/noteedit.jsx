@@ -5,6 +5,9 @@ import "react-quill/dist/quill.snow.css";
 import styles from "../NoteArea/notearea.module.css";
 import QuillEditor from "react-quill";
 import { useNavigate } from "react-router-dom";
+import Header from "../../../HomePage/components/header/header";
+import Sidebar from "../sidebar/sidebar";
+import Note from "../../Note";
 
 const NoteEdit = () => {
   const { note_id } = useParams();
@@ -82,7 +85,12 @@ const NoteEdit = () => {
     ],
   };
 
-  return (
+        
+return (
+  <div>
+  <div className={styles.noteadd_header}><Header useButtons = {true} /></div>
+   <div className={styles.noteadd_area}>
+    <Sidebar />
     <div className={styles.notearea_wrapper}>
       <input
         type="text"
@@ -91,7 +99,7 @@ const NoteEdit = () => {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
-      <div className={styles.notearea}>
+           <div className={styles.notearea}>
         {note ? (
           <QuillEditor
             theme="snow"
@@ -109,7 +117,9 @@ const NoteEdit = () => {
         Edit
       </button>
     </div>
-  );
+  </div>
+  </div>
+);
 };
 
 export default NoteEdit;

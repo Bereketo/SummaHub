@@ -94,22 +94,20 @@ function Reminder({theme , setTheme}) {
       toast.error("Please fill in all fields.");
       return;
     }
-
+  
     const reminderDateTime = new Date(`${remDate}T${remTime}`);
     if (reminderDateTime <= new Date()) {
       toast.error("Selected time is in the past or current. Please choose a future time.");
       return;
     }
-    
-    console.log(remTitle,remDescription,remDate,remTime)
-
+  
     const newReminder = {
       title: remTitle,
       description: remDescription,
       date: remDate,
       time: remTime,
     };
-
+  
     try {
       const userToken = JSON.parse(localStorage.getItem('user'));
       if (!userToken || !userToken.token) {
@@ -133,6 +131,7 @@ function Reminder({theme , setTheme}) {
       toast.error("Error saving reminder");
     }
   };
+  
 
   const scheduleNotification = (reminder) => {
     const reminderDateTime = new Date(`${reminder.date}T${reminder.time}`);
@@ -322,7 +321,7 @@ function Reminder({theme , setTheme}) {
           </div>
         </div>
       </div>
-      <ToastContainer />
+
     </div>
   );
 }
