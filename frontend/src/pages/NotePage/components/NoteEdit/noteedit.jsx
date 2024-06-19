@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../../../HomePage/components/header/header";
 import Sidebar from "../sidebar/sidebar";
 
-const NoteEdit = () => {
+const NoteEdit = ({theme , setTheme}) => {
   const { note_id } = useParams();
   const [note, setNote] = useState(null);
   const [title, setTitle] = useState("");
@@ -77,21 +77,6 @@ const NoteEdit = () => {
     }
   };
 
-  const formats = [
-    'header',
-    'bold',
-    'italic',
-    'underline',
-    'strike',
-    'blockquote',
-    'list',
-    'bullet',
-    'indent',
-    'link',
-    'image',
-    'color',
-    'clean',
-  ];
 
   const modules = useMemo(
     () => ({
@@ -118,7 +103,7 @@ const NoteEdit = () => {
 
   return (
     <div>
-      <div className={styles.noteadd_header}><Header useButtons={true} /></div>
+      <div className={styles.noteadd_header}><Header useButtons={true} theme={theme} setTheme={setTheme} /></div>
       <div className={styles.noteadd_area}>
         <Sidebar />
         <div className={styles.notearea_wrapper}>

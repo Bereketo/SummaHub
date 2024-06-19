@@ -33,7 +33,7 @@ function App() {
           <Route path="/Signup" element={<SignUp theme={theme} setTheme={setTheme} />} />
           <Route path="/Note" element={<Note theme={theme} setTheme={setTheme} />} />
           <Route path="/NoteAdd" element={<NoteArea />} />
-          <Route path="/NoteEdit/:note_id" element={<NoteEdit />} />
+          <Route path="/NoteEdit/:note_id" element={<NoteEdit theme={theme} setTheme={setTheme} />} />
           <Route path="/Login" element={<Login theme={theme} setTheme={setTheme} />} />
           <Route path="/Summary" element={<Summary theme={theme} setTheme={setTheme} />} />
           <Route path="/About" element={<About />} />
