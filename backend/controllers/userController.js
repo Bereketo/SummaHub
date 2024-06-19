@@ -96,26 +96,19 @@ class UserController {
     });
 
     trashedUser = catchAsync(async (req, res, next) => {
-        const page = parseInt(req.query.page, 10) || 1;
-        const limitValue = parseInt(req.query.limit, 10) || 6;
-        const skipValue = (page - 1) * limitValue;
-
-        const users = await User.find({ active: false })
-            .skip(skipValue)
-            .limit(limitValue)
-            .sort({ createdAt: 'desc' });
-
-        const totalDocs = await User.countDocuments({ active: false });
-
-        res.status(200).json({
-            status: 'success',
-            requestedAt: req.requestTime,
-            result: users.length,
-            data: users,
-            totalPages: Math.ceil(totalDocs / limitValue),
-            currentPage: page
-        });
+            // Query to fetch trashed users (active: false)
+            const users = await User.find({ active: false }); // <-- Adjusted query here
+            console.log('users', users);
+    
+            // Count total trashed users
+            res.status(200).json({
+                status: 'success',
+                requestedAt: req.requestTime,
+                result: users.length,
+                data: users,
+            }); 
     });
+    
 
     deleteMe = catchAsync(async (req, res, next) => {
         await User.findByIdAndUpdate(req.user.id, { active: false }, { new: true, runValidators: true });

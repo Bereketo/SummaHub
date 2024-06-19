@@ -32,6 +32,36 @@ const UserList = () => {
     fetchUserData();
   }, []);
 
+  const handleDelete = async (userId) => {
+    try {
+        const userToken = JSON.parse(localStorage.getItem('user'));
+        const { token } = userToken;
+        if (!token) {
+            throw new Error('No token found');
+        }
+
+        const response = await axios.patch(`http://localhost:4040/api/v1/users/${userId}`, null, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        if (response.status === 204) {
+            // User deleted successfully, update the UI
+            setUsers(users.filter(user => user._id !== userId));
+            console.log('User deleted successfully');
+
+            // Optionally, fetch trashed users again to update the TrashUser component
+
+        } else {
+            console.error('Failed to delete user');
+        }
+    } catch (err) {
+        console.error('Error deleting user:', err);
+    }
+};
+
+
   return (
     <div className={styles.user_display}>
       <div className={styles.manage_user}>
@@ -64,7 +94,9 @@ const UserList = () => {
                 <td>{user.role}</td>
                 <td>{user.active ? 'Active' : 'Inactive'}</td>
                 <td>
-                  {user.active && <button>Delete</button>}
+                  {user.active && (
+                    <button onClick={() => handleDelete(user._id)}>Delete</button>
+                  )}
                 </td>
               </tr>
             ))}

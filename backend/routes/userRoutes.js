@@ -18,7 +18,8 @@ router.patch('/updateMe', UserController.uploadUserPhoto, UserController.resizeU
 router.delete('/deleteMe', UserController.deleteMe);
 
 router.use(AuthController.restrictTo('admin'));
-router.get('/trashedUsers', UserController.trashedUser);  // Add this route
+router.route('/trashedUsers').
+    get(UserController.trashedUser);  
 router.route('/')
     .get(UserController.getAllusers);
 router.route('/:id')
