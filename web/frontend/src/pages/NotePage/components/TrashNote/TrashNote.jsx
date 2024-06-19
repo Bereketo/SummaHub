@@ -5,7 +5,7 @@ import axios from 'axios';
 import Header from "../../../HomePage/components/header/header";
 import Sidebar from "../sidebar/sidebar";
 
-function TrashNote() {
+function TrashNote({theme ,setTheme}) {
   const [notes, setNotes] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -66,7 +66,7 @@ function TrashNote() {
 
   return (
     <div className={styles.trashnote_wrapper}>
-      <Header useButtons={true} />
+      <Header useButtons={true} theme={theme} setTheme={setTheme} />
       <div className={styles.bottom_container}>
         <Sidebar />
         <div className={styles.content}>
@@ -113,9 +113,13 @@ function TrashNote() {
               </div>
             </div>
           ) : (
-            <p className={styles.no_notes}>
-              No trash notes
+            <div  className={styles.no_notes}>
+            <img src='images/sticky.png' width={200} alt=''/>
+            <p >
+              No Trash Notes
             </p>
+            </div>
+           
           )}
         </div>
       </div>
