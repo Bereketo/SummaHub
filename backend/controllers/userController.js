@@ -96,16 +96,24 @@ class UserController {
     });
 
     trashedUser = catchAsync(async (req, res, next) => {
-        const users = await User.find({ active: { $ne: true }}); // Corrected syntax
-        
-        console.log('Inactive users:', users);
-    
-        // Count total trashed users
+        const page = parseInt(req.query.page, 10) || 1;
+        const limitValue = parseInt(req.query.limit, 10) || 6;
+        const skipValue = (page - 1) * limitValue;
+
+        const users = await User.find({ active: false })
+            .skip(skipValue)
+            .limit(limitValue)
+            .sort({ createdAt: 'desc' });
+
+        const totalDocs = await User.countDocuments({ active: false });
+
         res.status(200).json({
             status: 'success',
             requestedAt: req.requestTime,
             result: users.length,
             data: users,
+            totalPages: Math.ceil(totalDocs / limitValue),
+            currentPage: page
         });
     });
     
