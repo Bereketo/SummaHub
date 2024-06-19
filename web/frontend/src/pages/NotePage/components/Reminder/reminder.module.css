@@ -117,12 +117,13 @@
 table {
   width: 100%;
   border-collapse: collapse;
+  margin-bottom: 1rem;
 }
 
 table th,
 table td {
   border: 1px solid #ccc;
-  /* padding: 10px; */
+  padding: 0px;
   text-align: left;
 }
 
@@ -133,17 +134,23 @@ table th {
 
 table td {
   background-color: white;
+  /* height: 10px; */
+  /* padding: 0;
+  margin: 0; */
 }
 
 table td button {
   background-color: rgb(86, 86, 249);
   color: #fff;
   border: none;
-  padding: 8px 16px;
+  padding: 0px;
   font-size: 0.9rem;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin: 0.7rem 0;
+  /* margin-right: 3rem; */
+
 }
 
 table td button:hover {

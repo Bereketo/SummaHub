@@ -3,10 +3,11 @@ import styles from "./reminder.module.css";
 import Header from "../../../HomePage/components/header/header";
 import Sidebar from "../sidebar/sidebar";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { format } from 'date-fns';
 
-function Reminder({theme , setTheme}) {
+function Reminder({ theme, setTheme }) {
   const now = new Date();
   const hours = now.getHours();
   const minutes = now.getMinutes().toString().padStart(2, "0");
@@ -65,11 +66,19 @@ function Reminder({theme , setTheme}) {
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log(response.data);
-      setReminders(response.data.data);
+
+      // Convert datetime strings to Date objects for frontend processin
+      const formattedReminders = response.data.data.map(reminder => ({
+        ...reminder,
+        datetime: new Date(reminder.datetime)
+      }));
+      setReminders(formattedReminders);
+
+
+      setReminders(formattedReminders);
     } catch (error) {
       console.error("Error fetching reminders", error);
-      toast.error("Error fetching reminders");
+
     }
   };
 
@@ -100,8 +109,6 @@ function Reminder({theme , setTheme}) {
       toast.error("Selected time is in the past or current. Please choose a future time.");
       return;
     }
-    
-    console.log(remTitle,remDescription,remDate,remTime)
 
     const newReminder = {
       title: remTitle,
@@ -134,8 +141,9 @@ function Reminder({theme , setTheme}) {
     }
   };
 
+
   const scheduleNotification = (reminder) => {
-    const reminderDateTime = new Date(`${reminder.date}T${reminder.time}`);
+    const reminderDateTime = new Date(reminder.datetime);
     const timeDifference = reminderDateTime.getTime() - new Date().getTime();
 
     if (timeDifference > 0) {
@@ -143,20 +151,17 @@ function Reminder({theme , setTheme}) {
         sendNotification(reminder.title, reminder.description);
         removeReminder(reminder._id); // Adjusted to use reminder ID
       }, timeDifference);
-    } else {
-      toast.error("Selected time is in the past. Please choose a future time.");
     }
   };
 
   const removeReminder = async (id) => {
     try {
-      
       const userToken = JSON.parse(localStorage.getItem('user'));
       if (!userToken || !userToken.token) {
         throw new Error('No token found');
       }
       const { token } = userToken;
-      await axios.delete(`http://localhost:4040/api/v1/reminders/${id}`,{
+      await axios.delete(`http://localhost:4040/api/v1/reminders/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -202,7 +207,7 @@ function Reminder({theme , setTheme}) {
 
   return (
     <div className={styles.reminder_wrapper}>
-      <Header useButtons={true} theme={theme} setTheme={setTheme}/>
+      <Header useButtons={true} theme={theme} setTheme={setTheme} />
       <div className={styles.bottom_container}>
         <Sidebar />
         <div className={styles.content}>
@@ -279,7 +284,7 @@ function Reminder({theme , setTheme}) {
                     <tr key={reminder._id}>
                       <td>{reminder.title}</td>
                       <td>{reminder.description}</td>
-                      <td>{reminder.date}</td>
+                      <td>{format(new Date(reminder.date), 'dd MMMM yyyy')}</td>
                       <td>{reminder.time}</td>
                       <td>
                         <button onClick={() => removeReminder(reminder._id)}>
@@ -322,7 +327,7 @@ function Reminder({theme , setTheme}) {
           </div>
         </div>
       </div>
-      <ToastContainer />
+
     </div>
   );
 }
