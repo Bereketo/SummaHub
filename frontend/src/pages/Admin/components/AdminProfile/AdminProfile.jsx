@@ -103,7 +103,6 @@ const AdminProfile = () => {
   return (
     <div className={styles.userprofile_info}>
       <div className={styles.left}>
-        <img src='images/summa.png' width={270} alt='' />
         <h1> Welcome Back, </h1>
         <p> {user.firstname}</p>
         <button onClick={handleBack} className={styles.back_btn}>Go Back</button>

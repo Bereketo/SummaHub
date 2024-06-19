@@ -115,7 +115,7 @@ const Header = ({ useButtons, theme, setTheme }) => {
           )
         )}
       </div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
     </div>
   );
 };

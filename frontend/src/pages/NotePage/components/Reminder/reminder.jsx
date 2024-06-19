@@ -76,8 +76,8 @@ function Reminder({theme , setTheme}) {
 
         setReminders(formattedReminders);
     } catch (error) {
-        console.error("Error fetching reminders", error);
-        toast.error("Error fetching reminders");
+      console.error("Error fetching reminders", error);
+      
     }
 };
 
