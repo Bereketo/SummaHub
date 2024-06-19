@@ -5,12 +5,19 @@ const AppError = require('../utils/appError');
 class ReminderController {
     getAllReminders = catchAsync(async (req, res, next) => {
         const reminders = await Reminder.find({ user: req.user._id }).sort({ date: 1 });
-
+    
+        // Convert time string to Date object for each reminder
+        const formattedReminders = reminders.map(reminder => ({
+            ...reminder.toObject(),
+            datetime: new Date(`${reminder.date}T${reminder.time}`)  // Combine date and time into datetime
+        }));
+    
         res.status(200).json({
             status: 'success',
-            data: reminders
+            data: formattedReminders
         });
     });
+    
 
     getReminder = catchAsync(async (req, res, next) => {
         const reminder = await Reminder.findOne({ _id: req.params.id, user: req.user._id });
