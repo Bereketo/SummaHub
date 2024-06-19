@@ -3,7 +3,8 @@ input{
     margin : 10px 0px;
     border-radius: 5px;
     border: 1px solid gray;
-    font-size: 12px;
+    font-size: 12pt;
+    /* color: chartreuse; */
     text-align: left;
 }
 
@@ -17,7 +18,7 @@ input{
     
 }
 label{
-    font-size: 9pt;
+    font-size: 13pt;
     color:gray;
     text-align: left;
     position: absolute;
@@ -42,7 +43,7 @@ input:focus ~ label
 input:not(:placeholder-shown) ~ label {
     top: 0px;
     left:10px;
-    font-size: 10pt;
+    font-size: 13pt;
     background-color: white;
     padding: 0px 5px;
 }
@@ -54,7 +55,7 @@ input:-webkit-autofill ~label
 {
     top: 0px;
     left:10px;
-    font-size: 10pt;
+    font-size: 13pt;
     background-color: white;
     padding: 0px 5px;
 }
