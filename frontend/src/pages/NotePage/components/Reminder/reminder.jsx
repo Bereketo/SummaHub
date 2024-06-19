@@ -114,7 +114,7 @@ function Reminder({ theme, setTheme }) {
       title: remTitle,
       description: remDescription,
       date: remDate,
-      time: remTime,
+      time: remTime
     };
 
     try {
@@ -135,6 +135,7 @@ function Reminder({ theme, setTheme }) {
       setRemDate("");
       setRemTime("");
       toast.success("Reminder saved successfully!");
+      console.log(response.data.data);
     } catch (error) {
       console.error("Error saving reminder", error);
       toast.error("Error saving reminder");
@@ -143,10 +144,10 @@ function Reminder({ theme, setTheme }) {
 
 
   const scheduleNotification = (reminder) => {
-    const reminderDateTime = new Date(reminder.datetime);
+    const reminderDateTime = new Date(reminder.time);
     const timeDifference = reminderDateTime.getTime() - new Date().getTime();
-
-    if (timeDifference > 0) {
+    console.log(reminderDateTime,timeDifference)
+    if (timeDifference < 0) {
       setTimeout(() => {
         sendNotification(reminder.title, reminder.description);
         removeReminder(reminder._id); // Adjusted to use reminder ID
