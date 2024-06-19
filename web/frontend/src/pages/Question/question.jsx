@@ -50,7 +50,7 @@ function Question({ theme, setTheme }) {
 
   return (
     <div>
-      <Header useButtons={false} theme={theme} setTheme={setTheme} />
+      <Header useButtons={false} theme={theme} setTheme={setTheme} useButtons={true}  />
       <div className={styles.question_wrapper}>
         <div className={styles.textarea_wrapper}>
           <div className={styles.left_menu}>
