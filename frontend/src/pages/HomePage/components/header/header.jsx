@@ -84,11 +84,11 @@ const Header = ({ useButtons, theme, setTheme }) => {
           </NavLink>
         </div>
         <div className={styles.daynight_btn}>
-          <img
+          {/* <img
             onClick={toggle_mode}
             src={theme === "light" ? "/images/moon.png" : "/images/sun.png"}
             alt="Toggle Theme"
-          />
+          /> */}
         </div>
         {user ? (
           <div className={styles.user_info}>
