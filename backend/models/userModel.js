@@ -64,6 +64,7 @@ const userSchema = new mongoose.Schema({
     timestamps: true // This option will add `createdAt` and `updatedAt` fields
 })
 
+
 userSchema.pre('save', async function (next) {
     // Only run if password was modified
     if (!this.isModified('password')) { return next(); }
@@ -82,11 +83,12 @@ userSchema.pre('save', async function (next) {
     console.log('password change middleware');
     next(); // Ensure middleware chain continues
 });
-userSchema.pre(/^find/, async function (next) {
+userSchema.pre(/^find/, function(next) {
     this.find({ active: { $ne: false } })
-    console.log('hello from active user checker middleware')
-    next()
-})
+    console.log('hello from active user checker middleware');
+    next();
+});
+
 userSchema.methods.correctPassword = async function (candidatePassword, userPassword) {
     return await bycrypt.compare(candidatePassword, userPassword);
 }

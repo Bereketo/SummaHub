@@ -96,28 +96,29 @@ class UserController {
     });
 
     trashedUser = catchAsync(async (req, res, next) => {
-            // Query to fetch trashed users (active: false)
-            const users = await User.find({ active: false }); // <-- Adjusted query here
-            console.log('users', users);
+        const users = await User.find({ active: { $ne: true }}); // Corrected syntax
+        
+        console.log('Inactive users:', users);
     
-            // Count total trashed users
-            res.status(200).json({
-                status: 'success',
-                requestedAt: req.requestTime,
-                result: users.length,
-                data: users,
-            }); 
-    });
-    
-
-    deleteMe = catchAsync(async (req, res, next) => {
-        await User.findByIdAndUpdate(req.user.id, { active: false }, { new: true, runValidators: true });
-
-        res.status(204).json({
-            status: 'Success',
-            user: null
+        // Count total trashed users
+        res.status(200).json({
+            status: 'success',
+            requestedAt: req.requestTime,
+            result: users.length,
+            data: users,
         });
     });
+    
+
+
+deleteMe = catchAsync(async (req, res, next) => {
+    await User.findByIdAndUpdate(req.user.id, { active: false }, { new: true, runValidators: true });
+
+    res.status(204).json({
+        status: 'Success',
+        user: null
+    });
+});
 }
 
 module.exports = new UserController();
