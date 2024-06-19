@@ -64,7 +64,7 @@ const UserList = () => {
                 <td>{user.role}</td>
                 <td>{user.active ? 'Active' : 'Inactive'}</td>
                 <td>
-                  <button>Delete</button>
+                  {user.active && <button>Delete</button>}
                 </td>
               </tr>
             ))}

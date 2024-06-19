@@ -1,53 +1,71 @@
+/* userList.module.css */
+
 .user_display {
-    width: 80%;
-    height: 100%;
-  }
-  
-  .manage_user {
-    margin: 20px 0;
-  }
-  
-  .user_listtitle {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .user_search input {
-    height: 30px;
-    font-size: 12pt;
-    padding: 5px;
-  }
-  
-  .user_list {
-    margin-top: 10px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  table td,
-  table th {
-    border: 1px solid #ddd;
-    padding: 8px;
-  }
-  
-  table tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  table tr:hover {
-    background-color: #ddd;
-  }
-  
-  table th,
-  tfoot td {
-    background-color: #2c5ddc;
-    color: white;
-    padding: 12px;
-    text-align: center;
-  }
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.manage_user {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.user_listtitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.user_search input {
+  padding: 8px;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.user_list {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.user_list table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.user_list th, .user_list td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.user_list th {
+  background-color: #f2f2f2;
+}
+
+.user_list td {
+  background-color: #fff;
+}
+
+.user_list tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.user_list button {
+  padding: 5px 10px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.user_list button:hover {
+  background-color: #e60000;
+}
