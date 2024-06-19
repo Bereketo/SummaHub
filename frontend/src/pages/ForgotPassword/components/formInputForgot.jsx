@@ -11,6 +11,7 @@ const FormInput = (props) => {
   return (
     <div className="formInput">
       <input
+      className='email_input'
         {...inputProps}
         onChange={onChange}
         onBlur={handleFocus}

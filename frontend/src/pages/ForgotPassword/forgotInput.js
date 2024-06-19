@@ -6,7 +6,7 @@ const inputs = [
         type : 'email',
         placeholder: '',
         errorMessage:"It should be valid email address",
-        label:<div><img src= './images/email.png' alt="mk"></img>Email</div>,
+        label:<div><img src= './images/email.png' alt="mk"></img>Enter Your Email</div>,
         required:true
     }, 
 ]
