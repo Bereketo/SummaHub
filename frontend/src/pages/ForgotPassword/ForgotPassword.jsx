@@ -4,6 +4,7 @@ import "./ForgotPassword.css";
 import FormInput from "./components/formInputForgot";
 import ForgotInputs from "./forgotInput";
 import axios from "../../api/axios";
+import { ToastContainer, toast } from 'react-toastify'; // Import toast
 
 const FORGOT_PASSWORD_URL = "http://localhost:4040/api/v1/users/forgotPassword";
 
@@ -22,17 +23,18 @@ function ForgotPassword() {
   useEffect(() => {
     const submitForm = async () => {
       if (!isSubmitting) {
-        return
-      };
+        return;
+      }
 
       try {
         const response = await axios.post(
-            FORGOT_PASSWORD_URL,
+          FORGOT_PASSWORD_URL,
           { email: values.email }
         );
         console.log(JSON.stringify(response?.data.status));
         if (response?.data.status === "Success") {
-            console.log('success email check your email');
+          toast.success('Check your email for password reset instructions');
+          navigate('/'); // Example: Redirect to homepage after success
         }
       } catch (err) {
         handleErrorResponse(err);
@@ -64,6 +66,7 @@ function ForgotPassword() {
 
   return (
     <div className="ForgotWrapper">
+      <ToastContainer /> {/* ToastContainer must be added once in your application */}
       <form onSubmit={handleSubmit}>
         <p
           ref={errRef}
@@ -72,7 +75,7 @@ function ForgotPassword() {
         >
           {errMsg}
         </p>
-        <img className="logo" src="./images/logo.png" alt="logo" />
+        <img className="logo" src="./images/summa.png" alt="logo" width={200} />
         {ForgotInputs.map((input) => (
           <FormInput
             key={input.id}
@@ -81,11 +84,11 @@ function ForgotPassword() {
             onChange={handleChange}
           />
         ))}
-        <a href="/forget">Forgot your password?</a>
-        <button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Lodding..." : "reset"}
+        
+        <button type="submit" disabled={isSubmitting} className="submitbtn">
+          {isSubmitting ? "Loading..." : "Reset"}
         </button>
-   
+   <ToastContainer />
       </form>
     </div>
   );

@@ -14,7 +14,7 @@ input{
     
 }
 label{
-    font-size: 9pt;
+    font-size: 1pt;
     color:gray;
     text-align: left;
     position: absolute;
@@ -75,4 +75,7 @@ label > div > img{
 label> div{
     display: flex;
     gap: 5px;
+}
+.email_input{
+    font-size: 12pt;
 }
