@@ -66,11 +66,13 @@ function Reminder({theme , setTheme}) {
             },
         });
 
-        // Convert datetime strings to Date objects for frontend processing
+        // Convert datetime strings to Date objects for frontend processin
         const formattedReminders = response.data.data.map(reminder => ({
-            ...reminder,
-            datetime: new Date(reminder.datetime)  // Ensure `datetime` is parsed into Date
-        }));
+          ...reminder,
+          datetime: new Date(reminder.datetime)
+      }));
+      setReminders(formattedReminders);
+      
 
         setReminders(formattedReminders);
     } catch (error) {
@@ -144,12 +146,12 @@ function Reminder({theme , setTheme}) {
     const timeDifference = reminderDateTime.getTime() - new Date().getTime();
 
     if (timeDifference > 0) {
-      setTimeout(() => {
-        sendNotification(reminder.title, reminder.description);
-        removeReminder(reminder._id); // Adjusted to use reminder ID
-      }, timeDifference);
-    } 
-  };
+        setTimeout(() => {
+            sendNotification(reminder.title, reminder.description);
+            removeReminder(reminder._id); // Adjusted to use reminder ID
+        }, timeDifference);
+    }
+};
 
   const removeReminder = async (id) => {
     try {
@@ -158,7 +160,7 @@ function Reminder({theme , setTheme}) {
         throw new Error('No token found');
       }
       const { token } = userToken;
-      await axios.delete(`http://localhost:4040/api/v1/reminders/${id}`,{
+      await axios.patch(`http://localhost:4040/api/v1/reminders/${id}`,{
         headers: {
           Authorization: `Bearer ${token}`,
         },
