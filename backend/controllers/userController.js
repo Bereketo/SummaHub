@@ -116,17 +116,32 @@ class UserController {
             currentPage: page
         });
     });
-    
+    restoreUser = catchAsync(async (req, res, next) => {
+        const doc = await User.findByIdAndUpdate(
+            req.params.id,
+            { active: true },
+            { new: true }
+        );
 
+        if (!doc) {
+            return next(new AppError('No document found with this ID', 404));
+        }
 
-deleteMe = catchAsync(async (req, res, next) => {
-    await User.findByIdAndUpdate(req.user.id, { active: false }, { new: true, runValidators: true });
-
-    res.status(204).json({
-        status: 'Success',
-        user: null
+        res.status(200).json({
+            status: 'success',
+            data: null
+        });
     });
-});
+
+
+    deleteMe = catchAsync(async (req, res, next) => {
+        await User.findByIdAndUpdate(req.user.id, { active: false }, { new: true, runValidators: true });
+
+        res.status(204).json({
+            status: 'Success',
+            user: null
+        });
+    });
 }
 
 module.exports = new UserController();

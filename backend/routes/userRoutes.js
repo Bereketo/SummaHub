@@ -19,9 +19,12 @@ router.delete('/deleteMe', UserController.deleteMe);
 
 router.use(AuthController.restrictTo('admin'));
 router.route('/trashedUsers').
-    get(UserController.trashedUser);  
+    get(UserController.trashedUser);
 router.route('/')
     .get(UserController.getAllusers);
+router.route('/restoreUser/:id')
+    .patch(UserController.restoreUser)
+
 router.route('/:id')
     .patch(UserController.deleteUser)
     .patch(UserController.updateUser)
