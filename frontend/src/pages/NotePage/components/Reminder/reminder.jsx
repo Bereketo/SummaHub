@@ -3,7 +3,7 @@ import styles from "./reminder.module.css";
 import Header from "../../../HomePage/components/header/header";
 import Sidebar from "../sidebar/sidebar";
 import axios from "axios";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Reminder({theme , setTheme}) {

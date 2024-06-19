@@ -1,0 +1,14 @@
+/* admin.module.css */
+
+.adminContainer {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+  }
+  
+  .mainContent {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ffffff; /* or your preferred background color */
+  }
+  

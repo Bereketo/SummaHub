@@ -7,7 +7,7 @@ import QuillEditor from "react-quill";
 import { useNavigate } from "react-router-dom";
 import Header from "../../../HomePage/components/header/header";
 import Sidebar from "../sidebar/sidebar";
-import Note from "../../Note";
+
 
 const NoteEdit = () => {
   const { note_id } = useParams();
