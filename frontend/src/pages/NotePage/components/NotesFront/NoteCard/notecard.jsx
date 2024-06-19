@@ -28,6 +28,11 @@ function Notecard() {
 
         setNotes(response.data.data);
         setTotalPages(response.data.totalPages);
+
+        // If the current page has no notes and it's not the first page, go back to the previous page
+        if (response.data.data.length === 0 && page > 1) {
+          setPage(page - 1);
+        }
       } catch (err) {
         console.error('Error fetching notes:', err);
         if (err.response && err.response.data.message === 'jwt expired') {
@@ -57,7 +62,23 @@ function Notecard() {
       );
 
       if (response.status === 200) {
-        setNotes(notes.filter(note => note._id !== id));
+        // Update state using functional form of setNotes
+        setNotes(prevNotes => prevNotes.filter(note => note._id !== id));
+        
+        // Fetch updated notes list
+        const updatedResponse = await axios.get(`http://localhost:4040/api/v1/notes?page=${page}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        setNotes(updatedResponse.data.data);
+        setTotalPages(updatedResponse.data.totalPages);
+
+        // If the current page has no notes and it's not the first page, go back to the previous page
+        if (updatedResponse.data.data.length === 0 && page > 1) {
+          setPage(page - 1);
+        }
       } else {
         console.error('Error deleting note:', response);
       }
@@ -123,13 +144,12 @@ function Notecard() {
           </div>
         </>
       ) : (
-        <div  className={styles.no_notes}>
-            <img src='images/sticky.png' width={200} alt=''/>
-            <p >
-              No Notes Available
-            </p>
-            </div>
-           
+        <div className={styles.no_notes}>
+          <img src='images/sticky.png' width={200} alt=''/>
+          <p>
+            No Notes Available
+          </p>
+        </div>
       )}
     </div>
   );
