@@ -144,19 +144,15 @@ function Reminder({theme , setTheme}) {
     const timeDifference = reminderDateTime.getTime() - new Date().getTime();
 
     if (timeDifference > 0) {
-        setTimeout(() => {
-            sendNotification(reminder.title, reminder.description);
-            removeReminder(reminder._id);
-        }, timeDifference);
-    } else {
-        toast.error("Selected time is in the past. Please choose a future time.");
-    }
-};
-
+      setTimeout(() => {
+        sendNotification(reminder.title, reminder.description);
+        removeReminder(reminder._id); // Adjusted to use reminder ID
+      }, timeDifference);
+    } 
+  };
 
   const removeReminder = async (id) => {
     try {
-      
       const userToken = JSON.parse(localStorage.getItem('user'));
       if (!userToken || !userToken.token) {
         throw new Error('No token found');
