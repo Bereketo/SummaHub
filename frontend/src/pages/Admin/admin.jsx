@@ -1,14 +1,16 @@
-// Admin.jsx
 import React from "react";
-// import styles from "./admin.module.css";
 import AdminSidebar from "./components/admin_sidebar/admin_sidebar";
-// import UserList from "./components/userlist/userList";
+import styles from "./admin.module.css";  // Ensure to import the styles
 
 const Admin = () => {
   return (
-    <>
+    <div className={styles.adminContainer}>
       <AdminSidebar />
-    </>
+      <div className={styles.mainContent}>
+        {/* Add main content components here, e.g., UserList, ProfileDetails, etc. */}
+        <h1>Welcome to Admin Dashboard</h1>
+      </div>
+    </div>
   );
 };
 
