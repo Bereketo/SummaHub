@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AdminSidebar from "./components/admin_sidebar/admin_sidebar";
 import AdminProfile from "./components/AdminProfile/AdminProfile";
+import UserList from "./components/userlist/userList";
 import styles from "./admin.module.css";
 
 const Admin = () => {
@@ -11,7 +12,7 @@ const Admin = () => {
       case 'adminProfile':
         return <AdminProfile />;
       case 'userList':
-        return <h1>User List Component</h1>; // Placeholder for UserList component
+        return <UserList />; // Placeholder for UserList component
       case 'feedbacks':
         return <h1>Feedbacks Component</h1>; // Placeholder for Feedbacks component
       case 'deletedUsers':
