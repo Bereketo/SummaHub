@@ -83,11 +83,11 @@ userSchema.pre('save', async function (next) {
     console.log('password change middleware');
     next(); // Ensure middleware chain continues
 });
-userSchema.pre(/^find/, function(next) {
-    this.find({ active: { $ne: false } })
-    console.log('hello from active user checker middleware');
-    next();
-});
+// userSchema.pre(/^find/, function(next) {
+//     this.find({ active: { $ne: false } })
+//     console.log('hello from active user checker middleware');
+//     next();
+// });
 
 userSchema.methods.correctPassword = async function (candidatePassword, userPassword) {
     return await bycrypt.compare(candidatePassword, userPassword);

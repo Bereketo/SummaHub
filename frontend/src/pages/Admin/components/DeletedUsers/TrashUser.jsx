@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import styles from './trashUser.module.css';
 
 const TrashUser = () => {
     const [trashs, setTrash] = useState([]);
@@ -15,12 +16,12 @@ const TrashUser = () => {
                     throw new Error('No token found');
                 }
 
-                const response = await axios.get(`http://localhost:4040/api/v1/users/trashedUsers`, {
+                const response = await axios.get(`http://localhost:4040/api/v1/users/trashedUsers?page=${currentPage}`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                console.log(response.data.data)
+                console.log(response.data.data);
                 setTrash(response.data.data);
                 setTotalPages(response.data.totalPages);
             } catch (err) {
@@ -66,7 +67,7 @@ const TrashUser = () => {
     return (
         <>
             <h1>Trashed Users</h1>
-            <table>
+            <table className={styles.user_table}>
                 <thead>
                     <tr>
                         <th>User ID</th>
@@ -90,9 +91,13 @@ const TrashUser = () => {
             </table>
 
             {totalPages > 1 && (
-                <div>
+                <div className={styles.pagination}>
                     {[...Array(totalPages).keys()].map((page) => (
-                        <button key={page + 1} onClick={() => handlePageChange(page + 1)}>
+                        <button
+                            key={page + 1}
+                            onClick={() => handlePageChange(page + 1)}
+                            className={currentPage === page + 1 ? styles.active : ''}
+                        >
                             {page + 1}
                         </button>
                     ))}

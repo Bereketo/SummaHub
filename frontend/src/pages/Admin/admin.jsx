@@ -3,6 +3,7 @@ import AdminSidebar from "./components/admin_sidebar/admin_sidebar";
 import AdminProfile from "./components/AdminProfile/AdminProfile";
 import UserList from "./components/userlist/userList";
 import styles from "./admin.module.css";
+import TrashUser from "./components/DeletedUsers/TrashUser";
 
 const Admin = () => {
   const [activeContent, setActiveContent] = useState('adminProfile');
@@ -16,7 +17,7 @@ const Admin = () => {
       // case 'feedbacks':
       //   return <h1>Feedbacks Component</h1>; // Placeholder for Feedbacks component
       case 'deletedUsers':
-        return ; // Placeholder for DeletedUsers component
+        return <TrashUser/>; // Placeholder for DeletedUsers component
       default:
         return <AdminProfile />;
     }
