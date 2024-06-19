@@ -28,12 +28,6 @@ const AdminSidebar = ({ setShowNoteArea }) => {
           <span className={styles.icon}>👥</span> User List
         </button>
         <button
-          onClick={() => handleButtonClick('feedbacks')}
-          className={`${styles.menuButton} ${activeButton === 'feedbacks' ? styles.active : ''}`}
-        >
-          <span className={styles.icon}>📝</span> Feedbacks
-        </button>
-        <button
           onClick={() => handleButtonClick('deletedUsers')}
           className={`${styles.menuButton} ${activeButton === 'deletedUsers' ? styles.active : ''}`}
         >

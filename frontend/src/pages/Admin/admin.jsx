@@ -13,8 +13,8 @@ const Admin = () => {
         return <AdminProfile />;
       case 'userList':
         return <UserList />; // Placeholder for UserList component
-      case 'feedbacks':
-        return <h1>Feedbacks Component</h1>; // Placeholder for Feedbacks component
+      // case 'feedbacks':
+      //   return <h1>Feedbacks Component</h1>; // Placeholder for Feedbacks component
       case 'deletedUsers':
         return <h1>Deleted Users Component</h1>; // Placeholder for DeletedUsers component
       default:
