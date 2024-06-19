@@ -69,7 +69,7 @@ function Reminder({theme , setTheme}) {
       setReminders(response.data.data);
     } catch (error) {
       console.error("Error fetching reminders", error);
-      toast.error("Error fetching reminders");
+      
     }
   };
 

@@ -13,7 +13,7 @@ const AdminSidebar = ({ setShowNoteArea }) => {
 
   return (
     <div className={styles.sidebarWrapper}>
-      
+      <img src='images/summa.png' width={200} alt='' />
       <div className={styles.sidebarMenu}>
         <button
           onClick={() => handleButtonClick('adminProfile')}
