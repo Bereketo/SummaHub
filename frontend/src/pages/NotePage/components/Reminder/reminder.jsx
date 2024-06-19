@@ -55,23 +55,29 @@ function Reminder({theme , setTheme}) {
 
   const fetchReminders = async () => {
     try {
-      const userToken = JSON.parse(localStorage.getItem('user'));
-      if (!userToken || !userToken.token) {
-        throw new Error('No token found');
-      }
-      const { token } = userToken;
-      const response = await axios.get("http://localhost:4040/api/v1/reminders", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      console.log(response.data);
-      setReminders(response.data.data);
+        const userToken = JSON.parse(localStorage.getItem('user'));
+        if (!userToken || !userToken.token) {
+            throw new Error('No token found');
+        }
+        const { token } = userToken;
+        const response = await axios.get("http://localhost:4040/api/v1/reminders", {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        // Convert datetime strings to Date objects for frontend processing
+        const formattedReminders = response.data.data.map(reminder => ({
+            ...reminder,
+            datetime: new Date(reminder.datetime)  // Ensure `datetime` is parsed into Date
+        }));
+
+        setReminders(formattedReminders);
     } catch (error) {
-      console.error("Error fetching reminders", error);
-      toast.error("Error fetching reminders");
+        console.error("Error fetching reminders", error);
+        toast.error("Error fetching reminders");
     }
-  };
+};
 
   const handleTitleChange = (event) => {
     setRemTitle(event.target.value);
@@ -134,18 +140,19 @@ function Reminder({theme , setTheme}) {
   
 
   const scheduleNotification = (reminder) => {
-    const reminderDateTime = new Date(`${reminder.date}T${reminder.time}`);
+    const reminderDateTime = new Date(reminder.datetime);
     const timeDifference = reminderDateTime.getTime() - new Date().getTime();
 
     if (timeDifference > 0) {
-      setTimeout(() => {
-        sendNotification(reminder.title, reminder.description);
-        removeReminder(reminder._id); // Adjusted to use reminder ID
-      }, timeDifference);
+        setTimeout(() => {
+            sendNotification(reminder.title, reminder.description);
+            removeReminder(reminder._id);
+        }, timeDifference);
     } else {
-      toast.error("Selected time is in the past. Please choose a future time.");
+        toast.error("Selected time is in the past. Please choose a future time.");
     }
-  };
+};
+
 
   const removeReminder = async (id) => {
     try {
