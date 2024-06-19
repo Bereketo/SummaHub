@@ -26,6 +26,7 @@ const About = () => {
             draggable: true,
             progress: undefined,
           });
+          form.current.reset(); // Reset the form after successful submission
         },
         (error) => {
           toast.error(`Error sending feedback: ${error.text}`, {

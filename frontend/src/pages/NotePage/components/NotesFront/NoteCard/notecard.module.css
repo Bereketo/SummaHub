@@ -111,3 +111,15 @@
     width: 100px;
     background-color: blue;
 }
+.no_notes {
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    margin-left: 150px;
+
+}
+.no_notes > p{
+font-size: 20pt;
+}
