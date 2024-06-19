@@ -3,7 +3,6 @@ import styles from "./summary.module.css";
 import Header from "../HomePage/components/header/header";
 import ReactMarkdown from 'react-markdown';
 import Typewriter from "react-typewriter-effect";
-import Header  from "../HomePage/components/header/header";
 
 
 function Summary({ theme, setTheme }) {
@@ -60,7 +59,7 @@ function Summary({ theme, setTheme }) {
 
   return (
     <div>
-      <Header theme={theme} setTheme={setTheme} useButtons=={true} />
+      <Header theme={theme} setTheme={setTheme} useButtons={true} />
       <div className={styles.summary_wrapper}>
         <h1> ✨Find The Best Summaries Here✨</h1>
         <div className={styles.top_bar}>
