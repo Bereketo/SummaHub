@@ -50,7 +50,7 @@ function App() {
       </BrowserRouter>
     
     </UserProvider>
-    
+    {/* <Admin /> */}
     </div>
   );
 }

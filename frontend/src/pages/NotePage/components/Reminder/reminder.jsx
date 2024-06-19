@@ -142,14 +142,11 @@ function Reminder({theme , setTheme}) {
         sendNotification(reminder.title, reminder.description);
         removeReminder(reminder._id); // Adjusted to use reminder ID
       }, timeDifference);
-    } else {
-      toast.error("Selected time is in the past. Please choose a future time.");
-    }
+    } 
   };
 
   const removeReminder = async (id) => {
     try {
-      
       const userToken = JSON.parse(localStorage.getItem('user'));
       if (!userToken || !userToken.token) {
         throw new Error('No token found');
