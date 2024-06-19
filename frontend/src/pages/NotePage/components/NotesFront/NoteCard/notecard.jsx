@@ -99,7 +99,7 @@ function Notecard() {
                       className={styles.pinnedSymbol}
                       to={`/NoteEdit/${note._id}`}
                     >
-                      🖊️
+                      <button className={styles.editbtn}> Edit </button>
                     </Link>
                   </div>
                 </footer>

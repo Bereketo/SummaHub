@@ -15,6 +15,9 @@ const NoteArea = () => {
 
   const handleSave = async () => {
     try {
+      // Clean up content to remove unnecessary tags or characters
+      const cleanedContent = quill.current.editor.getText().trim();
+  
       const userToken = JSON.parse(localStorage.getItem('user'));
       if (!userToken) {
         throw new Error('No token found');
@@ -22,7 +25,7 @@ const NoteArea = () => {
       const { token } = userToken;
       const response = await axios.post(
         'http://localhost:4040/api/v1/notes',
-        { title, content },
+        { title, content: cleanedContent },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -43,6 +46,7 @@ const NoteArea = () => {
       }
     }
   };
+  
 
   const formats = [
     'header',
