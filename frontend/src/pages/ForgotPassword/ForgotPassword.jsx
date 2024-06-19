@@ -34,7 +34,7 @@ function ForgotPassword() {
         console.log(JSON.stringify(response?.data.status));
         if (response?.data.status === "Success") {
           toast.success('Check your email for password reset instructions');
-          navigate('/'); // Example: Redirect to homepage after success
+          // navigate('/'); // Example: Redirect to homepage after success
         }
       } catch (err) {
         handleErrorResponse(err);
@@ -66,7 +66,7 @@ function ForgotPassword() {
 
   return (
     <div className="ForgotWrapper">
-      <ToastContainer /> {/* ToastContainer must be added once in your application */}
+      <ToastContainer /> 
       <form onSubmit={handleSubmit}>
         <p
           ref={errRef}
@@ -88,7 +88,7 @@ function ForgotPassword() {
         <button type="submit" disabled={isSubmitting} className="submitbtn">
           {isSubmitting ? "Loading..." : "Reset"}
         </button>
-   <ToastContainer />
+   
       </form>
     </div>
   );
