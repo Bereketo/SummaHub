@@ -124,7 +124,7 @@ function Notecard() {
         </>
       ) : (
         <div  className={styles.no_notes}>
-            <img src='images/sticky.png' width={200}/>
+            <img src='images/sticky.png' width={200} alt=''/>
             <p >
               No Notes Available
             </p>

@@ -8,7 +8,7 @@ function Question({theme , setTheme}) {
       <Header useButtons={true} theme = {theme} setTheme = {setTheme}  />
       <div>
         <div className={styles.quepage_title}>
-        <img src="images/bulb.png" width={50}/>
+        <img src="images/bulb.png" width={50} alt=""/>
           <h1> Enhance Your Study Effectiveness with More <strong>Questions</strong></h1>
         </div>
 
