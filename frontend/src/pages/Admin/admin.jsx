@@ -1,14 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import AdminSidebar from "./components/admin_sidebar/admin_sidebar";
-import styles from "./admin.module.css";  // Ensure to import the styles
+import AdminProfile from "./components/AdminProfile/AdminProfile";
+import UserList from "./components/userlist/userList";
+import styles from "./admin.module.css";
 
 const Admin = () => {
+  const [activeContent, setActiveContent] = useState('adminProfile');
+
+  const renderContent = () => {
+    switch (activeContent) {
+      case 'adminProfile':
+        return <AdminProfile />;
+      case 'userList':
+        return <UserList />; // Placeholder for UserList component
+      case 'feedbacks':
+        return <h1>Feedbacks Component</h1>; // Placeholder for Feedbacks component
+      case 'deletedUsers':
+        return <h1>Deleted Users Component</h1>; // Placeholder for DeletedUsers component
+      default:
+        return <h1>Welcome to Admin Dashboard</h1>;
+    }
+  };
+
   return (
     <div className={styles.adminContainer}>
-      <AdminSidebar />
+      <AdminSidebar setShowNoteArea={setActiveContent} />
       <div className={styles.mainContent}>
-        {/* Add main content components here, e.g., UserList, ProfileDetails, etc. */}
-        <h1>Welcome to Admin Dashboard</h1>
+        {renderContent()}
       </div>
     </div>
   );
