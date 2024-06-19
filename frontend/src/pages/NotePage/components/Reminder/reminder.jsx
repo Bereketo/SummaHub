@@ -5,8 +5,9 @@ import Sidebar from "../sidebar/sidebar";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { format } from 'date-fns';
 
-function Reminder({theme , setTheme}) {
+function Reminder({ theme, setTheme }) {
   const now = new Date();
   const hours = now.getHours();
   const minutes = now.getMinutes().toString().padStart(2, "0");
@@ -55,31 +56,31 @@ function Reminder({theme , setTheme}) {
 
   const fetchReminders = async () => {
     try {
-        const userToken = JSON.parse(localStorage.getItem('user'));
-        if (!userToken || !userToken.token) {
-            throw new Error('No token found');
-        }
-        const { token } = userToken;
-        const response = await axios.get("http://localhost:4040/api/v1/reminders", {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+      const userToken = JSON.parse(localStorage.getItem('user'));
+      if (!userToken || !userToken.token) {
+        throw new Error('No token found');
+      }
+      const { token } = userToken;
+      const response = await axios.get("http://localhost:4040/api/v1/reminders", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-        // Convert datetime strings to Date objects for frontend processin
-        const formattedReminders = response.data.data.map(reminder => ({
-          ...reminder,
-          datetime: new Date(reminder.datetime)
+      // Convert datetime strings to Date objects for frontend processin
+      const formattedReminders = response.data.data.map(reminder => ({
+        ...reminder,
+        datetime: new Date(reminder.datetime)
       }));
       setReminders(formattedReminders);
-      
 
-        setReminders(formattedReminders);
+
+      setReminders(formattedReminders);
     } catch (error) {
       console.error("Error fetching reminders", error);
-      
+
     }
-};
+  };
 
   const handleTitleChange = (event) => {
     setRemTitle(event.target.value);
@@ -102,20 +103,20 @@ function Reminder({theme , setTheme}) {
       toast.error("Please fill in all fields.");
       return;
     }
-  
+
     const reminderDateTime = new Date(`${remDate}T${remTime}`);
     if (reminderDateTime <= new Date()) {
       toast.error("Selected time is in the past or current. Please choose a future time.");
       return;
     }
-  
+
     const newReminder = {
       title: remTitle,
       description: remDescription,
       date: remDate,
       time: remTime,
     };
-  
+
     try {
       const userToken = JSON.parse(localStorage.getItem('user'));
       if (!userToken || !userToken.token) {
@@ -139,19 +140,19 @@ function Reminder({theme , setTheme}) {
       toast.error("Error saving reminder");
     }
   };
-  
+
 
   const scheduleNotification = (reminder) => {
     const reminderDateTime = new Date(reminder.datetime);
     const timeDifference = reminderDateTime.getTime() - new Date().getTime();
 
     if (timeDifference > 0) {
-        setTimeout(() => {
-            sendNotification(reminder.title, reminder.description);
-            removeReminder(reminder._id); // Adjusted to use reminder ID
-        }, timeDifference);
+      setTimeout(() => {
+        sendNotification(reminder.title, reminder.description);
+        removeReminder(reminder._id); // Adjusted to use reminder ID
+      }, timeDifference);
     }
-};
+  };
 
   const removeReminder = async (id) => {
     try {
@@ -160,7 +161,7 @@ function Reminder({theme , setTheme}) {
         throw new Error('No token found');
       }
       const { token } = userToken;
-      await axios.patch(`http://localhost:4040/api/v1/reminders/${id}`,{
+      await axios.delete(`http://localhost:4040/api/v1/reminders/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -206,7 +207,7 @@ function Reminder({theme , setTheme}) {
 
   return (
     <div className={styles.reminder_wrapper}>
-      <Header useButtons={true} theme={theme} setTheme={setTheme}/>
+      <Header useButtons={true} theme={theme} setTheme={setTheme} />
       <div className={styles.bottom_container}>
         <Sidebar />
         <div className={styles.content}>
@@ -283,7 +284,7 @@ function Reminder({theme , setTheme}) {
                     <tr key={reminder._id}>
                       <td>{reminder.title}</td>
                       <td>{reminder.description}</td>
-                      <td>{reminder.date}</td>
+                      <td>{format(new Date(reminder.date), 'dd MMMM yyyy')}</td>
                       <td>{reminder.time}</td>
                       <td>
                         <button onClick={() => removeReminder(reminder._id)}>

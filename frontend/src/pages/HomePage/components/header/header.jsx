@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { useUser } from "../../../../context/UserContext";
 import PropTypes from "prop-types";
-import { toast, ToastContainer } from "react-toastify";
+import { toast} from "react-toastify";
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 import 'react-toastify/dist/ReactToastify.css';
