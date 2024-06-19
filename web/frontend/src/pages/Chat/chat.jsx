@@ -51,7 +51,7 @@ function Chat({ theme, setTheme }) {
 
   return (
     <div>
-      <Header theme={theme} setTheme={setTheme} />
+      <Header theme = {theme} setTheme = {setTheme} useButtons ={true} />
       <div className={styles.chat_title}>
         <h1> Do you have questions? <strong> Ask me anything</strong></h1>
       </div>
