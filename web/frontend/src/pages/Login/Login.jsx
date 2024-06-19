@@ -32,7 +32,7 @@ function Login() {
         email: values.email,
         password: values.password,
       });
-      console.log(response.data);
+
       login(response.data);
       navigate('/');  // Adjust as per your route settings
     } catch (err) {
@@ -65,7 +65,7 @@ function Login() {
         >
           {errMsg}
         </p>
-        <img className="logo" src="./images/logo.png" alt="logo" />
+        <img className="logo" src="./images/summa.png" alt="logo" width={220}/>
         {LoginInputs.map((input) => (
           <FormInput
             key={input.id}
@@ -78,7 +78,7 @@ function Login() {
         <button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Logging in..." : "Login"}
         </button>
-        <p>
+        <p  className="no_account">
           Don't have an account? <a href="/signup">Sign Up Here</a>
         </p>
       </form>
