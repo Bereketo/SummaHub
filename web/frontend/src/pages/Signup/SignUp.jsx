@@ -94,7 +94,7 @@ function SignUp() {
                 >
                     {errMsg}
                 </p>
-                <img className='logo' src="./images/logo.png" alt="logo" />
+                <img className='logo' src="./images/summa.png" alt="logo"  width={200}/>
                 {inputs.map((input) => (
                     <FormInput
                         key={input.id}
