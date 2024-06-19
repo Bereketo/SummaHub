@@ -18,15 +18,14 @@ import Chat from './pages/Chat/chat';
 import Reminder from './pages/NotePage/components/Reminder/reminder';
 import Admin from './pages/Admin/admin';
 import TrashNote from './pages/NotePage/components/TrashNote/TrashNote';
-import { set } from 'mongoose';
-import Section from './pages/HomePage/components/Section/section';
-
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const [theme, setTheme] = useState('light');
 
   return (
     <div theme ={theme} setTheme ={setTheme}>
+    <ToastContainer />
     <UserProvider>
       <BrowserRouter>
         <Routes>
@@ -34,7 +33,7 @@ function App() {
           <Route path="/Signup" element={<SignUp theme={theme} setTheme={setTheme} />} />
           <Route path="/Note" element={<Note theme={theme} setTheme={setTheme} />} />
           <Route path="/NoteAdd" element={<NoteArea />} />
-          <Route path="/NoteEdit/:note_id" element={<NoteEdit />} />
+          <Route path="/NoteEdit/:note_id" element={<NoteEdit theme={theme} setTheme={setTheme} />} />
           <Route path="/Login" element={<Login theme={theme} setTheme={setTheme} />} />
           <Route path="/Summary" element={<Summary theme={theme} setTheme={setTheme} />} />
           <Route path="/About" element={<About />} />
@@ -51,7 +50,7 @@ function App() {
       </BrowserRouter>
     
     </UserProvider>
-    
+    {/* <Admin /> */}
     </div>
   );
 }
