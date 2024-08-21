@@ -20,7 +20,7 @@ To get started with SummaHubAI, follow these simple steps:
 1. **Clone the Repository**
 
    ```sh
-   git clone https://github.com/yourusername/SummaHubAI.git
+   git clone https://github.com/bereketo/SummaHub.git
    ```
 
 2. **Install Dependencies**
