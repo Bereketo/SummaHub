@@ -1,0 +1,42 @@
+import React, { useState } from 'react';
+import styles from './admin_sidebar.module.css';
+
+const AdminSidebar = ({ setShowNoteArea }) => {
+  const [activeButton, setActiveButton] = useState('');
+
+  const handleButtonClick = (button) => {
+    setActiveButton(button);
+    if (setShowNoteArea) {
+      setShowNoteArea(button);
+    }
+  };
+
+  return (
+    <div className={styles.sidebarWrapper}>
+      <img src='images/summa.png' width={200} alt='' />
+      <div className={styles.sidebarMenu}>
+        <button
+          onClick={() => handleButtonClick('adminProfile')}
+          className={`${styles.menuButton} ${activeButton === 'adminProfile' ? styles.active : ''}`}
+        >
+          <span className={styles.icon}>👤</span> Admin Profile
+        </button>
+        <button
+          onClick={() => handleButtonClick('userList')}
+          className={`${styles.menuButton} ${activeButton === 'userList' ? styles.active : ''}`}
+        >
+          <span className={styles.icon}>👥</span> User List
+        </button>
+        <button
+          onClick={() => handleButtonClick('deletedUsers')}
+          className={`${styles.menuButton} ${activeButton === 'deletedUsers' ? styles.active : ''}`}
+        >
+          <span className={styles.icon}>🗑️</span> Deleted Users
+        </button>
+       
+      </div>
+    </div>
+  );
+};
+
+export default AdminSidebar;

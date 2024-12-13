@@ -1,0 +1,62 @@
+.userprofile_info{
+    margin:30px 100px;
+    display: flex;
+    /* gap:200px; */
+    width:100vw;
+    margin-left: 100px;
+}
+.back_btn{
+    width:100px;
+    margin:50px 0 0 50px;
+}
+.left{
+    width:25%;
+}
+.left >button{
+ margin-left: 10px;
+ font-size: 11pt;
+ padding: 0;
+}
+.left > h1 {
+    font-size: 18pt;
+    padding-left:10px;
+    font-weight: lighter;
+}
+.left > p{
+    font-size: 20pt;
+    padding-left: 10px;
+    font-weight: bold;
+}
+.right{
+    border:1px solid rgb(155, 152, 152);
+    width:50%;
+    padding:10px;
+    padding-left:15px;
+    border-radius: 20px;
+}
+
+.label{
+    display: flex;
+}
+.label > p{
+    padding-top: 15px;
+    padding-right: 10px;
+    font-size: 12pt;
+    width: 100px;
+}
+
+.info_input{
+    width: 80%;
+    font-size: 10.5pt;
+}
+.submit_btn{
+    width: 100px;
+    margin-left:26.5rem;
+    margin-right: 10px;
+    font-size: 12pt;
+    padding: 0;
+}
+.form1 > h1{
+    /* height: 200px; */
+    padding-bottom: 10px;
+}

@@ -1,0 +1,41 @@
+.notearea_wrapper {
+  height: 30%;
+  width: 75vw;
+  background-color: white;
+  background-color: var(--background-color);
+}
+.notearea {
+  height: 70vh;
+  width: 75vw;
+  margin-bottom: 10px;
+}
+
+.notearea_container {
+height: 95vh;
+width: 100vw;
+display: flex;
+}
+.note_title {
+  width: 100%;
+  font-size: 13pt;
+}
+.note_title::placeholder {
+  font-size: 12pt;
+}
+.quilleditor {
+  background-color: white;
+  height: 85%;
+  border: black;
+  outline: none;
+}
+.ql-toolbar.ql-snow {
+  border: 1px solid #9f0505;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  padding: 8px;
+  height: 10px;
+}
+.noteadd_area{
+  display: flex;
+  flex-direction: row;
+}

@@ -1,0 +1,51 @@
+/* admin_sidebar.module.css */
+
+.sidebarWrapper {
+  background-color: #f7f9fc;
+  width: 250px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.newNoteButton {
+  background-color: #4a90e2;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.sidebarMenu {
+  display: flex;
+  flex-direction: column;
+}
+
+.menuButton {
+  background-color: transparent;
+  border: none;
+  color: #333;
+  text-align: left;
+  padding: 10px 0;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.menuButton:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.menuButton .icon {
+  margin-right: 10px;
+}
+
+.active {
+  font-weight: bold;
+  color: #4a90e2;
+}
